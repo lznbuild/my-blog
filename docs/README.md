@@ -13,3 +13,4 @@ var a=0;
 
 [链接](lsdjfkl)
 
+![图片啊](static/th.jfif)
