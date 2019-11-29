@@ -5,7 +5,6 @@
 ## JavaScript
 > 深入理解系列
 - [Javascript原型到原型链](https://github.com/lznbuild/my-blog/issues/1)
-- [Javascript正则表达式](https://github.com/lznbuild/my-blog/issues/2)
 - [Javascript多种继承方式]()
 - [Javascript词法作用域和动态作用域]()
 - [Javascript执行上下文]()
@@ -18,13 +17,14 @@
 - [Javascript从代码出发，解析知识点]()
 - [Javascript以上文章中的工具函数以及常用代码的封装]()
 
->  笔记系列  
-- [Javascript原型到原型链](https://github.com/lznbuild/my-blog/issues/1)
+>  读书笔记系列  
+- [Javascript正则表达式](https://github.com/lznbuild/my-blog/issues/1)
 
 > ES6
 
 ## 让人眼前一亮的代码片段或实现思路
 
+## 值得思考的问题
 
 ##  设计模式  
 
@@ -43,3 +43,5 @@
 ##  Webpack  
 
 ##  Node.js  
+
+## 参考博客链接
