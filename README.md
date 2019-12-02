@@ -7,6 +7,7 @@
 > 深入理解系列
 - [Javascript原型到原型链](https://github.com/lznbuild/my-blog/issues/1)
 - [Javascript多种继承方式]()
+- [Javascript中的类型转换]()
 - [Javascript词法作用域和动态作用域]()
 - [Javascript执行上下文]()
 - [Javascript变量对象]()
@@ -21,8 +22,16 @@
 >  读书笔记系列  
 这部分只会记载一些编程的读书笔记，不会深入解读，最后会放出摘自哪本书，有兴趣的同学可以读一读相关书
 - [Javascript正则表达式](https://github.com/lznbuild/my-blog/issues/1)
+- [Javascript中的字符串](https://github.com/lznbuild/my-blog/issues/1)
+- [Javascript中的对象](https://github.com/lznbuild/my-blog/issues/1)
+- [Javascript中的函数](https://github.com/lznbuild/my-blog/issues/1)
+- [Javascript的DOM](https://github.com/lznbuild/my-blog/issues/1)
+- [Javascript的BOM](https://github.com/lznbuild/my-blog/issues/1)
+- [Javascript的数组](https://github.com/lznbuild/my-blog/issues/1)
+
 
 > ES6
+let,const 不会变量声明提升？？
 
 ## 让人眼前一亮的代码片段或实现思路
 
