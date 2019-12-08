@@ -1,0 +1,1 @@
+https://github.com/yygmind/blog/issues/24
