@@ -258,3 +258,6 @@ var sub = myObject.sub;
 sub();
 // 1 3 3 4 4
 ```
+
+
+this指向一个调用上下文
