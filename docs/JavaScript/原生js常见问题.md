@@ -164,4 +164,43 @@ function getName() {
 
 getName() // Lydia
 ```
-    
+
+
+## 实现一个new 关键字
+```js
+function create(Con, ...args) {
+	let obj = {}
+	Object.setPrototypeOf(obj, Con.prototype)
+	let result = Con.apply(obj, args)
+	return result instanceof Object ? result : obj
+}
+```
+
+```js
+改进一下 new 的自实现:
+
+function create(Con, ...args) {
+  // 某些函数未必有 `prototype` 属性，比如箭头函数
+  if (! Con.prototype) throw new Error('First argument is not a constructor.');
+
+  const obj = {};
+  Object.setPrototypeOf(obj, Con.prototype);
+  
+  const result = Con.apply(obj, args);
+  // 避免 `null` 的情况，另外所有 reference type 都会覆写 `new` 的返回值，包括 `function`
+  if (result && (typeof result === 'object' || typeof result === 'function')) {
+    return result;
+  }
+  return obj;
+}
+```
+
+
+  ```js
+  // 查询url参数,包括对中文的解码  ?name=''&age=''
+  GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = location.search.slice(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null;
+  }
+  ```
