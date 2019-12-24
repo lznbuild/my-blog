@@ -1,6 +1,13 @@
 
 ## ES6的模块化
 
+export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下一节的import命令也是如此。  
+
+export 导出的变量不能在import的文件中修改，必须通过export导出的方法修改，多文件共享export导出的状态。动态引用。
+export deafult 导出不能通过export导出的方法修改,可以在import中的文件中直接修改。静态变量。
+
+import引入多次同一文件，此文件只会执行一次。
+
 ES6 模块的设计思想，是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量(这段话有点抽象，下面会有具体的说明)。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性。
 ```js
 // CommonJS模块
@@ -219,7 +226,7 @@ import { default as xxx } from './test.js';
 // import xxx from 'modules';
 ```
 
-正是因为export default命令其实只是输出一个叫做default的变量，所以它后面不能跟变量声明语句。
+正是因为export default命令其实只是输出一个叫做default的变量，所以它后面不能跟变量声明语句，function特殊。
 ```js
 // 正确
 export var a = 1;
@@ -273,14 +280,14 @@ export { foo, boo};
 跟export 最后的例子比较
 ```js
 var foo='bar';
-setTimeOut(()=>foo= 'baz',1000)
+setTimeout(()=>foo= 'baz',1000)
 export default foo
 
 
 // 导入
 import foo from '...';
 console.log(foo)
-setTimeOut(()=>console.log(foo),1000)
+setTimeout(()=>console.log(foo),1000)
 ```
 两次都是输出bar
 
