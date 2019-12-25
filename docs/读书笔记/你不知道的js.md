@@ -320,3 +320,62 @@ console.log( v );
 }
 // 2
 // 3
+
+
+## 第五章 原型
+有些情况下会隐式产生屏蔽，一定要当心。思考下面的代码：
+```js
+var anotherObject = {
+a:2
+};
+var myObject = Object.create( anotherObject );
+anotherObject.a; // 2
+myObject.a; // 2
+146 ｜ 第 5 章
+anotherObject.hasOwnProperty( "a" ); // true
+myObject.hasOwnProperty( "a" ); // false
+myObject.a++; // 隐式屏蔽！
+anotherObject.a; // 2
+myObject.a; // 3
+myObject.hasOwnProperty( "a" ); // true
+```
+尽管 myObject.a++ 看起来应该（通过委托）查找并增加 anotherObject.a 属性，但是别忘
+了 ++ 操作相当于 myObject.a = myObject.a + 1。因此 ++ 操作首先会通过 [[Prototype]]
+查找属性 a 并从 anotherObject.a 获取当前属性值 2，然后给这个值加 1，接着用 [[Put]]
+将值 3 赋给 myObject 中新建的屏蔽属性 a，天呐！
+修改委托属性时一定要小心。如果想让 anotherObject.a 的值增加，唯一的办法是
+anotherObject.a++。
+
+JavaScript中只有对象
+
+继承时丢失constructor属性，手动添加后，它成为了一个可枚举的属性。
+
+
+在 ES6 之前，
+我们只能通过设置 .__proto__ 属性来实现，但是这个方法并不是标准并且无法兼容所有浏
+览器。ES6 添加了辅助函数 Object.setPrototypeOf(..)，可以用标准并且可靠的方法来修
+改关联。
+
+Object.create()的polyfill代码
+```js
+if (!Object.create) {
+Object.create = function(o) {
+function F(){}
+F.prototype = o;
+return new F();
+};
+}
+```
+
+writable,configable,value,enumable是对象的属性描述符。
+
+## 第六章  行为委托
+[[Prototype]] 机制就是指对象中的一个内部链接引用
+另一个对象
+
+JavaScript 中这个机制的本质就是对象之间的关联关系。
+
+
+
+
+
