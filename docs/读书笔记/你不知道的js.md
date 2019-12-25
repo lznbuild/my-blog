@@ -17,9 +17,9 @@ JS引擎的编译步骤：
 ## 作用域
 负责收集并维护由所有声明的标识符（变量）组成的一系列查
 询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限。
-```js
+
 var a=2;
-````
+
 这句代码，编译器做了什么？
 1. 遇到 var a，编译器会 **查询作用域** 是否已经有一个该名称的变量存在于同一个作用域的
 集合中。如果是，编译器会忽略该声明，继续进行编译；否则它会要求作用域在当前作
@@ -192,3 +192,131 @@ this 提供了一种更优雅的方式来隐式“传递”一个对象引用，
 随着你的使用模式越来越复杂，显式传递上下文对象会让代码变得越来越混乱，使用 this
 则不会这样。
 
+
+
+
+
+this是在运行时绑定的，至于取决于函数的调用方式。
+
+当一个函数被调用时，会创建一个活动记录（有时候也称为执行上下文）。这个记录会包
+含函数在哪里被调用（调用栈）、函数的调用方法、传入的参数等信息。this 就是记录的
+其中一个属性，会在函数执行的过程中用到。
+
+## 第二章 this全面解析
+
+1.默认绑定
+2.隐式绑定，可能会丢失this
+```js
+function foo() {
+console.log( this.a );
+}
+var obj = {
+a: 2,
+foo: foo
+};
+var bar = obj.foo; // 函数别名！
+var a = "oops, global"; // a 是全局对象的属性
+bar(); // "oops, global"
+```
+虽然 bar 是 obj.foo 的一个引用，但是实际上，它引用的是 foo 函数本身，因此此时的
+bar() 其实是一个不带任何修饰的函数调用，因此应用了默认绑定。
+一种更微妙、更常见并且更出乎意料的情况发生在传入回调函数时：
+```js
+function foo() {
+console.log( this.a );
+}
+function doFoo(fn) {
+// fn 其实引用的是 foo
+fn(); // <-- 调用位置！
+}
+var obj = {
+a: 2,
+foo: foo
+};
+var a = "oops, global"; // a 是全局对象的属性
+doFoo( obj.foo ); // "oops, global"
+```
+参数传递其实就是一种隐式赋值，因此我们传入函数时也会被隐式赋值，所以结果和上一
+个例子一样。
+3.显示绑定
+4.new绑定，优先级高
+
+
+箭头函数根据外层作用域来决定this
+
+
+## 第三章 对象
+尝
+试修改一个不可配置的属性描述符都会出错。注意：如你所见，把 configurable 修改成
+false 是单向操作，无法撤销！表示不可配置，不可删除，要注意有一个小小的例外：即便属性是 configurable:false，我们还是可以
+把 writable 的状态由 true 改为 false，但是无法由 false 改为 true。
+
+Object.preventExtensions(); 阻止对象拓展属性
+
+## get,set 访问描述符、
+
+```js
+var myObject = {
+// 给 a 定义一个 getter
+get a() {
+return this._a_;
+},
+// 给 a 定义一个 setter
+set a(val) {
+this._a_ = val * 2;
+}
+};
+myObject.a = 2;
+myObject.a; // 4
+```
+
+
+for..of 循环首先会向被访问对象请求一个迭代器对象，然后通过调用迭代器对象的
+next() 方法来遍历所有返回值。
+数组有内置的 @@iterator，因此 for..of 可以直接应用在数组上。我们使用内置的 @@
+iterator 来手动遍历数组，看看它是怎么工作的：
+```js
+var myArray = [ 1, 2, 3 ];
+var it = myArray[Symbol.iterator]();
+it.next(); // { value:1, done:false }
+it.next(); // { value:2, done:false }
+it.next(); // { value:3, done:false }
+it.next(); // { done:true }
+```
+
+
+可以给任何想遍历的对象定义 @@iterator，举例来说：
+```js
+var myObject = {
+  a: 2,
+  b: 3
+};
+Object.defineProperty( myObject, Symbol.iterator, {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function() {
+    var o = this;
+    var idx = 0;
+    var ks = Object.keys( o );
+    return {
+      next: function() {
+        return {
+          value: o[ks[idx++]],
+          done: (idx > ks.length)
+        };
+      }
+    };
+  }
+} );
+// 手动遍历 myObject
+var it = myObject[Symbol.iterator]();
+it.next(); // { value:2, done:false }
+it.next(); // { value:3, done:false }
+it.next(); // { value:undefined, done:true }
+// 用 for..of 遍历 myObject
+for (var v of myObject) {
+console.log( v );
+}
+// 2
+// 3
