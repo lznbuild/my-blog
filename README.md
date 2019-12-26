@@ -7,27 +7,23 @@
 > 深入理解系列
 - [Javascript原型到原型链](https://github.com/lznbuild/my-blog/issues/2)
 - [Javascript多种继承方式](https://github.com/lznbuild/my-blog/issues/3)
-- [Javascript中的类型转换]()
+- [Javascript中的类型转换](https://github.com/lznbuild/my-blog/issues/5)
 - [Javascript词法作用域和动态作用域]()
 - [Javascript执行上下文]()
-- [Javascript变量对象]()
 - [Javascript作用域链]()
 - [Javascript解读this]()
-- [Javascript解读闭包]()
-- [Javascript函数参数按值传递？]()
+- [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4)
 - [Javascript防抖节流]()
-- [Javascript从代码出发，解析知识点]()
-- [Javascript以上文章中的工具函数以及常用代码的封装]()
+- [Javascript深浅拷贝]()
+
+> JavaScript中的常见问题
+- [JavaScript中new的实现]()
+
 
 >  读书笔记系列  
 这部分只会记载一些编程的读书笔记，不会深入解读，最后会放出摘自哪本书，有兴趣的同学可以读一读相关书
 - [Javascript正则表达式](https://github.com/lznbuild/my-blog/issues/1)
-- [Javascript中的字符串]()
-- [Javascript中的对象]()
-- [Javascript中的函数]()
-- [Javascript的DOM]()
-- [Javascript的BOM]()
-- [Javascript的数组]()
+
 
 
 > ES6
@@ -42,12 +38,12 @@ let,const 不会变量声明提升？？
 ##  数据结构  
 
 ##  浏览器部分  
+- [Event Loop]()
+
 
 ##  网络部分
 
 ##  React  
-
-## 《CSS世界》笔记
 
 ## Ant Design源码系列
 
