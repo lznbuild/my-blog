@@ -5,16 +5,15 @@
 ## JavaScript
 既然是做前端方向，JavaScript就是我们每天都要用到的编程语言，遗憾的是，我从来都不敢说自己真的了解，熟悉这门编程语言，每次刷博客的时候同行们总能提出一些怪异的问题，而我也大部分都说不出原理，所以经过一段时间的挣扎，准备全面的重新学习原生JavaScript，学习的主导资料《高程》，《犀牛书》，《你不知道的js》，MDN，在看的过程中有些不理解的内容，会借鉴很多前辈们的博客，文章最终我也会给上这些博客的链接，最后希望大家看完后，提出宝贵意见。
 > 深入理解系列
-- [Javascript原型到原型链](https://github.com/lznbuild/my-blog/issues/2)
-- [Javascript多种继承方式](https://github.com/lznbuild/my-blog/issues/3)
-- [Javascript中的类型转换](https://github.com/lznbuild/my-blog/issues/5)
+- [Javascript原型到原型链](https://github.com/lznbuild/my-blog/issues/2) 
+- [Javascript多种继承方式](https://github.com/lznbuild/my-blog/issues/3)  
+- [Javascript中的类型转换](https://github.com/lznbuild/my-blog/issues/5) 
 - [Javascript词法作用域和动态作用域]()
-- [Javascript执行上下文]()
-- [Javascript作用域链]()
-- [Javascript解读this]()
-- [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4)
-- [Javascript防抖节流]()
-- [Javascript深浅拷贝]()
+- [Javascript执行上下文]() 
+- [Javascript解读this]() 
+- [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4) 
+- [Javascript防抖节流]() 
+- [Javascript深浅拷贝]() 
 
 > JavaScript中的常见问题
 - [JavaScript中new的实现]()
