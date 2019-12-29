@@ -229,6 +229,9 @@ function instanceof(left, right) {
 }
 
 
+## class中的修饰符static
+static修饰的属性或者函数只能在当前class或者子类中使用，实例不能
+
 
 ## 参考博客
 https://juejin.im/post/5c64d15d6fb9a049d37f9c20#heading-33
