@@ -233,5 +233,83 @@ function instanceof(left, right) {
 static修饰的属性或者函数只能在当前class或者子类中使用，实例不能
 
 
+## js浮点数的问题
+双精度是怎么存储的？
+
+因为计算机中都是由0和1整的二进制数字表示的，所以十进制的小数转换成二进制是采用对阶运算求和，例如8是2的3次方，0.5(1/2)就是2的-1次方，0.75(3/4)是2的-1加2的-2，可是0.2呢？就是1/5，通过对阶运算求和只能无限接近，不能相等
+
+
+## call的实现
+```js
+Function.prototype.myCall = function(context) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  context = context || window
+  context.fn = this
+  const args = [...arguments].slice(1)
+  const result = context.fn(...args)
+  delete context.fn
+  return result
+}
+```
+
+## apply的实现
+```js
+Function.prototype.myApply = function(context) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  context = context || window
+  context.fn = this
+  let result
+  // 处理参数和 call 有区别
+  if (arguments[1]) {
+    result = context.fn(...arguments[1])
+  } else {
+    result = context.fn()
+  }
+  delete context.fn
+  return result
+}
+```
+
+## bind的实现
+```js
+Function.prototype.myBind = function (context) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  const _this = this
+  const args = [...arguments].slice(1)
+  // 返回一个函数
+  return function F() {
+    // 因为返回了一个函数，我们可以 new F()，所以需要判断
+    if (this instanceof F) {
+      return new _this(...args, ...arguments)
+    }
+    return _this.apply(context, args.concat(...arguments))
+  }
+}
+```
+
+## instanceof 的实现
+```JS
+function myInstanceof(left, right) {
+  let prototype = right.prototype
+  left = left.__proto__
+  while (true) {
+    if (left === null || left === undefined)
+      return false
+    if (prototype === left)
+      return true
+    left = left.__proto__
+  }
+}
+```
+
+
+
+
 ## 参考博客
 https://juejin.im/post/5c64d15d6fb9a049d37f9c20#heading-33

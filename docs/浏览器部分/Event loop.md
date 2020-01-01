@@ -64,3 +64,86 @@ async function main(){
     }
 }
 main()
+
+
+大家也知道了当我们执行 JS 代码的时候其实就是往执行栈中放入函数，那么遇到异步代码的时候该怎么办？其实当遇到异步的代码时，会被挂起并在需要执行的时候加入到 Task（有多种 Task） 队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上来说 JS 中的异步还是同步行为。
+
+console.log('script start')
+
+async function async1() {
+  await async2()
+  console.log('async1 end')
+}
+async function async2() {
+  console.log('async2 end')
+}
+async1()
+
+setTimeout(function() {
+  console.log('setTimeout')
+}, 0)
+
+new Promise(resolve => {
+  console.log('Promise')
+  resolve()
+})
+  .then(function() {
+    console.log('promise1')
+  })
+  .then(function() {
+    console.log('promise2')
+  })
+
+console.log('script end')
+// script start => async2 end => Promise => script end => promise1 => promise2 => async1 end => setTimeout
+
+把 await 看成是让出线程的标志
+
+Promise.resolve(返回值).then()，然后 await 后的代码全部被包裹进了 then 的回调中，所以 console.log('async1 end') 会优先执行于 setTimeout
+
+
+微任务包括 process.nextTick ，promise ，MutationObserver，其中 process.nextTick 为 Node 独有。
+
+宏任务包括 script ， setTimeout ，setInterval ，setImmediate ，I/O ，UI rendering。
+
+
+单线程语言：JavaScript 的设计就是为了处理浏览器网页的交互（DOM操作的处理、UI动画等），决定了它是一门单线程语言。
+
+如果有多个线程，它们同时在操作 DOM，那网页将会一团糟。
+
+JavaScript 是单线程的，那么处理任务是一件接着一件处理，从上往下顺序执行
+
+那如果一个任务的处理耗时（或者是等待）很久的话，如：网络请求、定时器、等待鼠标点击等，后面的任务也就会被阻塞，也就是说会阻塞所有的用户交互（按钮、滚动条等），会带来极不友好的体验。
+
+
+定时器触发线程也只是为 setTimeout(..., 1000) 定时而已，时间一到，还会把它对应的回调函数(callback)交给 消息队列 去维护，JS引擎线程会在适当的时候去消息队列取出消息并执行
+
+JS引擎线程遇到异步（DOM事件监听、网络请求、setTimeout计时器等...），会交给相应的线程单独去维护异步任务，等待某个时机（计时器结束、网络请求成功、用户点击DOM），然后由 事件触发线程 将异步对应的 回调函数 加入到消息队列中，消息队列中的回调函数等待被执行。
+同时，JS引擎线程会维护一个 执行栈，同步代码会依次加入执行栈然后执行，结束会退出执行栈。
+
+如果执行栈里的任务执行完成，即执行栈为空的时候（即JS引擎线程空闲），事件触发线程才会从消息队列取出一个任务（即异步的回调函数）放入执行栈中执行
+
+执行机制：
+
+
+执行一个宏任务（栈中没有就从事件队列中获取）
+
+
+执行过程中如果遇到微任务，就将它添加到微任务的任务队列中
+
+
+宏任务执行完毕后，立即执行当前微任务队列中的所有微任务（依次执行）
+
+
+当前宏任务执行完毕，开始检查渲染，然后GUI线程接管渲染
+
+
+渲染完毕后，JS引擎线程继续，开始下一个宏任务（从宏任务队列中获取）
+
+在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）
+
+## 参考
+https://juejin.im/post/5be5a0b96fb9a049d518febc
+
+
+https://juejin.im/post/5a6547d0f265da3e283a1df7#heading-11
