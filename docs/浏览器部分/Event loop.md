@@ -142,8 +142,17 @@ JS引擎线程遇到异步（DOM事件监听、网络请求、setTimeout计时�
 
 在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）
 
+从宏任务的头部取出一个任务执行；
+执行过程中若遇到微任务则将其添加到微任务的队列中；
+宏任务执行完毕后，微任务的队列中是否存在任务，若存在，则挨个儿出去执行，直到执行完毕；
+GUI 渲染；
+回到步骤 1，直到宏任务执行完毕；
+
 ## 参考
 https://juejin.im/post/5be5a0b96fb9a049d518febc
 
 
 https://juejin.im/post/5a6547d0f265da3e283a1df7#heading-11
+
+
+https://juejin.im/post/5e0adffbe51d4541013f0bf4?utm_source=gold_browser_extension
