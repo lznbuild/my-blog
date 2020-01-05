@@ -16,7 +16,7 @@
 - [Javascript深浅拷贝]() 
 
 > JavaScript中的常见问题
-- [JavaScript中new的实现]()
+- [JavaScript中一些函数的实现总结]()
 
 
 >  读书笔记系列  
@@ -28,9 +28,9 @@
 > ES6
 let,const 不会变量声明提升？？
 
-## 让人眼前一亮的代码片段或实现思路
 
-## 值得思考的问题
+
+
 
 ##  设计模式  
 
@@ -45,8 +45,6 @@ let,const 不会变量声明提升？？
 ##  React  
 
 ## Ant Design源码系列
-
-##  Webpack  
 
 ##  Node.js  
 
