@@ -8,11 +8,11 @@
 - [Javascript原型到原型链](https://github.com/lznbuild/my-blog/issues/2) 
 - [Javascript多种继承方式](https://github.com/lznbuild/my-blog/issues/3)  
 - [Javascript中的类型转换](https://github.com/lznbuild/my-blog/issues/5) 
-- [Javascript词法作用域和动态作用域]()
-- [Javascript执行上下文]() 
-- [Javascript解读this]() 
+- [Javascript执行上下文](https://github.com/lznbuild/my-blog/issues/7) 
+- [Javascript解读this](https://github.com/lznbuild/my-blog/issues/8) 
 - [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4) 
 - [Javascript防抖节流]() 
+- [Javascript垃圾回收]() 
 - [Javascript深浅拷贝]() 
 
 > JavaScript中的常见问题
