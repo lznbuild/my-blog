@@ -437,4 +437,7 @@ import * as data from "./module"
 console.log(data) // 导出的所有
 ```
 
+module.export[  ]的导出
+
+
 [参考内容](http://caibaojian.com/es6/module.html)
