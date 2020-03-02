@@ -33,6 +33,7 @@ setTimeout(() => { console.log(1) },0);
     new Promise((resolve,reject)=> {
         console.log(2);
         resolve()
+        console.log(55)
     }).then(()=>{
         new Promise((resolve,reject)=> {
             console.log(3);
@@ -41,7 +42,7 @@ setTimeout(() => { console.log(1) },0);
             console.log(44);
         })
     })
-    // 2 3 44 1
+    // 2 55  3 44 1
     <!-- 微任务的优先级比宏任务要高 -->
 
 
@@ -156,3 +157,6 @@ https://juejin.im/post/5a6547d0f265da3e283a1df7#heading-11
 
 
 https://juejin.im/post/5e0adffbe51d4541013f0bf4?utm_source=gold_browser_extension
+
+
+https://juejin.im/post/5e58c618e51d4526ed66b5cf?utm_source=gold_browser_extension
