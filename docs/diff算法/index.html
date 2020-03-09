@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .item {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
+<script src="v.js"></script>
+<script>
+  let vnode = createElement('div',{id: 'test'},[
+    createElement('p',{key:'a',style:{color: 'blue'}},'节点1'),
+    createElement('p',{key:'b','@click':()=>alert(1)},'节点2'),
+    createElement('p',{key:'c','class':'item'},'节点3'),
+    createElement('p',{key:'d'},'节点4')
+  ])
+
+
+  let vnode1 = createElement('div', { id: 'newText' }, [
+      createElement('p', { key: 'd',}, '节点4'),
+      createElement('p', { key: 'a', style:{color: 'red'} }, '节点1'),
+      createElement('p', { key: 'b',  }, '节点2'),
+      createElement('p', { key: 'e' }, '节点5'),
+      createElement('p', { key: 'f' ,style:{color: '#eee'}}, '节点6'),
+    ])
+
+  // render(vnode,document.getElementById('app'))
+
+  // setTimeout(()=> {
+  //   render(vnode1,document.getElementById('app'))
+  // },1000)
+
+
+</script>

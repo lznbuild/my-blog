@@ -1,0 +1,3 @@
+### setState
+
+setState不是真正意义上的异步，react内部实现了一个批量更新，把需要更新的nextState push到pendingStates数组中，通过isPending判断有没有在工作，如果工作了，就更新，否则不更新，循环调用updater中的函数时，isPending为true
