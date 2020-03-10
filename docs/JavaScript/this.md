@@ -559,3 +559,67 @@ person1.show4.call(person2)() // person2
 
 
 this中setTimeout(obj.foo,1000)看一下this指向啥
+
+
+```js
+var name = 'window'
+var obj1 = {
+  name: 'obj1',
+  foo1: function () {
+    console.log(this.name)
+    return () => {
+      console.log(this.name)
+    }
+  },
+  foo2: () => {
+    console.log(this.name)
+    return function () {
+      console.log(this.name)
+    }
+  }
+}
+var obj2 = {
+  name: 'obj2'
+}
+obj1.foo1.call(obj2)() // obj2 obj2
+obj1.foo1().call(obj2) // obj1 obj1
+obj1.foo2.call(obj2)() // window window
+obj1.foo2().call(obj2) // window obj2
+```
+
+
+```js
+var name = 'window'
+function Person (name) {
+  this.name = name
+  this.foo1 = function () {
+    console.log(this.name)
+    return function () {
+      console.log(this.name)
+    }
+  }
+  this.foo2 = function () {
+    console.log(this.name)
+    return () => {
+      console.log(this.name)
+    }
+  }
+  this.foo3 = () => {
+    console.log(this.name)
+    return function () {
+      console.log(this.name)
+    }
+  }
+  this.foo4 = () => {
+    console.log(this.name)
+    return () => {
+      console.log(this.name)
+    }
+  }
+}
+var person1 = new Person('person1')
+  person1.foo1()() // person1 window
+  person1.foo2()() // person1 person1
+  person1.foo3()() // person1 window
+  person1.foo4()() // person1 person1
+```
