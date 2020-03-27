@@ -42,9 +42,6 @@ promise有三个状态：pending,fulfilled,rejected
 数字都是以64位浮点数形式储存，即使整数也是如此。所以，1与1.0是相同的,这就是说，JavaScript 语言的底层根本没有整数，所有数字都是小数（64位浮点数）。
 
 
-## class 中的static,privite,protect
-
-static,静态方法被设计为只能被创建它们的构造器使用
 
 
 ## 关于对象
@@ -225,14 +222,12 @@ function instanceof(left, right) {
 }
 
 
-## class中的修饰符static
-static修饰的属性或者函数只能在当前class或者子类中使用，实例不能
-
-
 ## js浮点数的问题
 双精度是怎么存储的？
 
 因为计算机中都是由0和1整的二进制数字表示的，所以十进制的小数转换成二进制是采用对阶运算求和，例如8是2的3次方，0.5(1/2)就是2的-1次方，0.75(3/4)是2的-1加2的-2，可是0.2呢？就是1/5，通过对阶运算求和只能无限接近，不能相等
+
+console.log( Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON); 
 
 
 ## call的实现
