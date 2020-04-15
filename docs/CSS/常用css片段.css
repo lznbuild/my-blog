@@ -1,0 +1,13 @@
+div {
+  width: 100px;
+  border: 1px solid red;
+  /* 单行 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  /* 多行 */
+  /* display : -webkit-box;
+  -webkit-line-clamp : 4;
+  -webkit-box-orient : vertical; */
+}
