@@ -16,6 +16,11 @@ meta标签有哪些作用？？？？
 em标签强调词，strong强调读的重音
 
 
+解决inline-block元素的间隔问题
+ul{letter-spacing: -5px}
+li{letter-spacing: normal}
+
+
 
 
 
