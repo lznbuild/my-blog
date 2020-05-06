@@ -22,6 +22,15 @@ li{letter-spacing: normal}
 
 
 
+user-select: none; auto() all 控制文本选中
+
+
+vertical-align: middle;
+display: inline-block;  只能用在inline和inline-block元素上
+
+
+
+clear:both; 只能用于块元素
 
 
 
