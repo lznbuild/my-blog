@@ -101,3 +101,173 @@ Number( "" ); // 0
 Number( [] ); // 0
 Number( [ "abc" ] ); // NaN
 ```
+
+宽松相等（loose equals）== 和严格相等（strict equals）=== 都用来判断两个值是否“相
+等”，但是它们之间有一个很重要的区别，特别是在判断条件上。
+常见的误区是“== 检查值是否相等，=== 检查值和类型是否相等”。听起来蛮有道理，然而
+还不够准确。很多 JavaScript 的书籍和博客也是这样来解释的，但是很遗憾他们都错了。
+正确的解释是：“== 允许在相等比较中进行强制类型转换，而 === 不允许。”
+
+
+我们来看一看两种解释的区别。
+根据第一种解释（不准确的版本），=== 似乎比 == 做的事情更多，因为它还要检查值的
+类型。第二种解释中 == 的工作量更大一些，因为如果值的类型不同还需要进行强制类型
+转换。
+有人觉得 == 会比 === 慢，实际上虽然强制类型转换确实要多花点时间，但仅仅是微秒级
+（百万分之一秒）的差别而已。
+如果进行比较的两个值类型相同，则 == 和 === 使用相同的算法，所以除了 JavaScript 引擎
+实现上的细微差别之外，它们之间并没有什么不同。如果两个值的类型不同，我们就需要考虑有没有强制类型转换的必要，有就用 ==，没有就
+ ===，不用在乎性能。
+
+```js
+var a = 42;
+var b = "42";
+a === b; // false
+a == b; // true
+```
+
+(1) 如果 Type(x) 是数字，Type(y) 是字符串，则返回 x == ToNumber(y) 的结果。
+(2) 如果 Type(x) 是字符串，Type(y) 是数字，则返回 ToNumber(x) == y 的结果。
+
+
+```js
+var a = "42";
+var b = true;
+a == b; // false
+```
+
+(1) 如果 Type(x) 是布尔类型，则返回 ToNumber(x) == y 的结果；
+(2) 如果 Type(y) 是布尔类型，则返回 x == ToNumber(y) 的结果。
+
+
+```js
+var a = null;
+var b;
+
+a == b; // true
+a == null; // true
+b == null; // true
+
+a == false; // false   !!!
+b == false; // false   !!!
+a == ""; // false
+b == ""; // false
+a == 0; // false
+b == 0; // false
+```
+// 很奇怪，但是规范就是这样定义的
+(1) 如果 x 为 null，y 为 undefined，则结果为 true。
+(2) 如果 x 为 undefined，y 为 null，则结果为 true。
+undefined和null不会涉及到任何类型转换
+
+
+(1) 如果 Type(x) 是字符串或数字，Type(y) 是对象，则返回 x == ToPrimitive(y) 的结果；
+(2) 如果 Type(x) 是对象，Type(y) 是字符串或数字，则返回 ToPromitive(x) == y 的结果。
+
+```js
+var a = "abc";
+var b = Object( a ); // 和new String( a )一样
+a === b; // false
+a == b; // true
+```
+
+```js
+var a = null;
+var b = Object( a ); // 和Object()一样
+a == b; // false
+var c = undefined;
+var d = Object( c ); // 和Object()一样
+c == d; // false
+var e = NaN;
+var f = Object( e ); // 和new Number( e )一样
+e == f; // false
+```
+因为没有对应的封装对象，所以 null 和 undefined 不能够被封装（boxed），Object(null)
+和 Object() 均返回一个常规对象。
+NaN 能够被封装为数字封装对象，但拆封之后 NaN == NaN 返回 false，因为 NaN 不等于 NaN
+
+
+```js
+"0" == null; // false
+"0" == undefined; // false
+"0" == false; // true
+"0" == NaN; // false
+"0" == 0; // true
+"0" == ""; // false 相同类型，没有转换了
+false == null; // false
+false == undefined; // false
+false == NaN; // false
+false == 0; // true 
+false == ""; // true 
+false == []; // true 
+false == {}; // false
+"" == null; // false
+"" == undefined; // false
+"" == NaN; // false
+"" == 0; // true 
+"" == []; // true 
+"" == {}; // false
+0 == null; // false
+0 == undefined; // false
+0 == NaN; // false
+0 == []; // true 
+0 == {}; // false
+```
+
+< >涉及到的类型转换,这部分有点无聊，开发中用到的概率挺小的，不可能有数组和数组比较大小，对象和对象比较大小，了解就好
+
+```js
+var a = [ 42 ];
+var b = [ "43" ];
+
+a < b; // true
+b < a; // false   
+//比较双方首先调用 ToPrimitive，如果结果出现非字符串，就根据 ToNumber 规则将双方强
+// 制类型转换为数字来进行比较。
+
+var a = [ "42" ];
+var b = [ "043" ];
+a < b; // false
+```
+a 和 b 并没有被转换为数字，因为 ToPrimitive 返回的是字符串，所以这里比较的是 "42"
+和 "043" 两个字符串，它们分别以 "4" 和 "0" 开头。因为 "0" 在字母顺序上小于 "4"，所以
+最后结果为 false。
+
+
+var a = [ 4, 2 ];
+var b = [ 0, 4, 3 ];
+a < b; // false
+a 转换为 "4, 2"，b 转换为 "0, 4, 3"，同样是按字母顺序进行比较
+
+
+var a = { b: 42 };
+var b = { b: 43 };
+a < b; // ??
+结果还是 false，因为 a 是 [object Object]，b 也是 [object Object]，所以按照字母顺序
+a < b 并不成立。
+
+
+下面的例子就有些奇怪了：
+var a = { b: 42 };
+var b = { b: 43 };
+a < b; // false
+a == b; // false
+a > b; // false
+a <= b; // true
+a >= b; // true
+
+
+为什么 a == b 的结果不是 true ？它们的字符串值相同（同为 "[object Object]"），按道
+理应该相等才对？实际上不是这样，你可以回忆一下前面讲过的对象的相等比较。
+但是如果 a < b 和 a == b 结果为 false，为什么 a <= b 和 a >= b 的结果会是 true 呢？
+因为根据规范 a <= b 被处理为 b < a，然后将结果反转。因为 b < a 的结果是 false，所
+以 a <= b 的结果是 true。
+这可能与我们设想的大相径庭，即 <= 应该是“小于或者等于”。实际上 JavaScript 中 <= 是
+“不大于”的意思（即 !(a > b)，处理为 !(b < a)）。同理 a >= b 处理为 b <= a。
+
+
+## 第二部分 第一章  异步：现在与未来  
+## 第二章 回调
+
+关于异步的部分，这里写的太好了！建议直接看书
+
