@@ -24,7 +24,7 @@
 电子书链接：xxxxxxx
 - [《JavaScript正则表达式》](https://github.com/lznbuild/my-blog/issues/1)
 - [《你不知道的JavaScript》上册](https://github.com/lznbuild/my-blog/issues/9)
-- [《你不知道的JavaScript》中册]()
+- [《你不知道的JavaScript》中册](https://github.com/lznbuild/my-blog/issues/10)
 - [深入浅出React]()
 
 
