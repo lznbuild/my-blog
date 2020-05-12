@@ -1,5 +1,5 @@
 ## 简介
-不用那么麻烦，还得有简介？
+用的着那么麻烦，还得有简介？
 
 
 ## JavaScript
@@ -19,18 +19,21 @@
 - [JavaScript中一些函数的实现总结]()
 
 
->  读书笔记系列  
-这部分只会记载一些笔记，不会深入解读，不想看书的同学可以看一下这个笔记。
+>  读书笔记系列   
+
+
+这部分只会记载一些笔记，不会深入解读，不想看书的同学可以看一下这个笔记(笔记记的很简单，不适合没基础的同学)。
 电子书链接：xxxxxxx
 - [《JavaScript正则表达式》](https://github.com/lznbuild/my-blog/issues/1)
 - [《你不知道的JavaScript》上册](https://github.com/lznbuild/my-blog/issues/9)
 - [《你不知道的JavaScript》中册](https://github.com/lznbuild/my-blog/issues/10)
+- [JavaScript高级程序设计]()
+- [JavsScript权威指南]()
 - [深入浅出React]()
 
 
-##  设计模式  
-
 ##  数据结构  
+实现常见的数据结构，每一种数据结构都找一道算法题来练习
 
 ##  浏览器部分  
 - [Event Loop]()
@@ -40,12 +43,14 @@
 
 ##  React  
 
-## Ant Design源码系列
+## Ant Design源码系列 
+
+## Webpack系列  
 
 ##  Node.js  
 
-## 参考博客链接
-https://github.com/KieSun/awesome-fe-study-source
-
-
-https://github.com/ljianshu/Blog
+## 参考博客文档链接  
+https://github.com/KieSun/awesome-fe-study-source  
+http://caibaojian.com/es6/  
+https://github.com/ljianshu/Blog  
+极客时间中的《重学前端》《浏览器工作原理与实践》
