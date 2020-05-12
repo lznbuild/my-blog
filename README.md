@@ -1,5 +1,5 @@
 ## 简介
-从学JavaScript开始，就喜欢看前辈们的博客，白嫖了好久，终于下定决心对自己看到的知识做一个总结，希望自己不再“飘着”学东西，能做到真正掌握核心的知识。给自己做了一个2年的计划，目标是在2年内成为高级前端工程师，加油
+不用那么麻烦，还得有简介？
 
 
 ## JavaScript
@@ -20,8 +20,12 @@
 
 
 >  读书笔记系列  
-这部分只会记载一些编程的读书笔记，不会深入解读，最后会放出摘自哪本书，有兴趣的同学可以读一读相关书
-- [Javascript正则表达式](https://github.com/lznbuild/my-blog/issues/1)
+这部分只会记载一些笔记，不会深入解读，不想看书的同学可以看一下这个笔记。
+电子书链接：xxxxxxx
+- [《JavaScript正则表达式》](https://github.com/lznbuild/my-blog/issues/1)
+- [《你不知道的JavaScript》上册](https://github.com/lznbuild/my-blog/issues/9)
+- [《你不知道的JavaScript》中册]()
+- [深入浅出React]()
 
 
 ##  设计模式  

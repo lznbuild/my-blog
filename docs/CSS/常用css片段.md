@@ -30,3 +30,19 @@ div {
     transform-origin: top left;
   }
 } */
+
+font-size 各种大小的 12 14 16 18 
+主题色,包括一些线的颜色，公共盒子阴影
+
+less-loader.options.modifyVars可以定义全局变量
+
+统一的padding 
+
+// 对input placeholder的修改
+.search-input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #fff;
+}
+
+
+文本不可被选中
