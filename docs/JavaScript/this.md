@@ -623,3 +623,71 @@ var person1 = new Person('person1')
   person1.foo3()() // person1 window
   person1.foo4()() // person1 person1
 ```
+
+
+
+
+
+## bind，call的优先级
+function returnThis () {
+  return this
+}
+
+var boss1 = { name: 'boss1'}
+
+var boss1returnThis = returnThis.bind(boss1)
+
+boss1returnThis() // boss1
+
+var boss2 = { name: 'boss2' }
+boss1returnThis.call(boss2) // still boss1
+
+## new 的优先级最高
+function showThis () {
+  console.log(this)
+}
+
+showThis() // window
+new showThis() // showThis
+
+var boss1 = { name: 'boss1' }
+showThis.call(boss1) // boss1
+new showThis.call(boss1) // TypeError
+
+var boss1showThis = showThis.bind(boss1)
+boss1showThis() // boss1
+new boss1showThis() // showThis
+
+
+箭头函数里的this不再妖艳，被永远封印到当前词法作用域之中，称作 Lexical this ，在代码运行前就可以确定。没有其他大佬可以覆盖。
+
+这样的好处就是方便让回调函数的this使用当前的作用域，不怕引起混淆。
+
+所以对于箭头函数，只要看它在哪里创建的就行。且不能用call修改this
+function callback (cb) {
+  cb()
+}
+
+callback(() => { console.log(this) }) // window
+
+var boss1 = {
+  name: 'boss1',
+  callback: callback,
+  callback2 () {
+    callback(() => { console.log(this) })
+  }
+}
+
+boss1.callback(() => { console.log(this) }) // still window
+boss1.callback2(() => { console.log(this) }) // boss1
+
+this一旦被确定，就不可更改了
+
+
+## 关于this的好文
+https://zhuanlan.zhihu.com/p/23804247
+http://www.ruanyifeng.com/blog/2018/06/javascript-this.html
+
+https://www.cnblogs.com/front-Thinking/p/4364337.html（摘自《你不知道的JavaScript》）
+
+https://blog.crimx.com/2016/05/12/understanding-this/

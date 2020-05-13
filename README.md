@@ -9,6 +9,7 @@
 - [Javascript多种继承方式](https://github.com/lznbuild/my-blog/issues/3)  
 - [Javascript中的类型转换](https://github.com/lznbuild/my-blog/issues/5) 
 - [Javascript执行上下文](https://github.com/lznbuild/my-blog/issues/7) 
+- [Javascript作用域]() 
 - [Javascript解读this](https://github.com/lznbuild/my-blog/issues/8) 
 - [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4) 
 - [Javascript防抖节流]() 
@@ -27,9 +28,9 @@
 - [《JavaScript正则表达式》](https://github.com/lznbuild/my-blog/issues/1)
 - [《你不知道的JavaScript》上册](https://github.com/lznbuild/my-blog/issues/9)
 - [《你不知道的JavaScript》中册](https://github.com/lznbuild/my-blog/issues/10)
-- [JavaScript高级程序设计]()
-- [JavsScript权威指南]()
-- [深入浅出React]()
+- [《JavaScript高级程序设计》]()
+- [《JavsScript权威指南》]()
+- [《深入浅出React》]()
 
 
 ##  数据结构  
@@ -41,7 +42,7 @@
 
 ##  网络部分
 
-##  React  
+##  React系列    
 
 ## Webpack系列  
 
@@ -50,5 +51,7 @@
 ## 参考博客文档链接  
 https://github.com/KieSun/awesome-fe-study-source  
 http://caibaojian.com/es6/  
+[参考博客1](https://muyiy.cn/blog/1/1.1.html#%E6%89%A7%E8%A1%8C%E6%A0%88)
+
 https://github.com/ljianshu/Blog  
 极客时间中的《重学前端》《浏览器工作原理与实践》
