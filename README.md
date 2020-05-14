@@ -24,7 +24,8 @@
 
 
 这部分只会记载一些笔记，不会深入解读，不想看书的同学可以看一下这个笔记(笔记记的很简单，不适合没基础的同学)。
-电子书链接：xxxxxxx
+电子书链接：https://pan.baidu.com/s/1bSKDKBh-LUzqdkwpGkdRew   
+提取码：wube
 - [《JavaScript正则表达式》](https://github.com/lznbuild/my-blog/issues/1)
 - [《你不知道的JavaScript》上册](https://github.com/lznbuild/my-blog/issues/9)
 - [《你不知道的JavaScript》中册](https://github.com/lznbuild/my-blog/issues/10)
