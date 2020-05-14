@@ -9,7 +9,7 @@
 - [Javascript多种继承方式](https://github.com/lznbuild/my-blog/issues/3)  
 - [Javascript中的类型转换](https://github.com/lznbuild/my-blog/issues/5) 
 - [Javascript执行上下文](https://github.com/lznbuild/my-blog/issues/7) 
-- [Javascript作用域]() 
+- [Javascript作用域](https://github.com/lznbuild/my-blog/issues/11) 
 - [Javascript解读this](https://github.com/lznbuild/my-blog/issues/8) 
 - [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4) 
 - [Javascript防抖节流]() 

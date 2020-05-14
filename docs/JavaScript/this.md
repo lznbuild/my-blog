@@ -39,9 +39,6 @@ function foo() {
 
 baz(); // <-- baz的调用位置，当前调用位置是全局作用域
 ```  
-不清楚执行上下文的可以观看上篇博客[JavaScript执行上下文](https://github.com/lznbuild/my-blog/issues/7)
-
-
 
 
 在了解this调用方式之前，先来看一道题   
@@ -60,12 +57,12 @@ obj.foo() // 5
 bar() // 10
 ```
 
-通过查阅资料（最下方有原文链接），JavaScript中函数的调用方式有3种  
+通过查阅资料，JavaScript中函数的调用方式有3种  
 
 ```js
 func(p1, p2) 
 obj.child.method(p1, p2)
-func.call(context, p1, p2) // 用call来代表一类的显示调用，apply
+func.call(context, p1, p2) // 用call来代表一类的显示调用，还有apply
 ```
 好多初学者都只用到过前两种情况，而且认为前两者优于第三者。但其实第三种形式才是正常的调用形式。
 ```js
@@ -401,7 +398,7 @@ fn.call(window)
 思路有了，就可以实现call，apply了
 
 
-因为《高程》，《犀牛书》，《你不知道的js》中给出的联系题太少了，所以这篇文章借鉴了很多大佬们的博客，这里给出原文链接  
+因为《高程》，《犀牛书》，《你不知道的js》中给出的练习题太少了，所以这篇文章借鉴了很多大佬们的博客，这里给出原文链接  
 
 https://juejin.im/post/5d6e5f77f265da03e05b2fd9#heading-19
 
