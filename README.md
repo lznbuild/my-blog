@@ -13,7 +13,7 @@
 - [Javascript作用域](https://github.com/lznbuild/my-blog/issues/11) 
 - [Javascript解读this](https://github.com/lznbuild/my-blog/issues/8) 
 - [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4) 
-- [Javascript防抖节流]() 
+- [Javascript防抖节流](https://github.com/lznbuild/my-blog/issues/12) 
 - [Javascript垃圾回收]() 
 - [Javascript深浅拷贝]() 
 
