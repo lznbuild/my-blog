@@ -1,6 +1,7 @@
 ## 简介
 用的着那么麻烦，还得有简介？
 
+有些图加载失败的话，建议clone项目到本地，vs Code中有针对查看markdown文件的插件Markdown Shortcuts,支持在编辑器中查看markdown文件。
 
 ## JavaScript
 
