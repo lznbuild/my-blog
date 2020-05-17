@@ -34,7 +34,6 @@
 - [《你不知道的JavaScript》上册](https://github.com/lznbuild/my-blog/issues/9)
 - [《你不知道的JavaScript》中册](https://github.com/lznbuild/my-blog/issues/10)
 - [《JavaScript高级程序设计》]()
-- [《JavsScript权威指南》]()
 - [《深入浅出React》]()
 
 
