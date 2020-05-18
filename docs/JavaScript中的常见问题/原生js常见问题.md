@@ -265,7 +265,7 @@ Function.prototype.myApply = function(context) {
 }
 ```
 
-## bind的实现
+## bind的实现(多次bind，只生效第一次??????)
 ```js
 Function.prototype.myBind = function (context) {
   if (typeof this !== 'function') {
