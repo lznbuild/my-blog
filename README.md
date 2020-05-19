@@ -18,6 +18,7 @@
 - [Javascript解读闭包](https://github.com/lznbuild/my-blog/issues/4) 
 - [Javascript防抖节流](https://github.com/lznbuild/my-blog/issues/12) 
 - [Javascript垃圾回收](https://github.com/lznbuild/my-blog/issues/13) 
+- [Javascript深浅拷贝]() 
 
 
 > JavaScript中的常见问题
