@@ -333,6 +333,127 @@ a >= b; // true
 没法写完本书！）。但是，中断的发生经常频繁到让我觉得我的大脑几乎是不停地切换到
 不同的上下文（即“进程”）中。很可能 JavaScript 引擎也是这种感觉。
 
+### js异步解决方案的发展历程以及优缺点
+
+1.回调函数
+```js
+setTimeout(()=> {
+  // callback函数
+},1000)
+```
+
+缺点： 没法try catch捕获错误，还有回调地狱的问题，和人的大脑的思维方式不符
+
+
+
+2.promise
+
+优点：实现了链式调用，解决了回调地狱的问题  
+
+缺点： 无法终止promise，状态一旦更改为resolve,reject,无法再次改变  
+
+Promise.all([]).then()  必须所有Promise都是resolve状态，才会执行then回调函数(Promise.allsettled正在提案中)。
+
+Promise.race()  
+
+```js
+var p1 = new Promise((resolve,reject)=> {
+    setTimeout(()=> {
+      resolve()
+    },2000)
+  }).then(res => {
+    console.log('p1执行');
+  })
+
+  var p2 = new Promise((resolve,reject)=> {
+    setTimeout(()=> {
+      resolve()
+    },3000)
+  }).then(res=> {
+    console.log('p2执行');
+  })
+
+  Promise.all([p1,p2]).then(res=> {
+    console.log('执行完毕');
+  })
+
+  // p1执行
+  // p2执行  
+  // 执行完毕
+```
+
+```js
+ var p1 = new Promise((resolve,reject)=> {
+    setTimeout(()=> {
+      resolve()
+    },2000)
+  }).then(res => {
+    console.log('p1执行');
+  })
+
+  var p2 = new Promise((resolve,reject)=> {
+    setTimeout(()=> {
+      resolve()
+    },3000)
+  }).then(res=> {
+    console.log('p2执行');
+  })
+
+  Promise.race([p1,p2]).then(res=> {
+    console.log('执行完毕');
+  })
+
+// p1执行
+// 执行完毕
+
+// p2执行
+```
+
+```js
+ var p1 = new Promise((resolve,reject)=> {
+    setTimeout(()=> {
+      reject()
+    },2000)
+  }).then(res => {
+    console.log('p1执行');
+  })
+
+  var p2 = new Promise((resolve,reject)=> {
+    setTimeout(()=> {
+      resolve()
+    },3000)
+  }).then(res=> {
+    console.log('p2执行');
+  })
+
+  Promise.race([p1,p2]).then(res=> {
+    console.log('执行完毕');
+  })
+
+// p1报错
+
+// p2执行
+```
+
+3.generator  精准控制函数执行
+
+
+4.async，await  
+
+优点：代码清晰，不用像promise写一堆then，处理了回调地狱  
+
+缺点：await 将异步代码改造成同步代码，如果多个异步操作没有依赖性而使用 await 会导致性能上的降低。
+
+```js
+async function test() {
+  // 以下代码没有依赖性的话，完全可以使用 Promise.all 的方式
+  // 如果有依赖性的话，其实就是解决回调地狱的例子了
+  await fetch('XXX1')
+  await fetch('XXX2')
+  await fetch('XXX3')
+}
+```
+
 
 ## 第五章
 web worker
