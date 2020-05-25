@@ -17,29 +17,9 @@ var f = function () {
 ```
 上面代码中，函数体里面的this.x就是指当前运行环境的x。
 
-this说白了就是找拥有当前上下文（context）的对象（context object）,也就是说this指向调用位置的执行上下文，跟调用位置，怎样调用有关。跟函数在哪里定义没有半毛钱关系，而且会随着函数调用方式的变化而变化,这就给函数提供了非常大的灵活性。
+this说白了就是找拥有当前上下文（context）的对象（context object），也就是说this指向调用位置的执行上下文，跟调用位置，怎样调用有关。跟函数在哪里定义没有关系，而且会随着函数调用方式的变化而变化，这就给函数提供了非常大的灵活性。
 
-用栗子说明
-```js
-function baz() {
-    // 当前调用栈是：baz
-    console.log( "baz" );
-    bar(); // <-- bar的调用位置，当前调用位置在baz中
-}
 
-function bar() {
-    // 当前调用栈是：baz --> bar
-    console.log( "bar" );
-    foo(); // <-- foo的调用位置，当前调用位置在bar中
-}
-
-function foo() {
-    // 当前调用栈是：baz --> bar --> foo
-    console.log( "foo" );
-}
-
-baz(); // <-- baz的调用位置，当前调用位置是全局作用域
-```  
 
 
 在了解this调用方式之前，先来看一道题   
@@ -54,8 +34,8 @@ var obj = {
 }
 
 var bar = obj.foo
-obj.foo() // 5
-bar() // 10
+obj.foo() // 10
+bar() // 5
 ```
 
 通过查阅资料，JavaScript中函数的调用方式有3种  
@@ -65,7 +45,7 @@ func(p1, p2)
 obj.child.method(p1, p2)
 func.call(context, p1, p2) // 用call来代表一类的显示调用，还有apply
 ```
-好多初学者都只用到过前两种情况，而且认为前两者优于第三者。但其实第三种形式才是正常的调用形式。
+大部分人都只用到过前两种情况，而且认为前两者优于第三者。但其实第三种形式才是正常的调用形式。
 ```js
 func.call(context,p1,p2)
 ```
@@ -98,7 +78,7 @@ bar()
 
 obj.foo() 转化为call的形式就是obj.foo.call(obj)，所以this指向了obj
 
-bar() 转化为call的形式就是bar.call()，由于没有传 context，所以 this 就是 window，本文的所有分析，不考虑node环境。
+bar() 转化为call的形式就是bar.call()，由于没有传 context，所以 this 默认就是 window，本文的所有分析，不考虑node.js环境。
 
 
 
@@ -113,7 +93,7 @@ bar() 转化为call的形式就是bar.call()，由于没有传 context，所以 
 ### 默认绑定  
 独立函数调用，可以把默认绑定看作是无法应用其他规则时的默认规则，this指向全局对象。  
 严格模式下，不能将全局对象用于默认绑定，this会绑定到undefined。只有函数运行在非严格模式下，默认绑定才能绑定到全局对象。  
-```
+```js
 var a = 'hello'
 
 var obj = {
@@ -125,9 +105,9 @@ var obj = {
 
 var bar = obj.foo
 
-bar()              // 浏览器中输出: "hello"
+bar()              // hello
 ```
-bar()就是默认绑定，非下面要说明的的隐式绑定，函数调用的时候，前面没有任何修饰调用，也可以用之前的 call函数调用形式理解，bar.call(),所以输出结果是hello。
+bar()就是默认绑定，非下面要说明的的隐式绑定，函数调用的时候，前面没有任何修饰调用，也可以用之前的 call函数调用形式理解，bar.call()，所以输出结果是hello。
 
 注意，有坑
 ```js
@@ -218,12 +198,12 @@ console.log( bar.a ); // 2
 ```
 
 ### 箭头函数绑定
-ES6新增一种特殊函数类型：箭头函数，箭头函数无法使用上述四条规则，在箭头函数自己的作用域中没有this,而是根据外层（函数或者全局）作用域（词法作用域）来决定this。 也就是说，箭头函数里的this不再有迷惑性，被永远封印到当前词法作用域之中，称作 Lexical this ，在代码运行前就可以确定。
+ES6新增一种特殊函数类型：箭头函数，箭头函数无法使用上述四条规则，在箭头函数自己的作用域中没有this，而是根据外层（函数或者全局）作用域（词法作用域）来决定this。 也就是说，箭头函数里的this不再有迷惑性，被永远封印到当前词法作用域之中，称作 Lexical this ，在代码运行前就可以确定。
 
 这样的好处就是方便让回调函数的this使用当前的作用域，不怕引起混淆。  
 
 
-所以对于箭头函数，只要看它在哪里创建的就行。
+所以对于箭头函数，只要看它在哪个环境（上下文）创建的就行。
 
 
 ```js
@@ -246,7 +226,7 @@ var obj2 = {
 var bar = foo.call( obj1 );
 bar.call( obj2 ); // 2，不是3！
 ```
-foo()内部创建的箭头函数会捕获调用时foo()的this。由于foo()的this绑定到obj1，bar(引用箭头函数)的this也会绑定到obj1，箭头函数的绑定无法被修改(new也不行)，也可以理解为箭头函数无法显式使用call，apply修改this
+foo 内部创建的箭头函数会捕获调用时foo的this。由于foo的this绑定到obj1，bar(引用箭头函数)的this也会绑定到obj1，箭头函数的绑定无法被修改(new也不行)，也可以理解为箭头函数无法显式使用call，apply修改this。
 
 再来一个题巩固一下
 ```js
@@ -265,7 +245,7 @@ var boss1 = {
 }
 
 boss1.callback(() => { console.log(this) }) // window
-boss1.callback2(() => { console.log(this) }) // boss1
+boss1.callback2() // boss1
 ```
 如果这题没做对，建议再看一下上面的讲解  
 
@@ -290,7 +270,7 @@ boss1returnThis.call(boss2) // boss1,不是boss2,说明bind比call优先级高
 ```
 
 ## new 的优先级最高
-```
+```js
 function showThis () {
   console.log(this)
 }
@@ -317,8 +297,8 @@ function fn() {
 var obj = {
   length: 5,
   method: function(fn) {
-    fn(); // 10
-    arguments[0](); // 2 ，指向method方法的实参的个数
+    fn(); // 10 相当于fn.call() 默认绑定window
+    arguments[0](); // 2 ，指向method方法的实参的个数  相当于fn.call(arguments)
   }
 };
  
@@ -414,6 +394,11 @@ https://blog.crimx.com/2016/05/12/understanding-this/
 
 
 
+
+
+
+
+this 练习题  
 ```js
 var num = 1;
 var myObject = {
@@ -465,19 +450,6 @@ function Person (name) {
 var personA = new Person('personA')
 var personB = new Person('personB')
 
-personA.show1()
-personA.show1.call(personB)
-
-personA.show2()
-personA.show2.call(personB)
-
-personA.show3()()
-personA.show3().call(personB)
-personA.show3.call(personB)()
-
-personA.show4()()
-personA.show4().call(personB)
-personA.show4.call(personB)()
 
 
 personA.show1() // personA，隐式绑定，调用者是 personA
@@ -498,65 +470,6 @@ personA.show4.call(personB)() // personB，解析同题目1，最后是箭头函
 							  // this指向外层作用域，即改变后的person2函数作用域
 ```
 
-
-```js
-/**
- * 非严格模式
- */
-
-var name = 'window'
-
-var person1 = {
-  name: 'person1',
-  show1: function () {
-    console.log(this.name)
-  },
-  show2: () => console.log(this.name),
-  show3: function () {
-    return function () {
-      console.log(this.name)
-    }
-  },
-  show4: function () {
-    return () => console.log(this.name)
-  }
-}
-var person2 = { name: 'person2' }
-
-person1.show1()
-person1.show1.call(person2)
-
-person1.show2()
-person1.show2.call(person2)
-
-person1.show3()()
-person1.show3().call(person2)
-person1.show3.call(person2)()
-
-person1.show4()()
-person1.show4().call(person2)
-person1.show4.call(person2)()
-
-
-person1.show1() // person1，隐式绑定，this指向调用者 person1 
-person1.show1.call(person2) // person2，显式绑定，this指向 person2
-
-person1.show2() // window，箭头函数绑定，this指向外层作用域，即全局作用域
-person1.show2.call(person2) // window，箭头函数绑定，this指向外层作用域，即全局作用域
-
-person1.show3()() // window，默认绑定，这是一个高阶函数，调用者是window
-				  // 类似于`var func = person1.show3()` 执行`func()`
-person1.show3().call(person2) // person2，显式绑定，this指向 person2
-person1.show3.call(person2)() // window，默认绑定，调用者是window
-
-person1.show4()() // person1，箭头函数绑定，this指向外层作用域，即person1函数作用域
-person1.show4().call(person2) // person1，箭头函数绑定，
-							  // this指向外层作用域，即person1函数作用域
-person1.show4.call(person2)() // person2
-```
-
-
-this中setTimeout(obj.foo,1000)看一下this指向啥
 
 
 ```js
@@ -623,69 +536,3 @@ var person1 = new Person('person1')
 ```
 
 
-
-
-
-## bind，call的优先级
-function returnThis () {
-  return this
-}
-
-var boss1 = { name: 'boss1'}
-
-var boss1returnThis = returnThis.bind(boss1)
-
-boss1returnThis() // boss1
-
-var boss2 = { name: 'boss2' }
-boss1returnThis.call(boss2) // still boss1
-
-## new 的优先级最高
-function showThis () {
-  console.log(this)
-}
-
-showThis() // window
-new showThis() // showThis
-
-var boss1 = { name: 'boss1' }
-showThis.call(boss1) // boss1
-new showThis.call(boss1) // TypeError
-
-var boss1showThis = showThis.bind(boss1)
-boss1showThis() // boss1
-new boss1showThis() // showThis
-
-
-箭头函数里的this不再妖艳，被永远封印到当前词法作用域之中，称作 Lexical this ，在代码运行前就可以确定。没有其他大佬可以覆盖。
-
-这样的好处就是方便让回调函数的this使用当前的作用域，不怕引起混淆。
-
-所以对于箭头函数，只要看它在哪里创建的就行。且不能用call修改this
-function callback (cb) {
-  cb()
-}
-
-callback(() => { console.log(this) }) // window
-
-var boss1 = {
-  name: 'boss1',
-  callback: callback,
-  callback2 () {
-    callback(() => { console.log(this) })
-  }
-}
-
-boss1.callback(() => { console.log(this) }) // still window
-boss1.callback2(() => { console.log(this) }) // boss1
-
-this一旦被确定，就不可更改了
-
-
-## 关于this的好文
-https://zhuanlan.zhihu.com/p/23804247
-http://www.ruanyifeng.com/blog/2018/06/javascript-this.html
-
-https://www.cnblogs.com/front-Thinking/p/4364337.html（摘自《你不知道的JavaScript》）
-
-https://blog.crimx.com/2016/05/12/understanding-this/
