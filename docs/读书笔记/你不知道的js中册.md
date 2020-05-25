@@ -1,4 +1,4 @@
-中册的内容太基础了，没记多少
+中册的内容太基础了，没记多少。
 
 ## 第一章
 大多数开发者倾向于将 undefined 等同于 undeclared（未声明），但在 JavaScript 中它们完全是两回事。  
@@ -12,7 +12,7 @@ b; // ReferenceError: b is not defined
 
 浏览器对这类情况的处理很让人抓狂。  
 
-上例中，“b is not defined”容易让人误以为是“b isundefined”。这里再强调一遍，“undefined”和“is not defined”是两码事。
+上例中，“b is not defined”容易让人误以为是“b is undefined”。这里再强调一遍，“undefined”和“is not defined”是两码事。
 
 此时如果浏览器报错成“b is not found”或者“b is not declared”会更准确。
 更让人抓狂的是 typeof 处理 undeclared 变量的方式。
