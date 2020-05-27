@@ -1,9 +1,10 @@
 ## 事件系统  
+如果DOM上绑定了过多的事件处理函数，整个页面响应以及内存占用可能都会受到影响。React为了避免这类DOM事件滥用，同时屏蔽底层不同浏览器之间的事件系统差异，基于 Virtual DOM 实现了一个中间层——SyntheticEvent合成事件层）。
 
-React 基于 Virtual DOM 实现了一个 SyntheticEvent （合成事件层），开发者所定义的事件，处理器 会接到一个 SyntheticEvent 对象的实例，它完全符和 W3C标准 ，不会存在 IE 的兼容性问题。与原生的浏览器事件一样拥有同样的接口，同样支持事件的冒泡机制，我们可以使用 stopPropagation() 和 preventDefault() 中断它。 
+开发者所定义的事件，处理器会接到一个 SyntheticEvent 对象的实例，它完全符和 W3C标准 ，不会存在 IE 的兼容性问题。与原生的浏览器事件一样拥有同样的接口，同样支持事件的冒泡机制，我们可以使用 stopPropagation() 和 preventDefault() 中断它。 
 
 所有事件都自动绑定到最外层上。如果需要访问原生事件对象，可以使用 nativeEvent 属性。
-
+合成事件的监听器是统一注册在document上的。
 在React底层，主要对合成事件做了两件事： 事件委派和自动绑定。  
 
 ### 事件委派  
@@ -16,3 +17,17 @@ React 基于 Virtual DOM 实现了一个 SyntheticEvent （合成事件层），
 在React中使用DOM原生事件时，一定要在组件卸载时手动移出，否则很可能出现内存泄漏的问题。而使用合成事件系统则不需要，因为React内部已经处理了。  
 
 React的合成事件并没有实现事件捕获，仅仅支持了事件冒泡。
+
+在原生事件中阻止冒泡，可以阻止react合成事件。（React给合成事件封装的stopPropagation函数在调用时给自己加了个isPropagationStopped的标记位来确定后续监听器是否执行。而父级可以用stop阻止子级事件的执行。由于DOM事件被阻止冒泡了，无法到达document，所以合成事件自然不会被触发）
+
+合成事件没法阻止原生事件的冒泡。
+合成事件之间可以用e.stopPropagation()阻止事件冒泡。
+阻止合成事件与最外层document上的事件间的冒泡
+       e.nativeEvent.stopImmediatePropagation();//给子集
+
+
+
+https://juejin.im/post/59db6e7af265da431f4a02ef
+
+
+https://toutiao.io/posts/28of14w/preview
