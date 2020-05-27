@@ -42,9 +42,9 @@
 <!-- 实现常见的数据结构，每一种数据结构都找一道算法题来练习 -->
 
 ##  浏览器部分  
-- [浏览器的主要进程及协作关系]()
+- [浏览器的主要进程及协作关系](https://github.com/lznbuild/my-blog/issues/16)
 - [Event Loop]()
-- [在地址栏中输入URL会发生什么]()
+- [在地址栏中输入URL会发生什么](https://github.com/lznbuild/my-blog/issues/17)
 
 
 ##  网络部分  
