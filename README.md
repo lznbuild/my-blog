@@ -1,5 +1,5 @@
 ## 简介
-记录前端知识点  
+学习笔记  
 
 ## 建议  
 
@@ -28,26 +28,37 @@
 >  读书笔记系列   
 
 
-这部分只会记载一些笔记，不会深入解读，不想看书的同学可以看一下这个笔记(笔记记的很简单，不适合没基础的同学)。
+这部分只会记载一些笔记，不会深入解读
 电子书链接：https://pan.baidu.com/s/1bSKDKBh-LUzqdkwpGkdRew   
 提取码：wube
 - [《JavaScript正则表达式》](https://github.com/lznbuild/my-blog/issues/1)
 - [《你不知道的JavaScript》上册](https://github.com/lznbuild/my-blog/issues/9)
 - [《你不知道的JavaScript》中册](https://github.com/lznbuild/my-blog/issues/10)
 - [《JavaScript高级程序设计》](https://github.com/lznbuild/my-blog/issues/14)
-- [《深入浅出React》]()
 
 
 ##  数据结构  
-实现常见的数据结构，每一种数据结构都找一道算法题来练习
+<!-- 实现常见的数据结构，每一种数据结构都找一道算法题来练习 -->
 
 ##  浏览器部分  
+- [浏览器的主要进程及协作关系](https://github.com/lznbuild/my-blog/issues/16)
 - [Event Loop]()
+- [在地址栏中输入URL会发生什么](https://github.com/lznbuild/my-blog/issues/17)
 
 
-##  网络部分
+##  网络部分  
+- [HTTP,TCP,UDP,网络基础部分]()
+- [HTTP缓存]()
+- [常见问题]()
+
 
 ##  React系列    
+- [React常见问题]()
+- [React生命周期]()
+- [React高阶组件]()
+- [React事件系统]()
+- [React Filber]()
+- [React hooks]()
 
 ## Webpack系列  
 

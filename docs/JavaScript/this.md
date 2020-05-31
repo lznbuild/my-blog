@@ -80,9 +80,9 @@ obj.foo() 转化为call的形式就是obj.foo.call(obj)，所以this指向了obj
 
 bar() 转化为call的形式就是bar.call()，由于没有传 context，所以 this 默认就是 window，本文的所有分析，不考虑node.js环境。
 
+上面的分析已经很清楚了，来自大佬的分享。
 
-
-下面正式开始汇总this的调用方式  
+下面内容来自《你不知道的JavsScript》
 ## 5种this绑定
 1、默认绑定  
 2、隐式绑定   
@@ -297,8 +297,8 @@ function fn() {
 var obj = {
   length: 5,
   method: function(fn) {
-    fn(); // 10 相当于fn.call() 默认绑定window
-    arguments[0](); // 2 ，指向method方法的实参的个数  相当于fn.call(arguments)
+    fn(); // 10 默认绑定window
+    arguments[0](); // 2 ，指向method方法的实参的个数
   }
 };
  

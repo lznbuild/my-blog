@@ -1,7 +1,13 @@
 ## 变量声明的几种方式
   var function let const class import 
 
+## 如何将浮点数点左边的数每三位添加一个逗号，如 12000000.11 转化为12,000,000.11?
 
+```js
+function format(number) {
+  return number && number.replace(/(?!^)(?=(\d{3})+\.)/g, ",");
+}
+```
 ## promise A和promise A+ 有什么区别
 
 ## focus、blur、load、unload等事件，不会冒泡
