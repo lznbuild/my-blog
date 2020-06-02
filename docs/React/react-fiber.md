@@ -12,3 +12,6 @@ react初次render或协调后所生成的一个对象，react16前是通过组�
 
 重新实现堆栈的优点是，您可以将堆栈帧保留在内存中，并根据需要（以及在任何时候）执行它们
 除了调度之外，手动处理堆栈帧还可以释放并发和错误边界等功能
+
+
+https://blog.csdn.net/wu_xianqiang/article/details/105837869
