@@ -440,7 +440,7 @@ var p1 = new Promise((resolve,reject)=> {
 
 4.async，await  
 
-优点：代码清晰，不用像promise写一堆then，处理了回调地狱  
+优点：代码清晰，不用像promise写一堆then，处理了回调地狱
 
 缺点：await 将异步代码改造成同步代码，如果多个异步操作没有依赖性而使用 await 会导致性能上的降低。
 
