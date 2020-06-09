@@ -35,4 +35,6 @@ clear:both; 只能用于块元素
 
 
 
+### css层叠顺序  
 
+background/border==> z-index: -1 ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto,0 ==> z-index:1;
