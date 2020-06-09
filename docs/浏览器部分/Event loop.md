@@ -120,7 +120,86 @@ console.log('script end')
 Promise.resolve(返回值).then()，然后 await 后的代码全部被包裹进了 then 的回调中，所以 console.log('async1 end') 会优先执行于 console.log('promise1'),console.log('promise2')
 
 
+```js
+async function asyncFn() {
+    console.log('asyncFn')
+    let res = await asyncFn2()
+    console.log(res)
+}
 
+async function asyncFn2() {
+    console.log('asyncFn2')
+    let res = await fn3()
+    console.log(res)
+    return 'asyncFn2 return'
+}
+
+function fn3() {
+    console.log('fn3')
+}
+
+setTimeout(() => {
+    console.log('setTimeout')
+}, 0)
+
+console.log('script start')
+
+asyncFn()
+
+let promise = new Promise(resolve => {
+    console.log('promise')
+    resolve('promise resolved')
+    console.log('after promise resolved')
+}).then(res => {
+    console.log(res)
+})
+
+console.log('script end');
+
+```
+
+
+```js
+   function fn1() {
+      console.log("fn1");
+    }
+
+    async function fn2() {
+      console.log("fn2");
+      await new Promise(resolve => resolve());
+      console.log("fn end");
+    }
+
+    setTimeout(() => {
+      console.log("set");
+    });
+
+    new Promise(resolve => {
+      resolve(10);
+    }).then(ret => {
+      console.log(ret);
+    });
+
+    function data() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(20);
+        }, 0);
+      });
+    }
+
+    async function fn3() {
+      console.log("fn3");
+      const result = await data();
+      console.log(result);
+      console.log("fn3 end");
+    }
+
+    fn1();
+    fn2();
+    fn3();
+    // fn1  fn2  fn3  10  fn end  set  20   fn3 end
+```
 
 ## 参考
 https://juejin.im/post/5be5a0b96fb9a049d518febc
