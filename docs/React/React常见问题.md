@@ -3,6 +3,14 @@
 setState不是真正意义上的异步，react内部实现了一个批量更新，把需要更新的nextState push到pendingStates数组中，通过isPending判断有没有在工作，如果工作了，就更新，否则不更新，循环调用updater中的函数时，isPending为true。
 
 setState在原生事件中，可以在下面直接拿到修改后的值，是同步的。在setTimeout，是同步的。
+
+setState通过一个队列机制实现state更新，当执行setState时，会将需要更新的state合并后放入状态队列。
+
+不是异步的，而是react的批处理机制给人一种异步的假象。  
+
+setTimeout回调中使用setState，根据js的异步机制，会将异步代码先暂存，等所有同步代码执行完毕后再执行，这时React的批处理机制已经走完，处理标志被设置为false，这时再调用setState即可立即执行更新，拿到更新后的结果。
+
+在原生事件中调用setState并不会触发react的批处理机制，所以立即能拿到最新的结果。
 ### 虚拟dom有什么特点
 
 React 厉害的地方并不是说它比 DOM 快，而是说不管你数据怎么变化，我都可以以最小的代价来进行更新 DOM。方法就是我在内存里面用新的数据刷新一个虚拟 DOM 树，然后新旧 DOM 进行比较，找出差异，再更新到 DOM 树上。
@@ -67,3 +75,16 @@ https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247484469&idx=1&sn=f68d04
 https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247484536&idx=1&sn=94777b8c1aab80dffe1fc224bec02c72&scene=21#wechat_redirect
 2.拥有相同类的两个组件将会生成相似的树形结构，拥有不同类的两个组件将会生成不同的树形结构。  
 3.对于同一层级的一组子节点，可以通过唯一的id进行区分。
+
+
+
+### react中的自定义组件都要大写？
+jsx通过babel的解析，最终都会成为React.createElement()，这里面有个判断，小写开头的是原生html的标签，大写是变量  
+
+ref可以在自定义组件上使用，获取的是组件实例，不可直接用于函数组件，react.forwardRef传递ref 
+
+
+### 能不能通过ref获取子组件的dom节点？
+函数组件可以，class组件不行  
+
+### props不包括ref,key

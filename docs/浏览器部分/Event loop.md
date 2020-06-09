@@ -34,7 +34,6 @@ fn()
 - setTimeout  
 - setInterval  
 - setImmediate   (Node环境）  
-- requestAnimationFrame   (浏览器)  
 
 
 ### 常见微任务
@@ -123,7 +122,6 @@ Promise.resolve(返回值).then()，然后 await 后的代码全部被包裹进�
 
 
 ## 参考
-https://juejin.im/post/5be5a0b96fb9a049d518febc
 
 
 https://juejin.im/post/5a6547d0f265da3e283a1df7#heading-11
