@@ -38,7 +38,9 @@
 
 
 ##  数据结构  
-<!-- 实现常见的数据结构，每一种数据结构都找一道算法题来练习 -->
+- [栈](https://github.com/lznbuild/my-blog/issues/26)  
+- [队列](https://github.com/lznbuild/my-blog/issues/27)
+- [链表](https://github.com/lznbuild/my-blog/issues/28)
 
 ##  浏览器部分  
 - [浏览器的主要进程及协作关系](https://github.com/lznbuild/my-blog/issues/16)
