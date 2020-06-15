@@ -15,3 +15,4 @@ https://juejin.im/book/5b936540f265da0a9624b04b/section/5b97cd22e51d450e8f5f6375
 ```
 
 
+create-react-app ，打包项目，什么都没加进去，就接近500k了
