@@ -437,7 +437,17 @@ import * as data from "./module"
 console.log(data) // 导出的所有
 ```
 
-module.export[  ]的导出
+module.export[  ]的导出 
+
+
+ES6 的模块化 
+值的引用 
+静态分析：指不需要执行代码，只从字面量上对代码进行分析，方便优化代码体积，比如通过 Tree-shaking 操作消除模块中没有被引用或者执行结果不会被用到的无用代码
+
+commonJS 
+值的拷贝 
+动态声明 
+
 
 
 [参考内容](http://caibaojian.com/es6/module.html)
