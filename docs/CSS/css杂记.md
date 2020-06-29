@@ -38,3 +38,16 @@ clear:both; 只能用于块元素
 ### css层叠顺序  
 
 background/border==> z-index: -1 ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto,0 ==> z-index:1;
+
+
+### 选择器权重
+
+！important
+
+行内样式 
+
+ID  100
+
+class，属性选择器，伪类选择器  10 
+
+标签选择器，伪元素选择器 1 
