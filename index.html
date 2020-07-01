@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    这么会抬杠，工地需要你 
+    我不想知道你有病，别表现的这么明显
+    你长脑袋只是为了让自己看起来更高一点吗
+    有空一起吃鱼吧，我看你挺会挑刺的
+    你一定会做饭吧，看你挺会添油加醋的
+    
+  </pre>
+</body>
+</html>
+
+<script>
+
+const permute = function(nums) {
+  const len = nums.length
+  const curr = []
+  const res = []
+  const visited = {}
+
+  function dfs(nth) {
+      if(nth === len) {
+          res.push(curr.slice())
+          return 
+      }
+      for(let i=0;i<len;i++) {
+          if(!visited[nums[i]]) {
+              visited[nums[i]] = 1
+              curr.push(nums[i])
+              dfs(nth+1) 
+              curr.pop()
+              visited[nums[i]] = 0
+          }
+      }
+  }
+
+  dfs(0)
+
+  return res
+};
+
+console.log(permute([1,2,3]))
+
+</script>
