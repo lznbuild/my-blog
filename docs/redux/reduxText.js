@@ -36,6 +36,7 @@ const store = createStore(counterReducer, applyMiddleware(logger, thunk));
 
 export default class MyText extends React.Component {
   componentDidMount() {
+  // 这个subscribe本身就是发布订阅模式
     store.subscribe(() => this.forceUpdate());
   }
   render() {
