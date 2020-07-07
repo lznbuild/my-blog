@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <pre>
+    这么会抬杠，工地需要你 
+    我不想知道你有病，别表现的这么明显
+    你长脑袋只是为了让自己看起来更高一点吗
+    有空一起吃鱼吧，我看你挺会挑刺的
+    你一定会做饭吧，看你挺会添油加醋的
+
+  </pre
+    >
+  </body>
+</html>
+
+<script>
+  /*
+  
+  输入: [0,1,0,3,12]
+  输出: [1,3,12,0,0]
+*/
+  var moveZeroes = function(nums) {
+    let j = 0;
+    let length = nums.length;
+    for (let i=0;i<length;i++) {
+      if (nums[i] !== 0) {
+        nums[j] = nums[i]
+        if(i!=j) {
+          nums[i]=0
+        }
+        j++
+      }
+    }
+
+
+    return nums;
+  };
+
+  console.log(movejes([0, 0, 1]));
+</script>
