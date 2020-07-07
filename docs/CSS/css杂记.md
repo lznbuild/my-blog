@@ -44,10 +44,39 @@ background/border==> z-index: -1 ==> block盒子 ==> float盒子==> inline/inlin
 
 ！important
 
-行内样式 
+行内样式 1000
 
 ID  100
 
 class，属性选择器，伪类选择器  10 
 
 标签选择器，伪元素选择器 1 
+
+
+### 选择器的优先级
+```js
+.x {    background-color:lightblue;}.z {    background-color:lightblue;}.y {    background-color:lightgreen;}
+<div id="my" class="x y z">text<div>
+
+//最终y会生效,跟写css的位置有关
+
+ .z, .y {
+      color: yellow;
+    }
+
+    并列不会加权重
+```
+
+
+## 伪元素
+::first-line  
+
+::first-letter  
+
+排版后的第一行和第一个字符，跟HTML中的位置无关
+
+::before  
+
+::after
+
+

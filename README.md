@@ -73,9 +73,13 @@
 
 ## 参考博客文档链接  
 https://github.com/KieSun/awesome-fe-study-source  
+
 http://caibaojian.com/es6/  
-https://muyiy.cn/blog/1/1.1.html#%E6%89%A7%E8%A1%8C%E6%A0%88
+
+https://muyiy.cn/blog/1/1.1.html#%E6%89%A7%E8%A1%8C%E6%A0%88  
+
 https://github.com/ljianshu/Blog  
+
 极客时间中的《重学前端》《浏览器工作原理与实践》
 
 

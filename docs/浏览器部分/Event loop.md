@@ -220,8 +220,10 @@ setTimeout(function(){
 
 颜色一闪而过  
 
-每一帧要做的事
-宏任务===》 微任务==》 requestanimationframe ==> 渲染 ==》 （还有空闲时间）requestIdleVallback
+### 每一帧要做的事
+宏任务===》 微任务==》 requestanimationframe ==> 渲染(html解析，样式计算，布局，更新图层树，paint绘制，Composite合成，栅格化) ==》 （还有空闲时间）requestIdleVallback  
+
+浏览器需要时间将每一帧绘制到屏幕上，大约10ms用来执行代码
 
 ## 参考
 
