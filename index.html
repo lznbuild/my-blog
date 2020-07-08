@@ -1,62 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <pre>
-    这么会抬杠，工地需要你 
-    我不想知道你有病，别表现的这么明显
-    你长脑袋只是为了让自己看起来更高一点吗
-    有空一起吃鱼吧，我看你挺会挑刺的
-    你一定会做饭吧，看你挺会添油加醋的
-
-  </pre
-    >
-  </body>
-</html>
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    html,body{
+      height: 100%;
+      width: 100%;
+    }
+    #box{
+      height: 200px;
+      width: 450px;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+    <div id='box'></div>
+    <button id='change-button'>点击</button>
+</body>
 <script>
-  /*
-输入：n = 3
-输出：[
-       "((()))",
-       "(()())",
-       "(())()",
-       "()(())",
-       "()()()"
-     ]
-
-
-
-
-*/
-
-  var generateParenthesis = function(n) {
-    var arr = [];
-
-    const fn = (str, left, right) => {
-      if (str.length === 2 * n) {
-        arr.push(str);
-        return;
+    document.getElementById('change-button').onclick=function(){
+      let box = document.getElementById('box');
+      box.style.backgroundColor = 'yellow';
+      for(var i = 0; i < 100000; i++){
+        box.style.backgroundColor = 'black';
       }
-
-      if (left < n) {
-        fn(str + "(", left + 1, right);
-      }
-      if (right < left) {
-        fn(str + ")", left, right + 1);
-      }
-    };
-
-    fn("", 0, 0);
-
-    return arr;
-  };
-
-
-  console.log(generateParenthesis(3));
-</script>
+      box.style.backgroundColor = 'pink';
+      // box.style.backgroundColor = 'black';
+      setTimeout(()=>{
+        box.style.backgroundColor = 'black';
+      },0);
+    }
+  </script>
+</html>
