@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-    *{
-      padding: 0;
-      margin: 0;
-    }
-    html,body{
-      height: 100%;
-      width: 100%;
-    }
-    #box{
-      height: 200px;
-      width: 450px;
-      background: white;
-    }
-  </style>
-</head>
-<body>
-    <div id='box'></div>
-    <button id='change-button'>点击</button>
-</body>
-<script>
-    document.getElementById('change-button').onclick=function(){
-      let box = document.getElementById('box');
-      box.style.backgroundColor = 'yellow';
-      for(var i = 0; i < 100000; i++){
-        box.style.backgroundColor = 'black';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .easy {
+        width: 200px;
+        height: 200px;
+        background: lightgoldenrodyellow;
       }
-      box.style.backgroundColor = 'pink';
-      // box.style.backgroundColor = 'black';
-      setTimeout(()=>{
-        box.style.backgroundColor = 'black';
-      },0);
-    }
-  </script>
+      .hard {
+        background: lightsalmon;
+        transition: 2s all;
+      }
+    </style>
+    <body></body>
+    <script>
+      var body = document.querySelector("body");
+      console.log(`1`);
+      var cDiv = document.createElement("div");
+      console.log(cDiv);
+      console.log(`2`);
+      body.appendChild(cDiv);
+      console.log(body);
+      cDiv.classList.add("easy");
+      console.log(`3`,cDiv.clientLeft);
+      // ======================
+      for (var i = 0; i < 300000; i++);
+      cDiv.classList.add("hard");
+      console.log(cDiv);
+      // ======================
+    </script>
+  </head>
 </html>
