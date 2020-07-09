@@ -80,3 +80,7 @@ class，属性选择器，伪类选择器  10
 ::after
 
 
+## dom.getClientRects() x,y,width,height获取位置和尺寸 
+
+
+var offsetX = document.documentElement.getBoundingClientRect().x - element.getBoundingClientRect().x;

@@ -6,32 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <style>
-      .easy {
-        width: 200px;
-        height: 200px;
-        background: lightgoldenrodyellow;
+      * {
+        padding: 0;
+        margin: 0;
       }
-      .hard {
-        background: lightsalmon;
-        transition: 2s all;
+      #div {
+        width: 200px;
+        border: 1px solid red;
+        margin: 20px;
+        padding: 40px;
+      }
+      #child {
+        border: 1px solid blue;
+      }
+      #parent {
+        width: 400px;
+        border: 1px solid green;
       }
     </style>
-    <body></body>
+    <body>
+      <div id="parent">
+        <div id="div" style="width: 100px">
+          <div id="child">123</div>
+        </div>
+      </div>
+    </body>
     <script>
-      var body = document.querySelector("body");
-      console.log(`1`);
-      var cDiv = document.createElement("div");
-      console.log(cDiv);
-      console.log(`2`);
-      body.appendChild(cDiv);
-      console.log(body);
-      cDiv.classList.add("easy");
-      console.log(`3`,cDiv.clientLeft);
-      // ======================
-      for (var i = 0; i < 300000; i++);
-      cDiv.classList.add("hard");
-      console.log(cDiv);
-      // ======================
+      console.log(div.getClientRects());
+      console.log(div.getBoundingClientRect());
     </script>
   </head>
 </html>
