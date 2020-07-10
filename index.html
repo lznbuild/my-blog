@@ -7,10 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
   <style>
-    .z, .y {
+    .z,
+    .y {
       color: yellow;
     }
-  
+
     .x {
       color: red;
     }
@@ -24,22 +25,36 @@
 </html>
 
 <script>
-
   /*
+
+
+    1        2         3         4          5   
+    1        1         2         2          1
+
+
   
-      20   45   100
-  1   1    1    1    
-
-  5   1    1    1    
-
-  10  1    1    1    
-
-  25  
-
-
-
-
   */
 
-  
+
+  var coinChange = function (coins, amount) {
+    let dp = new Array(amount + 1).fill(Infinity)
+    dp[0] = 0
+    for (let coin of coins) {
+      for (let i = 1; i <= amount; i++) {
+        if (i - coin >= 0) {
+          dp[i] = Math.min(dp[i], dp[i - coin] + 1)
+        }
+      }
+
+      console.log(dp);
+    }
+
+    return dp[amount] === Infinity ? -1 : dp[amount]
+  }
+
+
+
+  // console.log(coinChange([1, 2, 5], 5))
+
+  ///   
 </script>
