@@ -10,30 +10,47 @@
         padding: 0;
         margin: 0;
       }
-      #div {
-        width: 200px;
-        border: 1px solid red;
-        margin: 20px;
-        padding: 40px;
-      }
-      #child {
-        border: 1px solid blue;
-      }
+
       #parent {
         width: 400px;
+        height: 400px;
         border: 1px solid green;
+        margin: 100px;
       }
     </style>
     <body>
-      <div id="parent">
-        <div id="div" style="width: 100px">
-          <div id="child">123</div>
-        </div>
-      </div>
+      <div id="myDiv" style="color:red">这段文字是用来删除的</div>
+      <span id="span">掺入</span>
     </body>
     <script>
-      console.log(div.getClientRects());
-      console.log(div.getBoundingClientRect());
+      var handler = {
+        get: function(target, name) {
+          if (name === "prototype") {
+            return Object.prototype;
+          }
+          return "Hello, " + name;
+        },
+
+        apply: function(target, thisBinding, args) {
+          console.log(target,'target');
+          console.log(thisBinding,'thisBinging');
+          console.log(args,'srgs');
+          return args[0];
+        },
+
+        construct: function(target, args) {
+          return { value: args[1] };
+        }
+      };
+
+      var fproxy = new Proxy(function(x, y) {
+        return x + y;
+      }, handler);
+
+      fproxy(1, 2); // 1
+      // new fproxy(1, 2); // {value: 2}
+      // fproxy.prototype === Object.prototype; // true
+      // fproxy.foo === "Hello, foo"; // true
     </script>
   </head>
 </html>
