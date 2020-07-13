@@ -1,31 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
 
-      #parent {
-        width: 400px;
-        height: 400px;
-        border: 1px solid green;
-        margin: 100px;
-      }
-    </style>
-    <body>
-      <div id="myDiv" style="color:red">这段文字是用来删除的</div>
-      <span id="span">掺入</span>
-    </body>
-    <script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
 
-      var o1 = { myfunc: function(){ console.log(myfunc) }}
-            o1.myfunc()
-    </script>
-  </head>
+    #parent {
+      width: 400px;
+      height: 400px;
+      border: 1px solid green;
+      margin: 100px;
+    }
+  </style>
+
+<body>
+  <div id="myDiv" style="color:red">这段文字是用来删除的</div>
+  <span id="span">掺入</span>
+</body>
+<script>
+
+  /*
+  
+    1 2 3 4 
+
+  */
+
+  function mergeSort(arr) {
+    const len = arr.length
+    if (len <= 1) {
+      return arr
+    }
+
+    const mid = Math.floor(len / 2)
+    const leftArr = mergeSort(arr.slice(0, mid))
+    const rightArr = mergeSort(arr.slice(mid, len))
+    arr = mergeArr(leftArr, rightArr)
+    return arr
+  }
+
+  function mergeArr(arr1, arr2) {
+    let i = 0, j = 0
+    const res = []
+    const len1 = arr1.length
+    const len2 = arr2.length
+    
+    while (i < len1 && j < len2) {
+      if (arr1[i] < arr2[j]) {
+        res.push(arr1[i])
+        i++
+      } else {
+        res.push(arr2[j])
+        j++
+      }
+    }
+    
+    // 处理两个数组长度不一样的问题
+    if (i < len1) {
+      return res.concat(arr1.slice(i))
+    } else {
+      return res.concat(arr2.slice(j))
+    }
+  }
+
+
+  var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
+  console.log(mergeSort(arr));
+
+</script>
+</head>
+
 </html>

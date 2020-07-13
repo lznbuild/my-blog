@@ -35,7 +35,7 @@ clear:both; 只能用于块元素
 
 
 
-### css层叠顺序  
+### css层叠顺序  (层叠上下文)
 
 background/border==> z-index: -1 ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto,0 ==> z-index:1;
 
@@ -84,3 +84,10 @@ class，属性选择器，伪类选择器  10
 
 
 var offsetX = document.documentElement.getBoundingClientRect().x - element.getBoundingClientRect().x;
+
+
+dom.offsetParent 指向position非默认值的祖元素。本身或祖元素display:none 指向null 
+
+
+em更习惯用于字体大小，行高，text-indent首行缩进
+em作为行高单位时，相对于自身字体大小
