@@ -231,6 +231,21 @@ setTimeout(function(){
 
 浏览器需要时间将每一帧绘制到屏幕上，大约10ms用来执行代码
 
+
+```js
+let a = 0;
+
+let b = async () => {
+  a = a + (await 10);
+  console.log("2", a); // -> '2' 10
+};
+
+b();
+
+a++;
+
+console.log("1", a); // -> '1' 1
+```
 ## 参考
 
 
