@@ -95,5 +95,11 @@ jsx通过babel的解析，最终都会成为React.createElement()，这里面有
 (持续更新中)  
 
 
+## react的缺点 
+不是一个完整的框架，需要配合react-router,redux等库。
 
+需要开发者处理多余的render处理 
+
+
+可读性稍微差一些
 
