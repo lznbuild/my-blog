@@ -309,7 +309,105 @@ function myInstanceof(left, right) {
 
 栈内存：存储基本数据类型  按值访问  存储的值大小固定   空间小，运行效率高
 
-堆内存：存储引用数据类型  按引用访问  值的大小不固定   空间大，运行效率低
+堆内存：存储引用数据类型  按引用访问  值的大小不固定   空间大，运行效率低 
+
+
+## 连等问题 
+```js
+// 连等
+var a = {n: 1};
+var b = a;
+a.x = a = {n: 2};
+console.log(a.x)    
+console.log(b.x)
+// 关键在于第三行，.的优先级高于=，所以a.x后，a和b同时指向{n:1,x:undefined},接着第3行从右向左执行，a.x(原对象)={n:2},也就是a和b指向{n:1,x:{n:2}}，a的引用指向新对象{n:2},
+// a.x // undefined
+// b.x  // {n:2}
+``` 
+
+
+## var,let,const 的区别
+内存分配
+var，会直接在栈内存里预分配内存空间，然后等到实际语句执行的时候，再存储对应的变量，如果传的是引用类型，那么会在堆内存里开辟一个内存空间存储实际内容，栈内存会存储一个指向堆内存的指针
+let，是不会在栈内存里预分配内存空间，而且在栈内存分配变量时，做一个检查，如果已经有相同变量名存在就会报错
+const，也不会预分配内存空间，在栈内存分配变量时也会做同样的检查。不过const存储的变量是不可修改的，对于基本类型来说你无法修改定义的值，对于引用类型来说你无法修改栈内存里分配的指针，但是你可以修改指针指向的对象里面的属性
+
+.变量提升
+let const 和var三者其实会存在变量提升
+let只是创建过程提升，初始化过程并没有提升，所以会产生暂时性死区。 var的创建和初始化过程都提升了，所以在赋值前访问会得到undefined function 的创建、初始化、赋值都被提升了 
+
+JavaScript 是允许访问还没有绑定值的var所声明的标识符的。这种标识符后来统一约定称为“变量声明（varDelcs）”，而“let/const”则称为“词法声明（lexicalDecls）”。JavaScript 环境在创建一个“变量名（varName in varDecls）”后，会为它初始化绑定一个 undefined 值，而”词法名字（lexicalNames）”在创建之后就没有这项待遇
+
+
+## DOM操作影响性能 
+浏览器的js引擎和DOM引擎共享一个主线程，多次DOM操作导致DOM引擎占
+用主线程过久，造成卡顿的感觉。任何 DOM API 调用都要先将 JS 数据结构转为 DOM 数据结构，再挂起 JS 引擎并启动 DOM 引擎，执行过后再把可能的返回值反转数据结构，重启 JS 引擎继续执行。这种上下文切换很耗性能。性能消耗在JS对象和DOM对象的转换和同步
+很多DOM操作都会触发回流，消耗性能。
+
+## 实现bind
+```js
+Function.prototype.myBind = function (context) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  var _this = this
+  var args = [...arguments].slice(1)
+  // 返回一个函数
+  return function F() {
+    // 因为返回了一个函数，我们可以 new F()，所以需要判断
+    if (this instanceof F) {
+      return new _this(...args, ...arguments)
+    }
+    return _this.apply(context, args.concat(...arguments))
+  }
+}
+```
+## 实现call
+```js
+Function.prototype.myCall = function (context) {
+  var context = context || window
+  // 给 context 添加一个属性
+  // getValue.call(a, 'yck', '24') => a.fn = getValue
+  context.fn = this
+  // 将 context 后面的参数取出来
+  var args = [...arguments].slice(1)
+  // getValue.call(a, 'yck', '24') => a.fn('yck', '24')
+  var result = context.fn(...args)
+  // 删除 fn
+  delete context.fn
+  return result
+}
+```
+
+## 实现apply
+```js
+Function.prototype.myApply = function (context) {
+  var context = context || window
+  context.fn = this
+
+  var result
+  // 需要判断是否存储第二个参数
+  // 如果存在，就将第二个参数展开
+  if (arguments[1]) {
+    result = context.fn(...arguments[1])
+  } else {
+    result = context.fn()
+  }
+
+  delete context.fn
+  return result
+}
+``` 
+
+
+for in 可以用于对象，for of不能，因为普通对象没有遍历器iterable,用于数组，前者遍历下表，后者遍历值  
+
+
+js 中数组元素的存储方式并不是连续的，而是哈希映射关系。哈希映射关系，可以通过键名 key，直接计算出值存储的位置，所以查找起来很快。
+
+使用 sort() 对数组 [3, 15, 8, 29, 102, 22] 进行排序，输出结果
+///  [102, 15, 22, 29, 3, 8]
+根据MDN上对Array.sort()的解释，默认的排序方法会将数组元素转换为字符串，然后比较字符串中字符的UTF-16编码顺序来进行排序。所以'102' 会排在 '15' 前面。
 
 ## 参考博客
 https://juejin.im/post/5c64d15d6fb9a049d37f9c20#heading-33

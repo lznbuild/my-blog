@@ -80,3 +80,14 @@ class，属性选择器，伪类选择器  10
 ::after
 
 
+## dom.getClientRects() x,y,width,height获取位置和尺寸 
+
+
+var offsetX = document.documentElement.getBoundingClientRect().x - element.getBoundingClientRect().x;
+
+
+dom.offsetParent 指向position非默认值的祖元素。本身或祖元素display:none 指向null 
+
+
+em更习惯用于字体大小，行高，text-indent首行缩进
+em作为行高单位时，相对于自身字体大小
