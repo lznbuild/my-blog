@@ -1,52 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Document</title>
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-    }
+      #parent {
+        width: 400px;
+        height: 400px;
+        border: 1px solid green;
+        margin: 100px;
+      }
+    </style>
 
-    #parent {
-      width: 100px;
-      height: 100px;
-      background-color: green;
-      position: relative;
-      top:10px;
-      left: 0;
-      z-index: 99;
-    }
-
-    #child {
-      width: 50px;
-      height: 50px;
-      background-color: red;
-      position: relative;
-      top:0;
-      left: 0;
-      z-index: 9;
-    }
-
-
-  </style>
-
-<body>
-  <div id="parent">
-   
-  </div>
-  <div id="child"></div>
-</body>
-<script>
-
-</script>
-</head>
-
+    <body>
+      <div id="myDiv" style="color:red">这段文字是用来删除的</div>
+      <span id="span">掺入</span>
+    </body>
+    <script>
+      // document.addEventListener('webkitvisibilitychange',()=> {
+      //   alert('离开');
+      // })
+      window.onbeforeunload = function() {
+        console.log('执行');
+      }
+    </script>
+  </head>
 </html>
-<script>
-
-</script>

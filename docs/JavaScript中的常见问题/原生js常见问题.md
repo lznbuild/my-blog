@@ -409,5 +409,24 @@ js 中数组元素的存储方式并不是连续的，而是哈希映射关系�
 ///  [102, 15, 22, 29, 3, 8]
 根据MDN上对Array.sort()的解释，默认的排序方法会将数组元素转换为字符串，然后比较字符串中字符的UTF-16编码顺序来进行排序。所以'102' 会排在 '15' 前面。
 
+
+
+## 箭头函数和普通函数的区别
+- 箭头函数没有 this，它会从自己的作用域链的上一层继承 this（因此无法使用 apply / call / bind 进行绑定 this 值）； 
+
+
+- 不绑定 arguments，当在箭头函数中调用 aruguments 时同样会向作用域链中查询结果； 
+
+- 不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数 
+
+
+- 没有 prototype 属性，即指向 undefined； 
+
+- 无法使用 new 实例化对象，因为普通构造函数通过 new 实例化对象时 this 指向实例对象，而箭头函数没有 this 值，同时 箭头函数也没有 prototype。使用new需要把函数的prototype赋值给新对象的__proto__ 
+
+
+
+
+
 ## 参考博客
 https://juejin.im/post/5c64d15d6fb9a049d37f9c20#heading-33
