@@ -36,10 +36,24 @@ clear:both; 只能用于块元素
 
 
 ### css层叠顺序  (层叠上下文)
+一个三维概念。
+background/border==> z-index:<0> ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto==>z-index:0 ==> z-index:1;
 
-background/border==> z-index: -1 ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto,0 ==> z-index:1;
+z-index:0和z-index:auto是有区别的
+0会创建一个新的层叠上下文。auto不会，0在auto上面。
+z-index的默认值是auto，堆叠顺序与父元素相等。
+
+如何产生层叠上下文？
+z-index 值不为 "auto"的 position非static值
+opacity 属性值⼩于 1 的元素
+transform 属性值不为 "none"的元素，
+filter值不为“none”的元素
 
 
+
+z-index:auto在z-index: -1 上面
+
+relative定位，top，z-index等值都有效.
 ### 选择器权重
 
 ！important
