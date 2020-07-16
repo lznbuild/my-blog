@@ -103,3 +103,4 @@ jsx通过babel的解析，最终都会成为React.createElement()，这里面有
 
 可读性稍微差一些
 
+## forceUpdate直接render，跳过shouldComponentUpdate

@@ -90,4 +90,7 @@ dom.offsetParent 指向position非默认值的祖元素。本身或祖元素disp
 
 
 em更习惯用于字体大小，行高，text-indent首行缩进
-em作为行高单位时，相对于自身字体大小
+em作为行高单位时，相对于自身字体大小 
+
+
+Vertical-align只能应用于inline-block,inline元素
