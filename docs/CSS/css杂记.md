@@ -104,4 +104,44 @@ dom.offsetParent 指向position非默认值的祖元素。本身或祖元素disp
 
 
 em更习惯用于字体大小，行高，text-indent首行缩进
-em作为行高单位时，相对于自身字体大小
+em作为行高单位时，相对于自身字体大小 
+
+
+Vertical-align只能应用于inline-block,inline元素 
+
+
+
+## 弹性布局的属性总结
+  容器设置为flex布局，子元素的float,clear,vertical-align失效  
+  定义在容器元素上的：  
+  flex-direction  
+  flex-wrap  
+  flex-flow: flex-direction flex-wrap  
+  justify-content  
+  align-items  
+  align-content  多个轴线的侧轴对齐方式  
+
+
+  定义在子元素上的：  
+    order: 根据数值展示主轴上的排列顺序,数值越大越往后  
+    flex-grow: 当主轴方向子元素没有撑满父元素，按照这个比例分配剩余空间  
+    flex-shrink: 当空间不足时，都将等比例缩小,为0就是不缩小，默认为1
+    flex-basis: 在分配多余空间之前，占据的主轴空间 写法：400px  
+    flex: flex-grow flex-shrink flex-basis     
+    flex:1 其实就是flex-grow: 1  默认 0 1 auto
+    align-self: 侧轴对齐方式，覆盖父元素的align-items  
+
+
+
+## @import 引入css和link有什么区别 
+
+- 本质的区别，link属于HTML标签，而@import是CSS提供的  
+
+- 加载顺序，页面被加载时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载  
+
+
+- 兼容性问题，import只在IE 5以上才能识别，而link是HTML标签，无兼容问题。 
+
+- 权重， link方式的样式权重高于@import的权重。 
+
+- 使用dom控制样式时的差别。当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的。

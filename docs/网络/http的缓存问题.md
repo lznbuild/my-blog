@@ -49,6 +49,24 @@ Pragma 只有一个属性值，就是 no-cache ，效果和 Cache-Control 中的
 
 有个问题，如果一个资源在缓存时间已过了，但是资源没有被修改过，这样的资源走协商缓存的话，会再一次从后端发送到前端，这也是一种浪费。  
 
+
+```js
+const express = require('express');
+const app = express();
+var options = { 
+  etag: true, // 开启协商缓存
+  lastModified: true, // 开启协商缓存
+  setHeaders: (res, path, stat) => {
+    res.set({
+      'Cache-Control': 'max-age=00', // 浏览器不走强缓存
+      'Pragma': 'no-cache', // 浏览器不走强缓存
+    });
+  },
+};
+app.use(express.static((__dirname + '/public'), options));
+app.listen(3001);
+```
+
 ETag 是服务器根据当前文件的内容，给文件生成的唯一标识，只要里面的内容有改动，这个值就会变。服务器通过响应头把这个值给浏览器。
 浏览器接收到ETag的值，会在下次请求时，将这个值作为If-None-Match这个字段的内容，并放到请求头中，然后发给服务器。
 服务器接收到If-None-Match后，会跟服务器上该资源的ETag进行比对:

@@ -5,102 +5,68 @@
   <title>拖放示例-文本</title>
 </head>
 <style>
-  .src {
+  #container {
+    height: 500px;
+    width: 380px;
+    border: 1px solid red;
     display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    /* flex-flow: column wrap; */
+    align-items: center;
+    /* align-content: center; */
   }
 
-  .dropabled {
-    flex: 1;
-  }
-
-  .txt {
-    color: green;
-  }
-
-  .img {
+  .box1 {
     width: 100px;
     height: 100px;
-    border: 1px solid gray;
+    background-color: antiquewhite;
+    order: 99;
+    /* flex-grow: 1; */
   }
-
-  .target {
-    width: 200px;
-    height: 200px;
-    line-height: 200px;
-    text-align: center;
-    border: 1px solid gray;
-    color: red;
+  .box2 {
+    width: 100px;
+    height: 80px;
+    background-color: goldenrod;
+    flex-basis:200px;
+  }
+  .box3 {
+    width: 100px;
+    height: 140px;
+    background-color: blueviolet;
+    flex-shrink: 0;
+  }
+  .box4 {
+    width: 100px;
+    height: 30px;
+    background-color: yellowgreen;
+  }
+  .box5 {
+    width: 100px;
+    height: 60px;
+    background-color: gray;
   }
 </style>
 
 <body>
-  <div class="src">
-    <div class="dragabled">
-      <div class="txt" id="txt">
-        所有的文字都可拖拽。
-        <p draggable="true">此段文字设置了属性draggable="true"</p>
-      </div>
-      <div class="url" id="url">
-        <a href="http://weiqinl.com" target="_blank">我是url:http://weiqinl.com</a>
-      </div>
-      <img class="img" id="tupian1" src="img1.png" alt="图片1" />
-      <img class="img" id="tupian2" src="img2.png" alt="图片2" />
-    </div>
-    <div id='target' class="dropabled target">Drop Here</div>
+  <div id="container">
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+    <div class="box4">4</div>
+    <div class="box5">5</div>
   </div>
-  <script>
-    var dragSrc = document.getElementById('txt')
-    var target = document.getElementById('target')
-
-    dragSrc.ondragstart = handle_start
-    dragSrc.ondrag = handle_drag
-    dragSrc.ondragend = handle_end
-
-    function handle_start(e) {
-      console.log('dragstart-在元素开始被拖动时候触发')
-    }
-
-    function handle_drag() {
-      console.log('drag-在元素被拖动时候反复触发')
-    }
-
-    function handle_end() {
-      console.log('dragend-在拖动操作完成时触发')
-    }
-
-
-    target.ondragenter = handle_enter
-    target.ondragover = handle_over
-    target.ondragleave = handle_leave
-
-    target.ondrop = handle_drop
-
-    function handle_enter(e) {
-      console.log('handle_enter-当元素进入目的地时触发')
-      // 阻止浏览器默认行为
-      e.preventDefault()
-    }
-
-    function handle_over(e) {
-      console.log('handle_over-当元素在目的地时触发')
-      // 阻止浏览器默认行为
-      e.preventDefault()
-    }
-
-    function handle_leave(e) {
-      console.log('handle_leave-当元素离开目的地时触发')
-      // 阻止浏览器默认行为
-      // e.preventDefault()
-    }
-
-    function handle_drop(e) {
-      console.log('handle_drop-当元素在目的地放下时触发')
-      var t = Date.now()
-      target.innerHTML = ''
-      target.append(t + '-拖放触发的事件。')
-      e.preventDefault()
-    }
-  </script>
+  
 </body>
 
 </html>
+<script>
+ try {
+    if(global) {
+      console.log('node');
+    }
+ }catch(err){
+    console.log('浏览器');
+ }
+</script>

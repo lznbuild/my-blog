@@ -33,4 +33,5 @@ process.stdin.on("data", e => {
 // 200并发量  1600次访问  10秒持续访问
 
 // node --prof  [url]   
-// chrome devTool     ==》      node --inspect-brk [url]  ==》chrome://inspect
+// chrome devTool     ==》      node --inspect-brk [url]  ==》chrome://inspect 
+
