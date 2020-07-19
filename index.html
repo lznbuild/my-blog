@@ -12,18 +12,56 @@
       }
 
     
-      div {
-        /* text-transform: capitalize; */
-        font-variant: small-caps;
-        visibility: visible;
-        overflow: visible;
+      #parent {
+        margin: 50px;
+        height: 400px;
+        border: 1px solid red;
+      }
+      #child {
+        margin: 20px;
+        height: 200px;
+        border: 1px solid green;
+      }
+      #subChild {
+        margin: 20px;
+        height: 100px;
+        border: 1px solid blue;
       }
      
     </style>
 
     <body>
-      <div>adklsjflk</div>
+      <div id="parent">
+        <div id="child">
+          <div id="subChild"></div>
+        </div>
+      </div>
     </body>
-    <script></script>
   </head>
 </html>
+<script>
+  parent.addEventListener('click',()=> {
+    console.log('parent 捕获');
+  },true)
+
+  parent.addEventListener('click',()=> {
+    console.log('parent 冒泡');
+  },false)
+
+  child.addEventListener('click',()=> {
+    console.log('child 捕获');
+  },true)
+
+  child.addEventListener('click',()=> {
+    console.log('child 冒泡');
+  },false)
+
+  
+  subChild.addEventListener('click',()=> {
+    console.log('subchild 冒泡');
+  },false)
+  
+  subChild.addEventListener('click',()=> {
+    console.log('subchild 捕获');
+  },true)
+</script>

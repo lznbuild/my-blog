@@ -107,4 +107,8 @@ em更习惯用于字体大小，行高，text-indent首行缩进
 em作为行高单位时，相对于自身字体大小 
 
 
-Vertical-align只能应用于inline-block,inline元素
+Vertical-align只能应用于inline-block,inline元素 
+
+
+
+在css里面，padding-top,padding-bottom,margin-top,margin-bottom取值为百分比的时候，参照的是父元素的宽度
