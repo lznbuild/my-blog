@@ -1,67 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
+<!DOCTYPE HTML>
+<html>
 
-    
-      #parent {
-        margin: 50px;
-        height: 400px;
-        border: 1px solid red;
-      }
-      #child {
-        margin: 20px;
-        height: 200px;
-        border: 1px solid green;
-      }
-      #subChild {
-        margin: 20px;
-        height: 100px;
-        border: 1px solid blue;
-      }
-     
-    </style>
+<head>
+  <title>拖放示例-文本</title>
+</head>
+<style>
+  #container {
+    height: 500px;
+    width: 380px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    /* flex-flow: column wrap; */
+    align-items: center;
+    /* align-content: center; */
+  }
 
-    <body>
-      <div id="parent">
-        <div id="child">
-          <div id="subChild"></div>
-        </div>
-      </div>
-    </body>
-  </head>
+  .box1 {
+    width: 100px;
+    height: 100px;
+    background-color: antiquewhite;
+    order: 99;
+    /* flex-grow: 1; */
+  }
+  .box2 {
+    width: 100px;
+    height: 80px;
+    background-color: goldenrod;
+    flex-basis:200px;
+  }
+  .box3 {
+    width: 100px;
+    height: 140px;
+    background-color: blueviolet;
+    flex-shrink: 0;
+  }
+  .box4 {
+    width: 100px;
+    height: 30px;
+    background-color: yellowgreen;
+  }
+  .box5 {
+    width: 100px;
+    height: 60px;
+    background-color: gray;
+  }
+</style>
+
+<body>
+  <div id="container">
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+    <div class="box4">4</div>
+    <div class="box5">5</div>
+  </div>
+  
+</body>
+
 </html>
 <script>
-  parent.addEventListener('click',()=> {
-    console.log('parent 捕获');
-  },true)
-
-  parent.addEventListener('click',()=> {
-    console.log('parent 冒泡');
-  },false)
-
-  child.addEventListener('click',()=> {
-    console.log('child 捕获');
-  },true)
-
-  child.addEventListener('click',()=> {
-    console.log('child 冒泡');
-  },false)
-
-  
-  subChild.addEventListener('click',()=> {
-    console.log('subchild 冒泡');
-  },false)
-  
-  subChild.addEventListener('click',()=> {
-    console.log('subchild 捕获');
-  },true)
+ try {
+    if(global) {
+      console.log('node');
+    }
+ }catch(err){
+    console.log('浏览器');
+ }
 </script>

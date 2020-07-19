@@ -12,25 +12,7 @@ function format(number) {
 
 ## focus、blur、load、unload等事件，不会冒泡
 
-## 弹性布局的属性总结
-  容器设置为flex布局，子元素的float,clear,vertical-align失效  
-  定义在容器元素上的：  
-  flex-direction  
-  flex-wrap  
-  flex-flow: flex-direction flex-wrap  
-  justify-content  
-  align-items  
-  align-content  多个轴线的侧轴对齐方式  
 
-
-  定义在子元素上的：  
-    order: 根据数值展示主轴上的排列顺序,数值越大越往后  
-    flex-grow: 当主轴方向子元素没有撑满父元素，按照这个比例分配剩余空间  
-    flex-shrink: 当空间不足时，都将等比例缩小  
-    flex-basis: 在分配多余空间之前，占据的主轴空间 写法：400px  
-    flex: flex-grow flex-shrink flex-basis     
-    flex:1 其实就是flex-grow: 1  
-    align-self: 侧轴对齐方式，覆盖父元素的align-items  
 
 ## promise
 promise有三个状态：pending,fulfilled,rejected
