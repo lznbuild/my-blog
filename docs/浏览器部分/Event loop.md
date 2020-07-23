@@ -229,7 +229,15 @@ setTimeout(function(){
 ### 每一帧要做的事
 宏任务===》 微任务==》 requestanimationframe ==> 渲染(html解析，样式计算，布局，更新图层树，paint绘制，Composite合成，栅格化) ==》 （还有空闲时间）requestIdleVallback  
 
-浏览器需要时间将每一帧绘制到屏幕上，大约10ms用来执行代码
+js=> style => layout => paint => composite(合成) 
+
+重绘就是跳过了layout部分，回流就从头走一遍 
+
+transfrom这种就是跳过layout,paint部分，直接composite 。 position:fixed,opacity,will-change,filter
+
+浏览器需要时间将每一帧绘制到屏幕上，大约10ms用来执行js代码。
+
+
 
 
 ```js
