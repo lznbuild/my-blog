@@ -5,68 +5,68 @@
   <title>拖放示例-文本</title>
 </head>
 <style>
-  #container {
-    height: 500px;
-    width: 380px;
-    border: 1px solid red;
-    display: flex;
-    flex-direction: row;
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
-    /* flex-flow: column wrap; */
-    align-items: center;
-    /* align-content: center; */
+  * {
+    margin: 0;
+    padding: 0;
   }
 
-  .box1 {
+  ul {
+    border: 1px solid red;
+    height: 400px;
+    width: 460px;
+    display: flex;
+    margin: 100px auto;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  li {
     width: 100px;
     height: 100px;
-    background-color: antiquewhite;
-    order: 99;
-    /* flex-grow: 1; */
+    background-color: aqua;
+    list-style-type: none;
   }
-  .box2 {
-    width: 100px;
-    height: 80px;
-    background-color: goldenrod;
-    flex-basis:200px;
-  }
-  .box3 {
-    width: 100px;
-    height: 140px;
-    background-color: blueviolet;
-    flex-shrink: 0;
-  }
-  .box4 {
-    width: 100px;
-    height: 30px;
-    background-color: yellowgreen;
-  }
-  .box5 {
-    width: 100px;
-    height: 60px;
-    background-color: gray;
+  ul::after {
+    content: '';
+    display: block;
+    width: 200px;
+    height: 1px;
+
   }
 </style>
 
 <body>
-  <div id="container">
-    <div class="box1">1</div>
-    <div class="box2">2</div>
-    <div class="box3">3</div>
-    <div class="box4">4</div>
-    <div class="box5">5</div>
-  </div>
-  
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+  </ul>
+
 </body>
 
 </html>
 <script>
- try {
-    if(global) {
-      console.log('node');
-    }
- }catch(err){
-    console.log('浏览器');
- }
+  // Array.prototype.findIndexCope = function (fn) {
+  //   if (typeof fn !== 'function') {
+  //     throw new Error('非函数')
+  //   }
+
+  //   for (let i = 0; i < this.length; i++) {
+  //     if (fn.call(this, this[i], i)) {
+  //       return i
+  //     }
+  //   }
+  // }
+
+
+  // var arr = [6, 4, 2, 8, 0]
+
+  // console.log(arr.findIndexCope(function(item, index){
+  //   console.log(this);
+  //   return item === 0
+  // }));
+
 </script>

@@ -1,6 +1,8 @@
 本质是将渲染工作分成多个块，并将其分布到多个帧中。
 
-### 讲讲react16中的fiber
+### 讲讲react16中的fiber  
+
+将任务细化为不同优先级，利用浏览器的空闲时间进行任务的执行以保证 UI 操作的流畅。浏览器的调度 API 主要分为两种，分别是高优先级的 requestAnimationFrame 与低优先级的 requestIdleCallback
 
 react初次render或协调后所生成的一个对象，react16前是通过组件递归遍历而来，react16是以fiber为节点构建成的单链表结构树，其作为真实dom的映射。
 之前，React并没有充分利用调度的优势。更新导致立即重新渲染整个子树。彻底革新React的核心算法以利用调度是Fiber背后的驱动思想
