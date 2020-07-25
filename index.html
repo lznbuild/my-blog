@@ -1,67 +1,111 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>拖放示例-文本</title>
+  </head>
+  <style>
+    #container {
+      height: 500px;
+      width: 380px;
+      border: 1px solid red;
+      display: flex;
+      flex-direction: row;
+      /* flex-wrap: wrap; */
+      /* justify-content: space-between; */
+      /* flex-flow: column wrap; */
+      align-items: center;
+      /* align-content: center; */
+    }
 
-<head>
-  <title>拖放示例-文本</title>
-</head>
-<style>
-  #container {
-    height: 500px;
-    width: 380px;
-    border: 1px solid red;
-    display: flex;
-    flex-direction: row;
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
-    /* flex-flow: column wrap; */
-    align-items: center;
-    /* align-content: center; */
-  }
+    .box1 {
+      width: 100px;
+      height: 100px;
+      background-color: antiquewhite;
+      order: 99;
+      /* flex-grow: 1; */
+    }
+    .box2 {
+      width: 100px;
+      height: 80px;
+      background-color: goldenrod;
+      flex-basis: 200px;
+    }
+    .box3 {
+      width: 100px;
+      height: 140px;
+      background-color: blueviolet;
+      flex-shrink: 0;
+    }
+    .box4 {
+      width: 100px;
+      height: 30px;
+      background-color: yellowgreen;
+    }
+    .box5 {
+      width: 100px;
+      height: 60px;
+      background-color: gray;
+    }
+  </style>
 
-  .box1 {
-    width: 100px;
-    height: 100px;
-    background-color: antiquewhite;
-    order: 99;
-    /* flex-grow: 1; */
-  }
-  .box2 {
-    width: 100px;
-    height: 80px;
-    background-color: goldenrod;
-    flex-basis:200px;
-  }
-  .box3 {
-    width: 100px;
-    height: 140px;
-    background-color: blueviolet;
-    flex-shrink: 0;
-  }
-  .box4 {
-    width: 100px;
-    height: 30px;
-    background-color: yellowgreen;
-  }
-  .box5 {
-    width: 100px;
-    height: 60px;
-    background-color: gray;
-  }
-</style>
-
-<body>
-123
-<script>
-document.write('开发了但是路口附近开了')
-</script>
-<button id="btn">按钮</button>
-  sdf
-</body>
-
+  <body></body>
 </html>
 <script>
-  btn.onclick = function() {
+  /*
+  
+                a
+                / \
+               b   c
+              /\   /\
+             d  e  g  h
+                /
+               f
+  */
 
-    document.write('1')
+  let root = {
+    val: "a",
+    left: {
+      val: "b",
+      left: {
+        val: "d",
+        left: null,
+        right: null
+      },
+      right: {
+        val: "e",
+        left: {
+          val: "f",
+          left: null,
+          right: null
+        },
+        right: null
+      }
+    },
+    right: {
+      val: "c",
+      left: {
+        val: "g",
+        left: null,
+        right: null
+      },
+      right: {
+        val: "h",
+        left: null,
+        right: null
+      }
+    }
+  };
+
+  function preorder(root) {
+    if (!root) {
+      return;
+    }
+
+    preorder(root.left);
+    preorder(root.right);
+    console.log("当前遍历的结点值是：", root.val);
   }
+
+  preorder(root);
+  // d f e b g h c a 
 </script>
