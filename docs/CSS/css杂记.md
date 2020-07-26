@@ -111,9 +111,7 @@ Vertical-align只能应用于inline-block,inline元素
 
 
 
-<<<<<<< HEAD
 在css里面，padding-top,padding-bottom,margin-top,margin-bottom取值为百分比的时候，参照的是父元素的宽度
-=======
 ## 弹性布局的属性总结
   容器设置为flex布局，子元素的float,clear,vertical-align失效  
   定义在容器元素上的：  
@@ -148,4 +146,43 @@ Vertical-align只能应用于inline-block,inline元素
 - 权重， link方式的样式权重高于@import的权重。 
 
 - 使用dom控制样式时的差别。当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的。
->>>>>>> 66c74e165110b525a374635b25ad97469207c72d
+
+
+
+IntersectionObserver  
+
+```js
+  const img = document.querySelector('#box')
+
+  const observer = new IntersectionObserver((changes) => {
+    // changes: 目标元素集合
+    changes.forEach((change) => {
+      // intersectionRatio
+      if (change.isIntersecting) {
+        const img = change.target
+        img.src = img.dataset.src
+        observer.unobserve(img)
+      }
+    })
+  })
+
+  observer.observe(img) 
+
+  ``` 
+
+
+  ## 获取浏览器的唯一标识 
+  由于不同的系统显卡绘制 canvas 时渲染参数、抗锯齿等算法不同，因此绘制成图片数据的 CRC 校验也不一样。 
+  ```js
+  function getCanvasFp () {
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    ctx.font = '14px Arial'
+    ctx.fillStyle = '#ccc'
+    ctx.fillText('hello, shanyue', 2, 2)
+    return canvas.toDataURL('image/jpeg')
+  }
+  ``` 
+
+### a标签的定义顺序
+  link→visited→hover→active 

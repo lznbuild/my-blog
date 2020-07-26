@@ -1,10 +1,11 @@
-const fs = require('fs');
+const http = require('http');
+const url = require('url');
 
-fs.mkdir('./test', (err) => {
-  if (err) {
-    console.log(err);
-    return 
+http.createServer(function (req, res) {
+  let pathname = url.parse(req.url);
+
+  if (pathname != '/favicon.ico') {
+    console.log(pathname, 'pathname');
   }
+}).listen(3000)
 
-  console.log('创建成功');
-})

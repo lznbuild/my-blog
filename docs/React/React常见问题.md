@@ -112,3 +112,10 @@ api的设计风格上差异极大
 React的render不如Vue的依赖追踪，不重新render子组件
 React setState 引起局部重新刷新。为了达到更好的性能，React 暴漏给开发者 shouldComponentUpdate 这个生命周期 hook，来避免不需要的重新渲染（相比之下，Vue 由于采用依赖追踪，默认就是优化状态：你动了多少数据，就触发多少更新，不多也不少，而 React 对数据变化毫无感知，它就提供 React.createElement 调用已生成 virtual dom）。另外 React 为了弥补不必要的更新，会对 setState 的行为进行合并操作。
 
+## React16的变化 
+
+hooks的自定义hooks比HOC和render props更优雅的逻辑复用方式  
+
+useEffect取代了复杂的声明周期  
+
+shouldcomponentupdate检查 this.props和nextProps的变动太麻烦

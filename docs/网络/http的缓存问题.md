@@ -74,6 +74,44 @@ ETag 是服务器根据当前文件的内容，给文件生成的唯一标识，
 如果两者不一样，说明要更新了。返回新的资源，跟常规的HTTP请求响应的流程一样。
 否则返回304，告诉浏览器直接用缓存。
 
+```js
+http.createServer(function(req, res) {
+    let { pathname } = url.parse(req.url, true);
+    console.log(pathname)
+    let abs = path.join(__dirname, pathname);
+    fs.stat(path.join(__dirname, pathname), (err, stat) => {
+      if(err) {
+        res.statusCode = 404;
+        res.end('Not Found')
+        return
+      }
+      if(stat.isFile()) {
+        //Etag 实体内容，他是根绝文件内容，算出一个唯一的值。
+        let md5 = crypto.createHash('md5')
+        let rs = fs.createReadStream(abs)
+        let arr = []; // 你要先写入响应头再写入响应体
+        rs.on('data', function(chunk) {
+          md5.update(chunk);
+          arr.push(chunk)
+        })
+
+        rs.on('end', function() {
+          let etag = md5.digest('base64');
+          if(req.headers['if-none-match'] === etag) {
+            console.log(req.headers['if-none-match'])
+            res.statusCode = 304;
+            res.end()
+            return
+          }
+          res.setHeader('Etag', etag)
+          // If-None-Match 和 Etag 是一对， If-None-Match是浏览器的， Etag是服务端的
+          res.end(Buffer.concat(arr))
+        })
+      }
+    })
+  }).listen(3000)
+
+```
 
 浏览器地址栏中写入URL，回车，浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿（最快）  
 
