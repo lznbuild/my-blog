@@ -118,4 +118,17 @@ hooks的自定义hooks比HOC和render props更优雅的逻辑复用方式
 
 useEffect取代了复杂的声明周期  
 
-shouldcomponentupdate检查 this.props和nextProps的变动太麻烦
+shouldcomponentupdate检查 this.props和nextProps的变动太麻烦 
+
+## react点击事件放在settimeout拿不到event对象  
+
+SyntheticEvent 是合并而来。这意味着 SyntheticEvent 对象可能会被重用，而且在事件回调函数被调用后，所有的属性都会无效。出于性能考虑，你不能通过异步访问事件。
+
+如果你想异步访问事件属性，你需在事件上调用 event.persist()，此方法会从池中移除合成事件，允许用户代码保留对事件的引用。
+
+## react函数组件和class组件 
+
+函数组件 setTimeout获取的props，是旧值，class组件获取的是新值。
+React组件props是不可变的，函数组件每次render props都是独立的，每次捕获到的props都不一样，而类组件中，虽然props也没有发生变化，但是this.props的指向了最新捕获到的
+
+state也一样。

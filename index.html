@@ -51,94 +51,63 @@
   <body></body>
 </html>
 <script>
-  /*
-  
-                a
-                / \
-               b   c
-              /\   /\
-             d  e  g  h
-                /
-               f
-  */
+  const p1 = new Promise((resolve, reject) => {
+    setTimeout(() =>{
+      resolve('1')
+    },2000)
+  })
 
-  let root = {
-    val: "a",
-    left: {
-      val: "b",
-      left: {
-        val: "d",
-        left: null,
-        right: null
-      },
-      right: {
-        val: "e",
-        left: {
-          val: "f",
-          left: null,
-          right: null
-        },
-        right: null
-      }
-    },
-    right: {
-      val: "c",
-      left: {
-        val: "g",
-        left: null,
-        right: null
-      },
-      right: {
-        val: "h",
-        left: null,
-        right: null
-      }
-    }
-  };
+  const p2 = new Promise((resolve, reject) => {
+    setTimeout(() =>{
+      resolve('2')
+    },1000)
+  })
 
-  function preorder(root) {
-    if (!root) {
-      return;
-    }
+ 
 
-    preorder(root.left);
-    preorder(root.right);
-    console.log("当前遍历的结点值是：", root.val);
+
+  // Promise.allSettled([p1,p2]).then(result => {
+  //   console.log(result);
+  // })
+
+  Promise.allSettled2([p1, p2]).then(result => {
+      console.log(result,'222222222');
+    })
+
+  Promise.all2 = function (promises) {
+    promises = Array.isArray(promises) ? promises : []
+
+    let fulfilledCount = 0
+    let promisesLength = promises.length
+    let results = new Array(promisesLength)
+
+    return new Promise((resolve, reject) => {
+      if (promisesLength === 0) return resolve([])
+
+      promises.forEach((promise, index) => {
+        if (promise instanceof Promise) {
+          promise.then(
+            value => {
+              results[index] = value
+
+              if (++fulfilledCount === promisesLength) resolve(results)
+            },
+            err => reject(err)
+          )
+        } else {
+          results[index] = promise
+
+          if (++fulfilledCount === promisesLength) resolve(results)
+        }
+
+      })
+    })
   }
 
-  preorder(root);
-  // d f e b g h c a
 
-// 非递归版
-const postorderTraversal = function(root) {
-  // 定义结果数组
-  const res = [];
-  // 处理边界条件
-  if (!root) {
-    return res;
-  }
-  // 初始化栈结构
-  const stack = [];
-  // 首先将根结点入栈
-  stack.push(root);
-  // 若栈不为空，则重复出栈、入栈操作
-  while (stack.length) {
-    // 将栈顶结点记为当前结点
-    const cur = stack.pop();
-    // 当前结点就是当前子树的根结点，把这个结点放在结果数组的头部
-    res.unshift(cur.val);
-    // 若当前子树根结点有左孩子，则将左孩子入栈
-    if (cur.left) {
-      stack.push(cur.left);
-    }
-    // 若当前子树根结点有右孩子，则将右孩子入栈
-    if (cur.right) {
-      stack.push(cur.right);
-    }
-  }
-  // 返回结果数组
-  return res;
-};
 
-  console.log(postorderTraversal(root));
+  // Promise.all2([p1,p2]).then(result => {
+  //   console.log(result);
+  // })
+
 </script>
