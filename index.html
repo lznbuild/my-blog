@@ -1,113 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>拖放示例-文本</title>
-  </head>
-  <style>
-    #container {
-      height: 500px;
-      width: 380px;
-      border: 1px solid red;
-      display: flex;
-      flex-direction: row;
-      /* flex-wrap: wrap; */
-      /* justify-content: space-between; */
-      /* flex-flow: column wrap; */
-      align-items: center;
-      /* align-content: center; */
-    }
 
-    .box1 {
-      width: 100px;
-      height: 100px;
-      background-color: antiquewhite;
-      order: 99;
-      /* flex-grow: 1; */
-    }
-    .box2 {
-      width: 100px;
-      height: 80px;
-      background-color: goldenrod;
-      flex-basis: 200px;
-    }
-    .box3 {
-      width: 100px;
-      height: 140px;
-      background-color: blueviolet;
-      flex-shrink: 0;
-    }
-    .box4 {
-      width: 100px;
-      height: 30px;
-      background-color: yellowgreen;
-    }
-    .box5 {
-      width: 100px;
-      height: 60px;
-      background-color: gray;
-    }
-  </style>
-
-  <body></body>
-</html>
-<script>
-  const p1 = new Promise((resolve, reject) => {
-    setTimeout(() =>{
-      resolve('1')
-    },2000)
-  })
-
-  const p2 = new Promise((resolve, reject) => {
-    setTimeout(() =>{
-      resolve('2')
-    },1000)
-  })
-
- 
-
-
-  // Promise.allSettled([p1,p2]).then(result => {
-  //   console.log(result);
-  // })
-
-  Promise.allSettled2([p1, p2]).then(result => {
-      console.log(result,'222222222');
-    })
-
-  Promise.all2 = function (promises) {
-    promises = Array.isArray(promises) ? promises : []
-
-    let fulfilledCount = 0
-    let promisesLength = promises.length
-    let results = new Array(promisesLength)
-
-    return new Promise((resolve, reject) => {
-      if (promisesLength === 0) return resolve([])
-
-      promises.forEach((promise, index) => {
-        if (promise instanceof Promise) {
-          promise.then(
-            value => {
-              results[index] = value
-
-              if (++fulfilledCount === promisesLength) resolve(results)
-            },
-            err => reject(err)
-          )
-        } else {
-          results[index] = promise
-
-          if (++fulfilledCount === promisesLength) resolve(results)
-        }
-
-      })
-    })
+<head>
+  <title>拖放示例-文本</title>
+</head>
+<style>
+  #container {
+    height: 500px;
+    width: 380px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    /* flex-flow: column wrap; */
+    align-items: center;
+    /* align-content: center; */
   }
 
+  .box1 {
+    width: 100px;
+    height: 100px;
+    background-color: antiquewhite;
+    order: 99;
+    /* flex-grow: 1; */
+  }
+
+  .box2 {
+    width: 100px;
+    height: 80px;
+    background-color: goldenrod;
+    flex-basis: 200px;
+  }
+
+  .box3 {
+    width: 100px;
+    height: 140px;
+    background-color: blueviolet;
+    flex-shrink: 0;
+  }
+
+  .box4 {
+    width: 100px;
+    height: 30px;
+    background-color: yellowgreen;
+  }
+
+  .box5 {
+    width: 100px;
+    height: 60px;
+    background-color: gray;
+  }
+</style>
+
+<body></body>
+
+</html>
+<script>
+  console.log('script start');
+
+  setTimeout(function() {
+    console.log('settimeout');
+  },0)
+
+  Promise.resolve().then(function(){
+    console.log('promise1');
+    return Promise.resolve('111')
+  }).then(val=> {
+    console.log(val);
+    console.log('promise1-2');
+  })
 
 
-  // Promise.all2([p1,p2]).then(result => {
-  //   console.log(result);
-  // })
+  Promise.resolve().then(function() {
+    setTimeout(function() {
+      console.log('promise2');
+    },0)
+  }).then(function() {
+    console.log('promise2-2');
+  })
+
+
+  console.log('script end');
+
+
+  // script start   script end     promise1   1111   promise1-2     promise2-2  settimeout   promise2 
 
 </script>
