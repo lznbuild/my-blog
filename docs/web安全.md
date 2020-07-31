@@ -184,4 +184,11 @@ samesite cookie
 二次验证 
 
 
-// https://github.com/YvetteLau/Blog/tree/master/Security
+## React 怎么处理的
+
+- 基础的对用户的输入内容进行转义，它会在运行时动态创建DOM节点然后填入文本内容
+- 元素$$typeof属性
+
+这个属性是symbol值，源码里就是判断typeof是否等于REACT_ELEMENT_TYPE来判断是否是React节点。
+
+// https://github.com/YvetteLau/Blog/tree/master/Security (攻击演示)

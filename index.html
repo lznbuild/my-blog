@@ -5,85 +5,29 @@
   <title>拖放示例-文本</title>
 </head>
 <style>
-  #container {
-    height: 500px;
-    width: 380px;
-    border: 1px solid red;
-    display: flex;
-    flex-direction: row;
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
-    /* flex-flow: column wrap; */
-    align-items: center;
-    /* align-content: center; */
-  }
 
-  .box1 {
-    width: 100px;
-    height: 100px;
-    background-color: antiquewhite;
-    order: 99;
-    /* flex-grow: 1; */
-  }
-
-  .box2 {
-    width: 100px;
-    height: 80px;
-    background-color: goldenrod;
-    flex-basis: 200px;
-  }
-
-  .box3 {
-    width: 100px;
-    height: 140px;
-    background-color: blueviolet;
-    flex-shrink: 0;
-  }
-
-  .box4 {
-    width: 100px;
-    height: 30px;
-    background-color: yellowgreen;
-  }
-
-  .box5 {
-    width: 100px;
-    height: 60px;
-    background-color: gray;
-  }
 </style>
 
-<body></body>
+<body>
+  <div id="mountNode"></div>
+</body>
 
 </html>
+
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.5.10/dist/g6.min.js"></script>
+
+<script src="./index.js"></script>
 <script>
-  console.log('script start');
+  
 
-  setTimeout(function() {
-    console.log('settimeout');
-  },0)
-
-  Promise.resolve().then(function(){
-    console.log('promise1');
-    return Promise.resolve('111')
-  }).then(val=> {
-    console.log(val);
-    console.log('promise1-2');
-  })
+    const graph = new G6.Graph({
+      container: 'mountNode', // 指定挂载容器
+      width: window.screen.width, // 图的宽度
+      height: window.screen.height, // 图的高度
+    });
 
 
-  Promise.resolve().then(function() {
-    setTimeout(function() {
-      console.log('promise2');
-    },0)
-  }).then(function() {
-    console.log('promise2-2');
-  })
-
-
-  console.log('script end');
-
-
-  // script start   script end     promise1   1111   promise1-2     promise2-2  settimeout   promise2 
+  graph.data(initData); // 加载数据
+  graph.render(); // 渲染
 
 </script>
