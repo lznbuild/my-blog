@@ -51,36 +51,25 @@
   <body></body>
 </html>
 <script>
-  console.log("sync1");
 
-  setTimeout(function() {
-    console.log("setTimeout1");
-  }, 0);
+  new Promise(resolve => {
+    resolve()
+  }).then(()=>{
+    console.log('promise1');
 
-  var promise = new Promise(function(resolve, reject) {
-    setTimeout(function() {
-      console.log("setTimeoutPromise");
-    }, 0);
-    console.log("promise");
-    resolve();
-  });
+    new Promise(resolve =>{
+      resolve()
+    }).then(()=>{
+      console.log('promise2');
+    }).then(()=>{
+      console.log('promise3');
+    })
 
-  promise.then(() => {
-    console.log("pro_then");
-    setTimeout(() => {
-      console.log("pro_timeout");
-    }, 0);
-  });
-
-  setTimeout(function() {
-    console.log("last_setTimeout");
-  }, 0);
-
-  console.log("sync2"); 
-
-  // web component shadow dom 
-
+  }).then(()=>{
+    console.log('promise4');
+  })
   
 
-  // sync1 promise sync2 pro_then  setTimeout1 setTimeoutPromise  last_setTimeout  pro_timeout
+  // 1  2 4 3 
+
 </script> 

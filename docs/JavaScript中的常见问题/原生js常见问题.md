@@ -8,7 +8,7 @@ function format(number) {
   return number && number.replace(/(?!^)(?=(\d{3})+\.)/g, ",");
 }
 ```
-## promise A和promise A+ 有什么区别
+
 
 ## focus、blur、load、unload等事件，不会冒泡
 
@@ -23,6 +23,27 @@ promise有三个状态：pending,fulfilled,rejected
 
 多个.catch只会运行第一个
 
+```js
+  new Promise(resolve => {
+    resolve()
+  }).then(()=>{
+    console.log('promise1');
+
+    new Promise(resolve =>{
+      resolve()
+    }).then(()=>{
+      console.log('promise2');
+    }).then(()=>{
+      console.log('promise3');
+    })
+
+  }).then(()=>{
+    console.log('promise4');
+  })
+  
+
+  // 1  2 4 3 
+```
 
 
 
@@ -407,7 +428,23 @@ js 中数组元素的存储方式并不是连续的，而是哈希映射关系�
 - 无法使用 new 实例化对象，因为普通构造函数通过 new 实例化对象时 this 指向实例对象，而箭头函数没有 this 值，同时 箭头函数也没有 prototype。使用new需要把函数的prototype赋值给新对象的__proto__ 
 
 
+## 函数的变量提升 
+- 允许在块级作用域内声明函数
+- 函数声明(函数名称) 类似于 var，即会提升到全局作用域或函数作用域的头部
+- 同时，函数声明(函数整体) 还会提升到所在的块级作用域的头部
 
+```js
+console.log(fn); // undefined
+{
+  function fn(){}
+} 
+```
+
+```js
+console.log(fn); // function fn(){}
+
+function fn(){}
+```
 
 
 ## 参考博客
