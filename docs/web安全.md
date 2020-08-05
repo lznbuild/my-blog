@@ -177,9 +177,10 @@ CSRF 攻击成本也比 XSS 低，用户每天都要访问大量网页，无法�
 
 使用token  
 
-服务端验证请求来源站点(Referer、Origin)  可被修改 
+服务端验证请求来源站点(Referer、Origin)  可被修改 ,阻止第三方网站请求接口
 
 samesite cookie 
+表示 Cookie 不随着跨域请求发送，可以很大程度减少 CSRF 的攻击
 
 二次验证 
 
