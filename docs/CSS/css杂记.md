@@ -39,6 +39,8 @@ clear:both; 只能用于块元素
 一个三维概念。
 background/border==> z-index:<0> ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto==>z-index:0 ==> z-index:1;
 
+transform在那里？？？？？？？？？？？？？？？？？？？
+
 z-index:0和z-index:auto是有区别的
 0会创建一个新的层叠上下文。auto不会，0在auto上面。
 z-index的默认值是auto，堆叠顺序与父元素相等。

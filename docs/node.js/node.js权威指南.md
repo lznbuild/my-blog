@@ -65,4 +65,9 @@ buf[2] 获取的是缓存区中第三个字节数据转换为整数后的数值
 
 Buffer有slice方法，并不是复制缓存区的数据，而是与该数据共享内存区域，修改slice取出的数据，缓存区数据也被修改。 
 
-Buffer.toString()   //Bugger对象到string转换 
+Buffer.toString()   //Bugger对象到string转换  
+
+
+Buffer.isBuffer(obj) // 判断一个对象是否是Buffer对象  
+
+

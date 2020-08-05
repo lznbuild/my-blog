@@ -3,73 +3,29 @@
   <head>
     <title>拖放示例-文本</title>
   </head>
-  <style>
-    #container {
-      height: 500px;
-      width: 380px;
-      border: 1px solid red;
-      display: flex;
-      flex-direction: row;
-      /* flex-wrap: wrap; */
-      /* justify-content: space-between; */
-      /* flex-flow: column wrap; */
-      align-items: center;
-      /* align-content: center; */
-    }
+  <style></style>
 
-    .box1 {
-      width: 100px;
-      height: 100px;
-      background-color: antiquewhite;
-      order: 99;
-      /* flex-grow: 1; */
-    }
-    .box2 {
-      width: 100px;
-      height: 80px;
-      background-color: goldenrod;
-      flex-basis: 200px;
-    }
-    .box3 {
-      width: 100px;
-      height: 140px;
-      background-color: blueviolet;
-      flex-shrink: 0;
-    }
-    .box4 {
-      width: 100px;
-      height: 30px;
-      background-color: yellowgreen;
-    }
-    .box5 {
-      width: 100px;
-      height: 60px;
-      background-color: gray;
-    }
-  </style>
-
-  <body></body>
+  <body>
+    <div id="mountNode"></div>
+  </body>
 </html>
+
+<!-- <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.5.10/dist/g6.min.js"></script>
+
+<script src="./index.js"></script>
 <script>
+  const graph = new G6.Graph({
+    container: "mountNode", // 指定挂载容器
+    width: document.documentElement.clientWidth, // 图的宽度
+    height: document.documentElement.clientHeight, // 图的高度
+    fitView: true
+  });
 
-  new Promise(resolve => {
-    resolve()
-  }).then(()=>{
-    console.log('promise1');
 
-    new Promise(resolve =>{
-      resolve()
-    }).then(()=>{
-      console.log('promise2');
-    }).then(()=>{
-      console.log('promise3');
-    })
 
-  }).then(()=>{
-    console.log('promise4');
-  })
-  
+  graph.data(initData); // 加载数据
+  // graph.renderCustomGroup(data, 'circle');
+  graph.render(); // 渲染
+</script> -->
 
-  // 1  2 4 3 
 
-</script> 

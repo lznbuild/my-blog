@@ -29,7 +29,10 @@ mobx相对来说⽐较简单，在其中有很多的抽象，mobx更多的使⽤
 
 mobx中有更多的抽象和封装，调试会⽐较困难，同时结果也难以预测；⽽redux提供能够进⾏时间回溯的开发⼯具，同时其纯函数以及更少的抽象，让调试变得更加的容易 
 
-redux跟踪数据变化，mobx不行
+redux跟踪数据变化，mobx不行 
+
+
+
 
 ### mobx的实现demo
 https://www.jianshu.com/p/ead32d9449bc?utm_source=desktop&utm_medium=timeline
