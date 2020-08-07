@@ -352,7 +352,7 @@ setTimeout(()=> {
 
 缺点： 无法终止promise，状态一旦更改为resolve,reject,无法再次改变  
 
-Promise.all([]).then()  必须所有Promise都是resolve状态，才会执行then回调函数(Promise.allsettled正在提案中)。
+Promise.all([]).then()  必须所有Promise都是resolve状态，才会执行then回调函数(Promise.allsettled)。
 
 Promise.race()  
 
@@ -513,8 +513,9 @@ Web Worker 通常应用于哪些方面呢？
  
 
 
-## 性能优化部分  选读吧
-感觉这部分知识有点老了，用到的不多了
+## 性能优化部分  
+选读吧。
+感觉这部分知识有点老了。
 
 ## 你不知道的js下册 
 知识过于基础 不做记录了
