@@ -17,7 +17,7 @@ var f = function () {
 ```
 上面代码中，函数体里面的this.x就是指当前运行环境的x。
 
-this 指向函数执行的上下文对象。 
+this 指向当前函数执行的上下文对象。 
 this说白了就是找拥有当前上下文（context）的对象（context object），也就是说this指向调用位置的执行上下文，跟调用位置，怎样调用有关。跟函数在哪里定义没有关系，而且会随着函数调用方式的变化而变化，这就给函数提供了非常大的灵活性。
 
 
@@ -79,11 +79,10 @@ bar()
 
 obj.foo() 转化为call的形式就是obj.foo.call(obj)，所以this指向了obj
 
-bar() 转化为call的形式就是bar.call()，由于没有传 context，所以 this 默认就是 window，本文的所有分析，不考虑node.js环境。
+bar() 转化为call的形式就是bar.call()，由于没有传 context，所以 this 默认就是 window，本文的所有分析，都在浏览器环境，不考虑node.js环境。
 
-上面的分析已经很清楚了，来自大佬的分享。
 
-下面内容来自《你不知道的JavsScript》
+下面内容来自《你不知道的JavsScript》，总结下常见的this调用情况。
 ## 5种this绑定
 1、默认绑定  
 2、隐式绑定   
@@ -198,7 +197,7 @@ var bar = new foo(2); // bar和foo(..)调用中的this进行绑定
 console.log( bar.a ); // 2
 ```
 
-### 箭头函数绑定
+### 箭头函数绑定 
 ES6新增一种特殊函数类型：箭头函数，箭头函数无法使用上述四条规则，在箭头函数自己的作用域中没有this，而是根据外层（函数或者全局）作用域（词法作用域）来决定this。 也就是说，箭头函数里的this不再有迷惑性，被永远封印到当前词法作用域之中，称作 Lexical this ，在代码运行前就可以确定。
 
 这样的好处就是方便让回调函数的this使用当前的作用域，不怕引起混淆。  
@@ -265,6 +264,7 @@ var boss1 = {
   name: 'boss1',
   callback: callback,
   callback2 () {
+    // 下面这个箭头函数是在当前环境创建的，当前this指向boss1,所以boss1.callback2() // 调用，指向boss1
     callback(() => { console.log(this) })
   }
 }
@@ -278,21 +278,7 @@ boss1.callback2() // boss1
 
 new绑定 > 显式绑定 > 隐式绑定 > 默认绑定
 
-## bind，call的优先级
-```js
-function returnThis () {
-  return this
-}
 
-var boss1 = { name: 'boss1'}
-
-var boss1returnThis = returnThis.bind(boss1)
-
-boss1returnThis() // boss1
-
-var boss2 = { name: 'boss2' }
-boss1returnThis.call(boss2) // boss1,不是boss2,说明bind比call优先级高
-```
 
 ## new 的优先级最高
 ```js
@@ -301,7 +287,7 @@ function showThis () {
 }
 
 showThis() // window
-new showThis() // showThis
+new showThis() // showThis的一个实例
 
 var boss1 = { name: 'boss1' }
 showThis.call(boss1) // boss1

@@ -132,3 +132,9 @@ SyntheticEvent 是合并而来。这意味着 SyntheticEvent 对象可能会被�
 React组件props是不可变的，函数组件每次render props都是独立的，每次捕获到的props都不一样，而类组件中，虽然props也没有发生变化，但是this.props的指向了最新捕获到的
 
 state也一样。
+
+## react 如何判断当前组件是函数组件还是类组件
+```js
+F.prototype instanceof React.Component // true为class组件
+
+```
