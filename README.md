@@ -50,6 +50,7 @@
 - [Event Loop](https://github.com/lznbuild/my-blog/issues/18)
 - [在地址栏中输入URL会发生什么](https://github.com/lznbuild/my-blog/issues/17)
 - [浏览器的回流重绘](https://github.com/lznbuild/my-blog/issues/19)
+- [安全部分](https://github.com/lznbuild/my-blog/issues/35)
 
 ##  网络部分  
 - [HTTP,TCP,UDP,网络基础部分](https://github.com/lznbuild/my-blog/issues/24)

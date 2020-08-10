@@ -30,31 +30,6 @@
 
 
 <script>
-  class Person {
-    constructor(id){
-      this.id = id
-    }
-    getId() {
-      return this.id
-    }
-  }
 
-  class Person1 extends Person{
-    constructor(id,name){
-      super(id)
-      this.name = name
-      this.getId = function(){}
-    }
-
-  }
-
-  const a = new Person1('a-id','a-name')
-  const b = new Person1('b-id','b-name')
-
-  console.log(a.getId());
-
-  a.getId = function(){return null}
-
-  console.log(b.getId());
 
 </script>
