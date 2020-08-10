@@ -193,3 +193,10 @@ IntersectionObserver
 
 ### a标签的定义顺序
   link→visited→hover→active    lv ha 
+
+
+### bfc触发条件 
+- float 不为none
+- position 为absolute 或fixed 
+- display 为inline-block, inline-flex, flex, table-cell
+- overflow 不为visible 

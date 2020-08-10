@@ -317,6 +317,10 @@ function myInstanceof(left, right) {
 
 ## 连等问题 
 ```js
+var A = B = C;
+```
+连等赋值真正的运算规则是  B = C; A = B;  即连续赋值是从右至左永远只取等号右边的表达式结果赋值到等号左侧。
+```js
 // 连等
 var a = {n: 1};
 var b = a;
