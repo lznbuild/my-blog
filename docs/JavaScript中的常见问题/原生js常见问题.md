@@ -113,12 +113,10 @@ let person = { name: "Lydia" };
 const members = [person];
 person = null;
 
-console.log(members);
+console.log(members); // [{...}]
 ```
 
-## 函数传参都是值传递????
 
-## class也是有原型链的
 
 ## 全局对象的属性可以被删除，用var,const,let声明的变量不能被删除
 
@@ -141,7 +139,9 @@ multiply(value);
 ## 问题
 ```js
 [1, 2, 3, 4].reduce((x, y) => console.log(x, y));
-// 1 2  undefined 3  undefined 4
+// 1 2  
+// undefined 3  
+// undefined 4
 ```
 ## 箭头函数没有prototype属性
 
@@ -172,34 +172,8 @@ getName() // Lydia
 ```
 
 
-## 实现一个new 关键字
-```js
-function create(Con, ...args) {
-	let obj = {}
-	Object.setPrototypeOf(obj, Con.prototype)
-	let result = Con.apply(obj, args)
-	return result instanceof Object ? result : obj
-}
-```
 
-```js
-改进一下 new 的自实现:
 
-function create(Con, ...args) {
-  // 某些函数未必有 `prototype` 属性，比如箭头函数
-  if (! Con.prototype) throw new Error('First argument is not a constructor.');
-
-  const obj = {};
-  Object.setPrototypeOf(obj, Con.prototype);
-  
-  const result = Con.apply(obj, args);
-  // 避免 `null` 的情况，另外所有 reference type 都会覆写 `new` 的返回值，包括 `function`
-  if (result && (typeof result === 'object' || typeof result === 'function')) {
-    return result;
-  }
-  return obj;
-}
-```
 
 
   ```js
@@ -210,25 +184,6 @@ function create(Con, ...args) {
     if (r != null) return decodeURI(r[2]); return null;
   }
   ```
-
-
-
-
-实现一下 instanceof
-function instanceof(left, right) {
- // 获得类型的原型
- let prototype = right.prototype
- // 获得对象的原型
- left = left.__proto__
- // 判断对象的类型是否等于类型的原型
- while (true) {
- if (left === null)
- return false
- if (prototype === left)
- return true
- left = left.__proto__
- }
-}
 
 
 ## js浮点数的问题
@@ -293,20 +248,6 @@ Function.prototype.myBind = function (context) {
 }
 ```
 
-## instanceof 的实现
-```JS
-function myInstanceof(left, right) {
-  let prototype = right.prototype
-  left = left.__proto__
-  while (true) {
-    if (left === null || left === undefined)
-      return false
-    if (prototype === left)
-      return true
-    left = left.__proto__
-  }
-}
-```
 
 ## 占内存和堆内存的比较  
 
@@ -347,66 +288,13 @@ JavaScript 是允许访问还没有绑定值的var所声明的标识符的。这
 用主线程过久，造成卡顿的感觉。任何 DOM API 调用都要先将 JS 数据结构转为 DOM 数据结构，再挂起 JS 引擎并启动 DOM 引擎，执行过后再把可能的返回值反转数据结构，重启 JS 引擎继续执行。这种上下文切换很耗性能。性能消耗在JS对象和DOM对象的转换和同步
 很多DOM操作都会触发回流，消耗性能。
 
-## 实现bind
-```js
-Function.prototype.myBind = function (context) {
-  if (typeof this !== 'function') {
-    throw new TypeError('Error')
-  }
-  var _this = this
-  var args = [...arguments].slice(1)
-  // 返回一个函数
-  return function F() {
-    // 因为返回了一个函数，我们可以 new F()，所以需要判断
-    if (this instanceof F) {
-      return new _this(...args, ...arguments)
-    }
-    return _this.apply(context, args.concat(...arguments))
-  }
-}
-```
-## 实现call
-```js
-Function.prototype.myCall = function (context) {
-  var context = context || window
-  // 给 context 添加一个属性
-  // getValue.call(a, 'yck', '24') => a.fn = getValue
-  context.fn = this
-  // 将 context 后面的参数取出来
-  var args = [...arguments].slice(1)
-  // getValue.call(a, 'yck', '24') => a.fn('yck', '24')
-  var result = context.fn(...args)
-  // 删除 fn
-  delete context.fn
-  return result
-}
-```
 
-## 实现apply
-```js
-Function.prototype.myApply = function (context) {
-  var context = context || window
-  context.fn = this
 
-  var result
-  // 需要判断是否存储第二个参数
-  // 如果存在，就将第二个参数展开
-  if (arguments[1]) {
-    result = context.fn(...arguments[1])
-  } else {
-    result = context.fn()
-  }
-
-  delete context.fn
-  return result
-}
-``` 
 
 
 for in 可以用于对象，for of不能，因为普通对象没有遍历器iterable,用于数组，前者遍历下表，后者遍历值  
 
 
-js 中数组元素的存储方式并不是连续的，而是哈希映射关系。哈希映射关系，可以通过键名 key，直接计算出值存储的位置，所以查找起来很快。
 
 使用 sort() 对数组 [3, 15, 8, 29, 102, 22] 进行排序，输出结果
 ///  [102, 15, 22, 29, 3, 8]
