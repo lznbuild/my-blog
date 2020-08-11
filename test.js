@@ -1,3 +1,2 @@
-const ip = require('ip')
+console.log(this);
 
-console.log(ip);

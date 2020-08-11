@@ -1,3 +1,4 @@
+```css
 div {
   width: 100px;
   border: 1px solid red;
@@ -11,6 +12,7 @@ div {
   -webkit-line-clamp : 4;
   -webkit-box-orient : vertical; */
 }
+
 
 
 /* 1px像素线 */
@@ -31,12 +33,9 @@ div {
   }
 } */
 
-font-size 各种大小的 12 14 16 18 
-主题色,包括一些线的颜色，公共盒子阴影
 
 less-loader.options.modifyVars可以定义全局变量
 
-统一的padding 
 
 // 对input placeholder的修改
 .search-input::-webkit-input-placeholder {
@@ -44,5 +43,4 @@ less-loader.options.modifyVars可以定义全局变量
   color: #fff;
 }
 
-
-文本不可被选中
+```

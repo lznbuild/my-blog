@@ -1,61 +1,61 @@
-## html标签
-怎么禁止iframe插入自己的页面？？
+
+### 怎么禁止iframe插入自己的页面？？
+```js
+<script type="text/javascript">  
+if(top.window.location.href!=window.location.href){
+    top.window.location.href=window.location.href;
+}
+</script>
+
+// 判断当前路径和父级路径是否相同 ，不相同就是被插入了页面。
+```
 
 
-iframe怎么优化加载速度？？？？
+
+### meta标签有哪些作用？？？？
+```js
+  // 指定编码方式
+  <meta charset="UTF-8" /> 
+  // 指定缩放比例 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="" /> 
+  <meta name="keywords" content="" />
+  <meta name="author" content="" />
+```
 
 
 
-有哪些语义化标签？？？？语义化标签的意义？？？？
-利于seo
 
-
-meta标签有哪些作用？？？？
-
-
-em标签强调词，strong强调读的重音
-
-
-解决inline-block元素的间隔问题
+### 解决inline-block元素的间隔问题
+```css
 ul{letter-spacing: -5px}
 li{letter-spacing: normal}
-
-
-
-user-select: none; auto() all 控制文本选中
-
-
-vertical-align: middle;
-display: inline-block;  只能用在inline和inline-block元素上
-
-
-
-clear:both; 只能用于块元素
-
-
+```
 
 
 ### css层叠顺序  (层叠上下文)
 一个三维概念。
-background/border==> z-index:<0> ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto==>z-index:0 ==> z-index:1;
+background/border==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto==>z-index:0 ==> transform ==> z-index:1;==>filter==>opacity
 
-transform在那里？？？？？？？？？？？？？？？？？？？
 
-z-index:0和z-index:auto是有区别的
+
+z-index:0和z-index:auto是有区别的。
 0会创建一个新的层叠上下文。auto不会，0在auto上面。
 z-index的默认值是auto，堆叠顺序与父元素相等。
-
-如何产生层叠上下文？
-z-index 值不为 "auto"的 position非static值
-opacity 属性值⼩于 1 的元素
-transform 属性值不为 "none"的元素，
-filter值不为“none”的元素
-
-
-
-z-index:auto在z-index: -1 上面
+z-index:auto在z-index: -1 上面。
 
 relative定位，top，z-index等值都有效.
+
+### 如何产生层叠上下文？
+- z-index 值不为 "auto"的 position非static值
+- opacity 属性值⼩于 1 的元素
+- transform 属性值不为 "none"的元素，
+- filter值不为“none"的元素
+
+
+
+
 ### 选择器权重
 
 ！important
@@ -70,17 +70,20 @@ class，属性选择器，伪类选择器  10
 
 
 ### 选择器的优先级
-```js
-.x {    background-color:lightblue;}.z {    background-color:lightblue;}.y {    background-color:lightgreen;}
+```html
+.x {    background-color:lightblue;}.
+z {    background-color:lightblue;}
+.y {    background-color:lightgreen;}
+
 <div id="my" class="x y z">text<div>
 
-//最终y会生效,跟写css的位置有关
+最终y会生效,跟写css的位置有关
 
  .z, .y {
       color: yellow;
     }
 
-    并列不会加权重
+并列不会加权重
 ```
 
 
@@ -96,10 +99,12 @@ class，属性选择器，伪类选择器  10
 ::after
 
 
-## dom.getClientRects() x,y,width,height获取位置和尺寸 
+## dom.getClientRects(),dom.getBoundingClientRect()  x,y,width,height获取位置和尺寸 
 
 
-var offsetX = document.documentElement.getBoundingClientRect().x - element.getBoundingClientRect().x;
+var offsetX = 
+document.documentElement.getBoundingClientRect().x - 
+element.getBoundingClientRect().x;
 
 
 dom.offsetParent 指向position非默认值的祖元素。本身或祖元素display:none 指向null 
@@ -112,8 +117,8 @@ em作为行高单位时，相对于自身字体大小
 Vertical-align只能应用于inline-block,inline元素 
 
 
-
 在css里面，padding-top,padding-bottom,margin-top,margin-bottom取值为百分比的时候，参照的是父元素的宽度
+
 ## 弹性布局的属性总结
   容器设置为flex布局，子元素的float,clear,vertical-align失效  
   定义在容器元素上的：  
@@ -187,4 +192,11 @@ IntersectionObserver
   ``` 
 
 ### a标签的定义顺序
-  link→visited→hover→active 
+  link→visited→hover→active    lv ha 
+
+
+### bfc触发条件 
+- float 不为none
+- position 为absolute 或fixed 
+- display 为inline-block, inline-flex, flex, table-cell
+- overflow 不为visible 
