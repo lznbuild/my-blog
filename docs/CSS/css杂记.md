@@ -199,4 +199,48 @@ IntersectionObserver
 - float 不为none
 - position 为absolute 或fixed 
 - display 为inline-block, inline-flex, flex, table-cell
-- overflow 不为visible 
+- overflow 不为visible  
+
+##  bfc解决问题
+1. 容器高度塌陷，清除浮动
+2. margin边距重叠 
+3. 防止浮动的字体环绕
+
+
+### css垂直居中 
+1. 子元素行高等于父元素高度。 
+
+2. position:absolute; top: 50%; left: 50%; margin-left: -width*50%;margin-top:-height*50%;
+
+3. ... translate(-50%,-50%) 
+
+4. ... top:0;left:0;right:0;bottom:0;margin:auto;
+
+5. flex    margin: auto
+
+6. flex jusify-content:center; align-items: center;
+
+7. 父元素 display: table-cell; vertical-align: middle
+
+
+8.
+```css
+  div {
+    width: 300px;
+    height: 300px;
+    border: 1px solid red;
+  }
+  div::after {
+    content:'';
+    display:inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+
+  span {
+ 
+    display: inline-block;
+    vertical-align: middle;
+  }
+``` 
+

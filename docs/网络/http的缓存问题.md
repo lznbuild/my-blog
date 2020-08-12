@@ -145,7 +145,7 @@ Last-Modified 能够感知的单位时间是秒，如果文件在 1 秒内改变
 
 强缓存优于协商缓存进行，expires和cache-contrl生效则直接使用缓存。 
 
-
+etag适合重要量小的资源，last modify适合不重要的量大的资源。注意last modify需要保证服务器时间准确
 
 https://juejin.im/post/5eb7f811f265da7bbc7cc5bd
 

@@ -22,9 +22,11 @@ React的合成事件层做了两件事：
 在React中只能绑定一个同类型的事件监听器，重复定义时，后面的会覆盖之前的，所以合成事件甚至都不去封装event.stopImmediatePropagation。 
 
 
-上面说到，合成事件的监听器统一注册在document上，只有冒泡阶段，注意，React的合成事件并没有实现事件捕获，仅仅支持了事件冒泡。所以同一节点上的原生事件的监听器相应总是比合成事件的监听器早触发 ，阻止原生事件的冒泡后，会阻止合成事件的监听器执行。相反， 合成事件没法阻止原生事件的冒泡。合成事件之间可以用e.stopPropagation阻止事件冒泡。 React 给合成事件封装的 stopPropagation 函数在调用时给自己加了个 isPropagationStopped 的标记位来确定后续监听器是否执行。而父级可以用stop阻止子级事件的执行。由于DOM事件被阻止冒泡了，无法到达document，所以合成事件不会被触发。
+上面说到，合成事件的监听器统一注册在document上，只有冒泡阶段，注意，React的合成事件并没有实现事件捕获，仅仅支持了事件冒泡。所以同一节点上的原生事件的监听器相应总是比合成事件的监听器早触发 (原生事件在dom节点上，合成事件在document上)，阻止原生事件的冒泡后，会阻止合成事件的监听器执行。相反， 合成事件没法阻止原生事件的冒泡。合成事件之间可以用e.stopPropagation阻止事件冒泡。在document上的原生事件，在合成事件之后执行。且在合成事件中只能用e.nativeEvent.stopImmediatePropagation()来阻止document上原生事件的执行。
 
-如需注册捕获阶段的事件处理函数，则应为事件名添加 Capture。例如，处理捕获阶段的点击事件请使用 onClickCapture，而不是 onClick。
+ React 给合成事件封装的 stopPropagation 函数在调用时给自己加了个 isPropagationStopped 的标记位来确定后续监听器是否执行。而父级可以用stop阻止子级事件的执行。由于DOM事件被阻止冒泡了，无法到达document，所以合成事件不会被触发。
+
+如需注册捕获阶段的事件处理函数，则应为事件名添加 Capture。例如，处理捕获阶段的点击事件请使用 onClickCapture，而不是 onClick。(建议不要使用这种事件，巨坑！！！)
 
 React没有实现包括所有的原生js事件，比如，合成事件不在window上，所有跟window有关的事件都要用原生事件，onload，resize等事件。  
 
@@ -36,10 +38,7 @@ React没有实现包括所有的原生js事件，比如，合成事件不在wind
 在React中使用DOM原生事件时，一定要在组件卸载时手动移出，否则很可能出现内存泄漏的问题。而使用合成事件系统则不需要，因为React内部已经处理了。  
 
 
-阻止合成事件与最外层document上的事件的冒泡(阻止document上的事件触发)。  
-```js
-e.nativeEvent.stopImmediatePropagation()
-```
+
 
 ### 参考  
 https://juejin.im/post/59db6e7af265da431f4a02ef

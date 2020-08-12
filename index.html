@@ -4,78 +4,53 @@
 <head>
   <title>拖放示例-文本</title>
 </head>
-<style></style>
+<style>
+  .outer {
+    width: 200px;
+    overflow: hidden;
+    background: red;
+  }
+  .float {
+    width: 100px;
+    height: 100px;
+    background: aqua;
+    float: left;
+    margin-right: 20px;
+  }
+  .text {
+    overflow: hidden;
+  }
+</style>
 
 <body>
-  <div id="mountNode"></div>
+  <div class="outer">
+    <div class="float">浮动元素</div>
+    <div class="text">老师大大激发了奇偶位u哦就上的辣椒粉为哦如哪里能程序路径名称v两款手机哦i就</div>
+  </div>
 </body>
 
 </html>
 
-
-
-
 <script>
-  // ## call的实现
-  // Function.prototype.myCall = function(context) {
-  //   if (typeof this !== 'function') {
-  //     throw new TypeError('Error')
-  //   }
-  //   context = context || window
-  //   context.fn = this
-  //   const args = [...arguments].slice(1)
-  //   const result = context.fn(...args)
-  //   delete context.fn
-  //   return result
-  // }
 
+/* 
+  {
+      "a": {
+        "b": {
+          "c": {
+            "d": 1
+          }
+        }
+      },
+      "aa": 2,
+        "c": [
+          1,
+          2
+        ]
+    } =>
+    {'a.b.c.d': 1, aa: 2, 'c[0]': 1, 'c[1]': 2}
 
+  reduce+...
 
-
-  // ## apply的实现
-  // Function.prototype.myApply = function(context) {
-  //   if (typeof this !== 'function') {
-  //     throw new TypeError('Error')
-  //   }
-  //   context = context || window
-  //   context.fn = this
-  //   let result
-  //   // 处理参数和 call 有区别
-  //   if (arguments[1]) {
-  //     result = context.fn(...arguments[1])
-  //   } else {
-  //     result = context.fn()
-  //   }
-  //   delete context.fn
-  //   return result
-  // }
-
-  // ## bind的实现(多次bind，只生效第一次 ??????)
-
-  Function.prototype.myBind = function (context) {
-    if (typeof this !== 'function') {
-      throw new TypeError('Error')
-    }
-    const _this = this
-    const args = [...arguments].slice(1)
-    // 返回一个函数
-    return function F() {
-      // 因为返回了一个函数，我们可以 new F()，所以需要判断
-      if (this instanceof F) {
-        return new _this(...args, ...arguments)
-      }
-      return _this.apply(context, args.concat(...arguments))
-    }
-  }
-
-
-  function fn(a, b, c, d, e, f) {
-    console.log(this, a, b, c, d, e, f);
-  }
-
-  var a = fn.myBind(document, 1, 2, 3);
-  a(4)
-
-  var b = a.myBind({}, 5)
-  b(6)
+  */
 </script>
