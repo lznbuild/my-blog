@@ -137,4 +137,17 @@ state也一样。
 ```js
 F.prototype instanceof React.Component // true为class组件
 
-```
+``` 
+
+
+### React和vue的不同 
+React不对数据进行监听，不知道那个数据变了，只能通过diff，子组件也更新了。 react在往运行时优化（diff），filber
+
+
+
+vue有数据劫持，知道那个数据变了，只diff当前组件就好。
+
+vue3 
+往这些方向优化
+模板编译
+数据监听
