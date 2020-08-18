@@ -100,7 +100,7 @@ z {    background-color:lightblue;}
 
 
 ## dom.getClientRects(),dom.getBoundingClientRect()  x,y,width,height获取位置和尺寸 
-
+他俩对块级元素的返回值一样，对行内元素不一样
 
 var offsetX = 
 document.documentElement.getBoundingClientRect().x - 

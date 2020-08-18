@@ -20,7 +20,7 @@
   }
 
   .text {
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 </style>
 
@@ -28,19 +28,20 @@
   <div class="outer">
     <div class="float">浮动元素</div>
     <div class="text">老师大大激发了奇偶位u哦就上的辣椒粉为哦如哪里能程序路径名称v两款手机哦i就</div>
+    <a href="#id" id="a">顶</a>
   </div>
 </body>
 
 </html>
 
 <script>
-  String.prototype.f = function() {
-    return this.split("").reverse().join("-")
+
+  const a = document.querySelector('#a');
+
+  a.onclick = function(e) {
+    // e.preventDefault();
+    window.open('https://www.baidu.com','_block')
   }
 
-  var str = 'abcd'
-
-
-  console.log(str.f());
 
 </script>
