@@ -15,6 +15,7 @@ div {
 
 
 
+
 /* 1px像素线 */
 /* .borderRound(@color: #eee) {
 
@@ -34,7 +35,7 @@ div {
 } */
 
 
-less-loader.options.modifyVars可以定义全局变量
+less-loader.options.modifyVars可以定义全局less变量
 
 
 // 对input placeholder的修改
