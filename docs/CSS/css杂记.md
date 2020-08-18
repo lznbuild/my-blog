@@ -174,6 +174,7 @@ IntersectionObserver
   })
 
   observer.observe(img) 
+  // observer.observe(img1)  // 观察多个元素
 
   ``` 
 
