@@ -10,9 +10,10 @@
     height: 100px;
     border: 1px solid red;
   }
-  .box:nth-of-type(1){
+
+  .box:nth-of-type(1) {
     margin: 1000px 0 0;
-    
+
   }
 </style>
 
@@ -24,28 +25,10 @@
 </html>
 
 <script>
+  function fn() {
+    console.log(new.target);
+  }
 
-  const img = document.querySelectorAll('.box') 
-
-  console.log(img);
-
-  const observer = new IntersectionObserver((changes) => {
-    // changes: 目标元素集合
-    changes.forEach((change) => {
-      console.log(change,'change');
-      // intersectionRatio
-      if (change.isIntersecting) {
-        // const img = change.target
-        // img.src = img.dataset.src
-        // observer.unobserve(img)
-      }
-    })
-  })
-
-  Array.from(img).forEach(item=> {
-    observer.observe(item) 
-
-  })
-
+  new fn()
 
 </script>

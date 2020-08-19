@@ -1,5 +1,5 @@
 ## 变量声明的几种方式
-  var function let const class import 
+  var let const  function class import
 
 ## 如何将浮点数点左边的数每三位添加一个逗号，如 12000000.11 转化为12,000,000.11?
 
@@ -194,60 +194,6 @@ getName() // Lydia
 console.log( Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON); 
 
 
-## call的实现
-```js
-Function.prototype.myCall = function(context) {
-  if (typeof this !== 'function') {
-    throw new TypeError('Error')
-  }
-  context = context || window
-  context.fn = this
-  const args = [...arguments].slice(1)
-  const result = context.fn(...args)
-  delete context.fn
-  return result
-}
-```
-
-## apply的实现
-```js
-Function.prototype.myApply = function(context) {
-  if (typeof this !== 'function') {
-    throw new TypeError('Error')
-  }
-  context = context || window
-  context.fn = this
-  let result
-  // 处理参数和 call 有区别
-  if (arguments[1]) {
-    result = context.fn(...arguments[1])
-  } else {
-    result = context.fn()
-  }
-  delete context.fn
-  return result
-}
-```
-
-## bind的实现(多次bind，只生效第一次??????)
-```js
-Function.prototype.myBind = function (context) {
-  if (typeof this !== 'function') {
-    throw new TypeError('Error')
-  }
-  const _this = this
-  const args = [...arguments].slice(1)
-  // 返回一个函数
-  return function F() {
-    // 因为返回了一个函数，我们可以 new F()，所以需要判断
-    if (this instanceof F) {
-      return new _this(...args, ...arguments)
-    }
-    return _this.apply(context, args.concat(...arguments))
-  }
-}
-```
-
 
 ## 占内存和堆内存的比较  
 
@@ -275,14 +221,13 @@ console.log(b.x)
 
 
 ## var,let,const 的区别
-内存分配
-var，会直接在栈内存里预分配内存空间，然后等到实际语句执行的时候，再存储对应的变量，如果传的是引用类型，那么会在堆内存里开辟一个内存空间存储实际内容，栈内存会存储一个指向堆内存的指针
-let，是不会在栈内存里预分配内存空间，而且在栈内存分配变量时，做一个检查，如果已经有相同变量名存在就会报错
-const，也不会预分配内存空间，在栈内存分配变量时也会做同样的检查。不过const存储的变量是不可修改的，对于基本类型来说你无法修改定义的值，对于引用类型来说你无法修改栈内存里分配的指针，但是你可以修改指针指向的对象里面的属性
+var 声明的变量在变量环境 ， let ,const 声明的变量在词法环境，对应执行上下文。
 
-.变量提升
-let const 和var三者其实会存在变量提升
-let只是创建过程提升，初始化过程并没有提升，所以会产生暂时性死区。 var的创建和初始化过程都提升了，所以在赋值前访问会得到undefined function 的创建、初始化、赋值都被提升了 
+变量提升 
+
+let const 和var三者其实会存在变量提升。  
+let只是创建过程提升，初始化过程并没有提升，所以会产生暂时性死区。 
+var的创建和初始化过程都提升了，所以在赋值前访问会得到undefined function 的创建、初始化、赋值都被提升了。
 
 JavaScript 是允许访问还没有绑定值的var所声明的标识符的。这种标识符后来统一约定称为“变量声明（varDelcs）”，而“let/const”则称为“词法声明（lexicalDecls）”。JavaScript 环境在创建一个“变量名（varName in varDecls）”后，会为它初始化绑定一个 undefined 值，而”词法名字（lexicalNames）”在创建之后就没有这项待遇
 
@@ -323,7 +268,9 @@ for in 可以用于对象，for of不能，因为普通对象没有遍历器iter
 ## 函数的变量提升 
 - 允许在块级作用域内声明函数
 - 函数声明(函数名称) 类似于 var，即会提升到全局作用域或函数作用域的头部
-- 同时，函数声明(函数整体) 还会提升到所在的块级作用域的头部
+- 同时，函数声明(函数整体) 还会提升到所在的块级作用域的头部 
+ 
+也就是说函数声明的初始化赋值在定义的块级作用域顶部，变量提升到最顶部的环境。
 
 ```js
 console.log(fn); // undefined
@@ -350,7 +297,7 @@ Map key值可以是any
 Object没迭代器，不能用for of循环 
 
 
-## Set 和 WeakSet,Map和WeakMap 
+## Set 和 WeakSet, Map 和 WeakMap 
 
 WeakSet 成员只能是对象（或数组），不能是其他类型的值。对象都是弱引用，即GC不考虑WeakSet对该对象的引用 ，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中
 WeakSet 适合临时存放一组对象，以及存放跟对象绑定的信息。只要这些对象在外部消失，它在 WeakSet 里面的引用就会自动消失。

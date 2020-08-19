@@ -16,5 +16,6 @@ class是会变量声明提升的，但不会初始化赋值
  class Child extends Parent{}
 
  console.log(Child.__proto__ == Parent); // true
+ console.log(Child.prototype.__proto__ == Parent.prototype) // true 
 ``` 
 
