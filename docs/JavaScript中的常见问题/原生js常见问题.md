@@ -305,7 +305,32 @@ WeakSet 适合临时存放一组对象，以及存放跟对象绑定的信息。
 由于上面这个特点，WeakSet 的成员是不适合引用的，因为它会随时消失。另外，由于 WeakSet 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的，因此 ES6 规定 WeakSet 不可遍历。 
 
 
-WeakMap只接受对象作为键名，不接受其他类型的值作为键名。 弱引用
+WeakMap只接受对象作为键名，不接受其他类型的值作为键名。 弱引用 
+
+
+## Reflect存在意义 
+- 将object对象一些内部的方法，放到Reflect对象上，现阶段这些方法存在于object和Reflect对象上，未来只存在于Reflect对象上。也就是说，从Reflect对象上可以拿到语言内部的方法。  
+
+- 操作对象时出现报错返回false  
+```js
+ try {
+  Object.defineProperty(target, property, attributes);
+  // success
+} catch (e) {
+  // failure
+}
+ 
+// 新写法
+if (Reflect.defineProperty(target, property, attributes)) {
+  // success
+} else {
+  // failure
+}
+``` 
+
+- 让操作对象的编程变为函数式编程  
+
+- 保持和proxy对象的方法一一对应, Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。
 
 ## 参考博客
 https://juejin.im/post/5c64d15d6fb9a049d37f9c20#heading-33

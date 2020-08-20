@@ -273,7 +273,7 @@ export { foo, bar } from 'my_module';
 
 // 等同于
 import { foo, bar } from 'my_module';
-export { foo, boo};
+export { foo, bar};
 ```
 
 跟export 最后的例子比较
