@@ -18,4 +18,12 @@ react初次render或协调后所生成的一个对象，react16前是通过组�
 
 https://blog.csdn.net/wu_xianqiang/article/details/105837869 
 
-https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247484802&idx=1&sn=4b9f618ddbdf483101bbe942e23b08ca&chksm=fa2be56bcd5c6c7d4a9b384625ed88a917bfd841e41eccb7369301c037712c1993cb430efa1a&mpshare=1&&srcid=&sharer_sharetime=1572533493883&sharer_shareid=c2e4bd2a7749c57364e37417427f8b4f&from=timeline&scene=2&subscene=1&clicktime=1572591786&enterid=1572591786#rd
+https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247484802&idx=1&sn=4b9f618ddbdf483101bbe942e23b08ca&chksm=fa2be56bcd5c6c7d4a9b384625ed88a917bfd841e41eccb7369301c037712c1993cb430efa1a&mpshare=1&&srcid=&sharer_sharetime=1572533493883&sharer_shareid=c2e4bd2a7749c57364e37417427f8b4f&from=timeline&scene=2&subscene=1&clicktime=1572591786&enterid=1572591786#rd 
+
+
+
+### fiber的执行阶段 
+
+阶段一： 生成fiber树，得出需要更新的节点信息。这一步是一个渐进的过程，可以被打断。基于vdom树生成Fiber树，本质是链表。
+
+阶段二： 将需要更新的节点一次批量更新，这个过程不能被打断。

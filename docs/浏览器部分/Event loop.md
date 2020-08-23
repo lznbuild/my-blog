@@ -240,7 +240,7 @@ setTimeout(function(){
 let a = 0;
 
 let b = async () => {
-  a = a + (await 10);
+  a = a + (await 10); // a= await 10 +a 就是不一样的结果了
   console.log("2", a); // -> '2' 10
 };
 
@@ -249,7 +249,9 @@ b();
 a++;
 
 console.log("1", a); // -> '1' 1
-``` 
+```  
+
+冻结函数作用域，往协程上想，
 
 ## setTimeout 是准时的吗
 

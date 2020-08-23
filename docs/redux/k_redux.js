@@ -5,18 +5,21 @@ function fn1() {
     'fn1'
   );
 }
+
 function fn2() {
   console.log(
     'fn2'
   );
 }
+
 function fn3() {
   console.log(
     'fn3'
   );
 }
+
 debugger;
 
 arr.reduce((left, right) => {
-  return left(right())
+  return right(left())
 })

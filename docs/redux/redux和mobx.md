@@ -29,9 +29,16 @@ mobx相对来说⽐较简单，在其中有很多的抽象，mobx更多的使⽤
 
 mobx中有更多的抽象和封装，调试会⽐较困难，同时结果也难以预测；⽽redux提供能够进⾏时间回溯的开发⼯具，同时其纯函数以及更少的抽象，让调试变得更加的容易 
 
-redux跟踪数据变化，mobx不行 
+redux跟踪数据变化(每次返回新的store,不修改原有store)，mobx不行 
+
+redux是函数式编程的思路，可以添加中间件（redux-thunk），mobx是面向对象编程和响应式编程。
 
 
+### 总结 
+- redux本身是纯函数思想，单向数据流，只能通过dispatch一个action去修改store，mobx 有一层监听数据的变化，响应式。
+- redux store不可修改，返回新的store， mobx直接修改 ，redux可以做时间旅行，调试方便。
+- redux将数据保存在单⼀的store中，mobx将数据保存在分散的多个store中，可以进行更细粒度更新，mobx可能会有更好的性能（监听也有性能损耗）。 
+- redux 有中间件
 
 
 ### mobx的实现demo

@@ -92,7 +92,6 @@ jsx通过babel的解析，最终都会成为React.createElement()，这里面有
 
 
 
-(持续更新中)  
 
 
 ## react的缺点 
@@ -101,7 +100,14 @@ jsx通过babel的解析，最终都会成为React.createElement()，这里面有
 需要开发者处理多余的render处理 
 
 
-可读性稍微差一些
+可读性稍微差一些 
+
+## react优点 
+
+- 浏览器兼容 
+- 模块化，组件化 
+- 单向数据流 
+
 
 ## forceUpdate直接render，跳过shouldComponentUpdate 
 
@@ -143,11 +149,25 @@ React setState 引起局部重新刷新。为了达到更好的性能，React �
 
 React不对数据进行监听，不知道那个数据变了，只能通过diff，子组件也更新了。 react在往运行时优化（diff），filber 
 
-
+vue可以更快的计算出vdom的差异，跟踪每一个组件的依赖关系，不需要重新渲染组件数。
 
 vue有数据劫持，知道那个数据变了，只diff当前组件就好。
+
+react 通过import导入的组件在render中可以直接使用，在vue中，由于模板中使用的数据都必须挂在this上进行一次中转，所以需要在components中再次声明。
+
+vue使用的是模板渲染，react是jsx，纯js。
+
+## react context 的理解 
+
+context提供一种在组件之间共享state的方法，不必显式的通过组件树的逐层传递props。
+
+对比js作用域链去理解。
+
+## React中的key 
+
 
 vue3 
 往这些方向优化
 模板编译
 数据监听
+
