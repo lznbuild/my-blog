@@ -16,7 +16,6 @@ react初次render或协调后所生成的一个对象，react16前是通过组�
 除了调度之外，手动处理堆栈帧还可以释放并发和错误边界等功能
 
 
-https://blog.csdn.net/wu_xianqiang/article/details/105837869 
 
 https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247484802&idx=1&sn=4b9f618ddbdf483101bbe942e23b08ca&chksm=fa2be56bcd5c6c7d4a9b384625ed88a917bfd841e41eccb7369301c037712c1993cb430efa1a&mpshare=1&&srcid=&sharer_sharetime=1572533493883&sharer_shareid=c2e4bd2a7749c57364e37417427f8b4f&from=timeline&scene=2&subscene=1&clicktime=1572591786&enterid=1572591786#rd 
 
