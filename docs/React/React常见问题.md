@@ -72,7 +72,9 @@ react初次render或协调后所生成的一个对象，react16前是通过组�
 ### React fiber 的讲解  
 https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247484469&idx=1&sn=f68d044f1b0e4e2eb981e3878427b75b&scene=21#wechat_redirect 
 
-https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247484536&idx=1&sn=94777b8c1aab80dffe1fc224bec02c72&scene=21#wechat_redirect
+https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247484536&idx=1&sn=94777b8c1aab80dffe1fc224bec02c72&scene=21#wechat_redirect 
+
+
 ### diff算法的策略
 - web UI 中DOM节点跨层级的移动操作特别少，可以忽略不计。（diff对比过程中当发现之前的节点不存在时，该节点及其子节点完全删除掉，不会用于进一步的比较。这样只需要对树进行一次遍历，便能完成整个DOM树的比较）
 
@@ -95,18 +97,22 @@ jsx通过babel的解析，最终都会成为React.createElement()，这里面有
 
 
 ## react的缺点 
-不是一个完整的框架，需要配合react-router,redux等库。
+- 不是一个完整的框架，需要配合react-router,redux等库。 
 
-需要开发者处理多余的render处理 
+- 需要开发者处理多余的render处理  
 
+- 会吃一些内存 
 
-可读性稍微差一些 
+- 可读性稍微差一些  
+
 
 ## react优点 
-
+- 指明了未来前端的发展方向，将开发者的精力放到state上，而不是dom操作上，声明式编程代替命令时编程。
+- 不管如何修改数据，总是会最小的代价去更新dom
 - 浏览器兼容 
-- 模块化，组件化 
+- 模块化，组件化，可复用
 - 单向数据流 
+- 跨平台 
 
 
 ## forceUpdate直接render，跳过shouldComponentUpdate 
@@ -128,12 +134,7 @@ SyntheticEvent 是合并而来。这意味着 SyntheticEvent 对象可能会被�
 
 如果你想异步访问事件属性，你需在事件上调用 event.persist()，此方法会从池中移除合成事件，允许用户代码保留对事件的引用。
 
-## react函数组件和class组件 
 
-函数组件 setTimeout获取的props，是旧值，class组件获取的是新值。
-React组件props是不可变的，函数组件每次render props都是独立的，每次捕获到的props都不一样，而类组件中，虽然props也没有发生变化，但是this.props的指向了最新捕获到的
-
-state也一样。
 
 ## react 如何判断当前组件是函数组件还是类组件
 ```js
