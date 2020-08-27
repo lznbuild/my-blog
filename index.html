@@ -7,35 +7,51 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
   <style>
-    * {
-      padding: 0;
-      margin: 0;
-    }
-
-    #box {
-      height: 200px;
-      background-color: gold;
-      margin: 0 100px;
-      width: 100%;
-    }
+   
   </style>
 </head>
 
 <body>
-  <div id="box"></div>
+  <div id="parent">
+    parent
+    <div id="child">
+      child
+      <div id="subchild">subchild</div>
+    </div>
+  </div>
 </body>
 
 </html>
-<script>
-  const getQueryString = (name) => {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.slice(1).match(reg); //search,查询？后面的参数，并匹配正则
-    console.log(r,'r');
-    if (r != null) {
-      return unescape(r[2]);
-    }
-    return null;
-  }
 
-  console.log(getQueryString('name'));
+<script>
+  const parent = document.querySelector('#parent');
+  const child = document.querySelector('#child');
+  const subchild = document.querySelector('#subchild');
+
+
+  parent.addEventListener('click',()=> {
+    console.log('parent','捕获');
+  },true)
+
+  parent.addEventListener('click',()=> {
+    console.log('parent','冒泡');
+  },false)
+
+
+  child.addEventListener('click',()=> {
+    console.log('child','冒泡');
+  },false)
+
+  child.addEventListener('click',()=> {
+    console.log('child','捕获');
+  },true)
+  
+  subchild.addEventListener('click',()=> {
+    console.log('subchild','捕获');
+  },true)
+
+  subchild.addEventListener('click',()=> {
+    console.log('subchild','冒泡');
+  },false)
+
 </script>

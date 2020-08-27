@@ -143,7 +143,6 @@ multiply(value);
 // undefined 3  
 // undefined 4
 ```
-## 箭头函数没有prototype属性
 
 ## 问题
 ```js
