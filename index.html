@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      *{
-        padding: 0;
-        margin: 0;
-      }
-      #box {
-        height: 200px;
-        background-color:gold;
-        margin: 0 100px;
-        width: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="box"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      height: 200px;
+      background-color: gold;
+      margin: 0 100px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+</body>
+
 </html>
- 
+<script>
+  const getQueryString = (name) => {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.slice(1).match(reg); //search,查询？后面的参数，并匹配正则
+    console.log(r,'r');
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return null;
+  }
+
+  console.log(getQueryString('name'));
+</script>
