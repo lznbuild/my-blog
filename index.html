@@ -24,34 +24,6 @@
 </html>
 
 <script>
-  const parent = document.querySelector('#parent');
-  const child = document.querySelector('#child');
-  const subchild = document.querySelector('#subchild');
-
-
-  parent.addEventListener('click',()=> {
-    console.log('parent','捕获');
-  },true)
-
-  parent.addEventListener('click',()=> {
-    console.log('parent','冒泡');
-  },false)
-
-
-  child.addEventListener('click',()=> {
-    console.log('child','冒泡');
-  },false)
-
-  child.addEventListener('click',()=> {
-    console.log('child','捕获');
-  },true)
-  
-  subchild.addEventListener('click',()=> {
-    console.log('subchild','捕获');
-  },true)
-
-  subchild.addEventListener('click',()=> {
-    console.log('subchild','冒泡');
-  },false)
+ 
 
 </script>

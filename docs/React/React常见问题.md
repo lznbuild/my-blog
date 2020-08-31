@@ -170,5 +170,60 @@ context提供一种在组件之间共享state的方法，不必显式的通过�
 vue3 
 往这些方向优化
 模板编译
-数据监听
+数据监听 
 
+
+## React 的生命周期怎么实现的 
+
+React 通过三种状态：MOUNTING、RECEIVE_PROPS、UNMOUNTING，管理整个生命周期的执行顺序；
+
+### 状态1 mounting 
+mountComponent 负责管理生命周期中的 getInitialState、componentWillMount、render 和 componentDidMount。
+
+getDefaultProps 是通过 Constructor 进行管理，因此也是整个生命周期中最先开始执行，而 mountComponent 只能望洋兴叹，无法调用到 getDefaultProps。这就解释了为何 getDefaultProps 只执行1次的原因
+
+首先通过 mountComponent 装载组件，此时，将状态设置为 MOUNTING，利用 getInitialState 获取初始化 state，初始化更新队列。
+
+若存在 componentWillMount，则执行；如果此时在 componentWillMount 中调用 setState，是不会触发 reRender，而是进行 state 合并。
+
+到此时，已经完成 MOUNTING 的工作，更新状态为 NULL，同时 state 也将执行更新操作，此刻在 render 中可以获取更新后的 this.state 数据。 
+
+
+mountComponent 本质上是通过 递归渲染 内容的 
+
+
+当渲染完成之后，若存在 componentDidMount 则触发 
+
+
+### 状态2 receive-props 
+
+updateComponent 负责管理生命周期中的 componentWillReceiveProps、shouldComponentUpdate、componentWillUpdate、render 和 componentDidUpdate。
+
+首先通过 updateComponent 更新组件，如果前后元素不一致说明需要进行组件更新，此时将状态设置为RECEIVING_PROPS。 
+
+若存在 componentWillReceiveProps，则执行；如果此时在 componentWillReceiveProps 中调用 setState，是不会触发 reRender，而是进行 state 合并。
+
+到此时，已经完成 RECEIVING_PROPS 工作，更新状态为 NULL
+
+调用 shouldComponentUpdate 判断是否需要进行组件更新，如果存在 componentWillUpdate，则执行。
+
+updateComponent 本质上也是通过 递归渲染 内容的.
+
+当渲染完成之后，若存在 componentDidUpdate，则触发 
+
+
+### 状态3 unmounting 
+unmountComponent 负责管理生命周期中的 componentWillUnmount。
+
+首先将状态设置为 UNMOUNTING，若存在 componentWillUnmount，则执行；如果此时在 componentWillUnmount 中调用 setState，是不会触发 reRender。更新状态为 NULL，完成组件卸载操作。
+
+
+当调用 setState 时，会对 state 以及 _pendingState 更新队列进行合并操作，但其实真正更新 state 的幕后黑手是replaceState。
+
+replaceState 会先判断当前状态是否为 MOUNTING，如果不是即会调用 ReactUpdates.enqueueUpdate 执行更新。
+
+当状态不为 MOUNTING 或 RECEIVING_PROPS 时，performUpdateIfNecessary 会获取 _pendingElement、_pendingState、_pendingForceUpdate，并调用 updateComponent 进行组件更新。
+
+
+
+https://zhuanlan.zhihu.com/p/20312691
