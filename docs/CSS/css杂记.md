@@ -245,3 +245,14 @@ IntersectionObserver
   }
 ``` 
 
+## css自定义变量 
+```css
+:root{
+  --testColor: red;
+}
+```
+
+```js
+  var rootStyles = document.styleSheets[0].cssRules[0].style;
+  rootStyles.setProperty('--testColor', 'green');
+```

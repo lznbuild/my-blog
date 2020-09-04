@@ -7,75 +7,52 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
   <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
 
+    }
+
+    .wrap {
+      width: 10px;
+      height: 2000px;
+      border: 1px solid red;
+    }
   </style>
 </head>
 
 <body>
-  <div id="parent">
-    parent
-    <div id="child">
-      child
-      <div id="subchild">subchild</div>
-    </div>
-  </div>
+  <div class="wrap"></div>
+  <div id="box"></div>
+  <div class="wrap"></div>
+
 </body>
 
 </html>
 
 <script>
-  const root = {
-    val: "A",
-    left: {
-      val: "B",
-      left: {
-        val: "D"
-      },
-      right: {
-        val: "E"
-      }
-    },
-    right: {
-      val: "C",
-      right: {
-        val: "F"
-      }
-    }
-  };
+  const img = document.querySelector('#box')
+  let isShow = false
 
-
-  // 先序遍历
-  function fn(root) {
-    let res = []
-
-    let stack = []
-
-    stack.push(root)
-
-    while (stack.length) {
-      let cur = stack.pop()
-
-      res.unshift(cur.val)
-
-
-
-
-
-      if (cur.left) {
-        stack.push(cur.left)
+  const observer = new IntersectionObserver((changes) => {
+    // changes: 目标元素集合
+    changes.forEach((change) => {
+      // intersectionRatio
+      if (change.isIntersecting) {
+        const img = change.target
+        console.log('出现');
+        isShow= true
+        // observer.unobserve(img)
       }
 
-      if (cur.right) {
-        stack.push(cur.right)
+      if(change.isIntersecting == false&&isShow==true){
+        console.log('消失');
+        isShow = false
       }
+    })
+  })
 
-    }
+  observer.observe(img)
 
-    console.log(res);
-    return res
-
-  }
-
-
-  fn(root)
 </script>
