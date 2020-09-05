@@ -10,91 +10,43 @@
         padding: 0;
         margin: 0;
       }
+      .box {
+        width: 100px;
+        float: right;
+        height: 2000px;
+        border: 1px solid red;
+      }
+      .parent {
+        width: 100px;
+        height: 200px;
+        border: 1px solid red;
+        overflow: auto;
+      }
+      .child {
+        width: 10px;
+        height: 2000px;
+        background: yellow;
+      }
     </style>
   </head>
   <body>
     <div class="box"></div>
+    <div class="parent">
+      <div class="child"></div>
+
+    </div>
   </body>
 </html>
+
 <script>
-  // async function a1() {
-  //   console.log("a1 start");
-  //   await a2();
-  //   console.log("a1 end");
-  // }
+  let parent = document.getElementsByClassName('parent')[0];
+  
+  parent.addEventListener('scroll',(e)=> {
+    console.log('parent 滚动');
+    // e.stopPropagation()
+  })
 
-  // async function a2() {
-  //   console.log("a2");
-  // }
-
-  // console.log("script start");
-
-  // setTimeout(() => {
-  //   console.log("setTimeout");
-  // }, 0);
-
-  // Promise.resolve().then(() => {
-  //   console.log("promise1");
-  // });
-
-  // a1();
-
-  // let promise2 = new Promise(resolve => {
-  //   resolve("promise2.then");
-  //   console.log("promise2");
-  // });
-
-  // promise2.then(res => {
-  //   console.log(res);
-  //   Promise.resolve().then(() => {
-  //     console.log("promise3");
-  //   });
-  // });
-  // console.log("script end");
-
-  /*
-  script start 
-  a1 start
-  a2
-
-  promise2
-
-  script end 
-
-
-
-  promise1
-  a1 end
-  promise2.then
-  promise3
-
-
-  setTimeout
-  */
-</script>
-<script>
-  function Parent(value) {
-    this.val = value;
-  }
-
-  Parent.prototype.getValue = function() {
-    console.log(this.val);
-  };
-
-  function Child(value) {
-    Parent.call(this, value);
-  }
-
-  Child.prototype = Object.create(Parent.prototype, {
-    constructor: {
-      value: Child,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-
-  Child.prototype.sayName = function() {};
-
-  const child = new Child(1);
+  document.addEventListener('scroll',()=> {
+    console.log('document 滚动');
+  })
 </script>

@@ -1,4 +1,4 @@
-渲染进程中都有一个主线程，并且主线程非常繁忙，既要处理 DOM，又要计算样式，还要处理布局，同时还需要处理 JavaScript 任务以及各种输入事件。要让这么多不同类型的任务在主线程中有条不紊地执行，这就需要一个系统来统筹调度这些任务，这个统筹调度系统就是消息队列和事件循环系统。
+主线程非常繁忙，既要处理 DOM，又要计算样式，还要处理布局，同时还需要处理 JavaScript 任务以及各种输入事件。要让这么多不同类型的任务在主线程中有条不紊地执行，这就需要一个系统来统筹调度这些任务，这个统筹调度系统就是消息队列和事件循环系统。
 
 首先，JS分为同步任务和异步任务。
 同步任务都在主线程上执行，会形成一个执行栈。
@@ -126,6 +126,7 @@ Promise.resolve(返回值).then()，然后 await 后的代码全部被包裹进�
 
 
 ```js
+// TODO: 不理解
 async function asyncFn() {
     console.log('asyncFn')
     let res = await asyncFn2()
@@ -160,6 +161,19 @@ let promise = new Promise(resolve => {
 })
 
 console.log('script end');
+  /*
+  script start 
+ asyncFn
+ asyncFn2
+ fn3
+ promise
+ after promise resolved
+ script end
+ undefined
+ promise resolved
+ asyncFn2 return
+ setTimeout
+  */
 
 ```
 
@@ -251,7 +265,7 @@ a++;
 console.log("1", a); // -> '1' 1
 ```  
 
-冻结函数作用域，往协程上想，
+冻结函数作用域，往协程上想
 
 ## setTimeout 是准时的吗
 
