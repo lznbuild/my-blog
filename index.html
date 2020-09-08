@@ -11,48 +11,139 @@
       width: 100px;
       height: 100px;
       background-color: red;
-
+      display: inline-block;
+      margin-bottom: -20px;
     }
 
     .wrap {
-      width: 10px;
-      height: 2000px;
-      border: 1px solid red;
+      width: 100px;
+      height: 100px;
+      background-color: black;
+      /* margin-top: -20px; */
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap"></div>
   <div id="box"></div>
   <div class="wrap"></div>
-
 </body>
 
 </html>
 
+<!--  
 <script>
-  const img = document.querySelector('#box')
-  let isShow = false
+  class Vue {
+    constructor(opt) {
+      this.opt = opt
+      this.observe(opt.data)
+      let root = document.querySelector(opt.el)
+      this.compile(root)
+    }
+    // 为响应式对象 data 里的每一个 key 绑定一个观察者对象
+    observe(data) {
+      Object.keys(data).forEach(key => {
+        let obv = new Observer()
+        data["_" + key] = data[key]
+        // 通过 getter setter 暴露 for 循环中作用域下的 obv，闭包产生
+        Object.defineProperty(data, key, {
+          get() {
+            console.log(Observer.target, 'Observer.target');
+            Observer.target && obv.addSubNode(Observer.target);
+            return data['_' + key]
+          },
+          set(newVal) {
+            obv.update(newVal)
+            data['_' + key] = newVal
+          }
+        })
+      })
+    }
 
-  const observer = new IntersectionObserver((changes) => {
-    // changes: 目标元素集合
-    changes.forEach((change) => {
-      // intersectionRatio
-      if (change.isIntersecting) {
-        const img = change.target
-        console.log('出现');
-        isShow= true
-        // observer.unobserve(img)
+    // 初始化页面，遍历 DOM，收集每一个key变化时，随之调整的位置，以观察者方法存放起来    
+    compile(node) {
+      [].forEach.call(node.childNodes, child => {
+        if (!child.firstElementChild && /\{\{(.*)\}\}/.test(child.innerHTML)) {
+          let key = RegExp.$1.trim()
+          child.innerHTML = child.innerHTML.replace(new RegExp('\\{\\{\\s*' + key + '\\s*\\}\\}', 'gm'), this.opt.data[key])
+          Observer.target = child
+          this.opt.data[key]
+          Observer.target = null
+        }
+        else if (child.firstElementChild)
+          this.compile(child)
+      })
+    }
+  }
+  // 常规观察者类
+  class Observer {
+    constructor() {
+      this.subNode = []
+    }
+    addSubNode(node) {
+      this.subNode.push(node)
+    }
+    update(newVal) {
+      this.subNode.forEach(node => {
+        node.innerHTML = newVal
+      })
+    }
+  }
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    let opt = {el: '#app', data: {name: '检索中...', age: 30}}
+    let vm = new Vue(opt)
+    // setTimeout(() => {
+    //   opt.data.name = '王永峰'
+    // }, 2000);
+  }, false)
+
+
+
+
+</script> 
+-->
+<script>
+  const root = {
+    val: "A",
+    left: {
+      val: "B",
+      left: {
+        val: "D"
+      },
+      right: {
+        val: "E"
+      }
+    },
+    right: {
+      val: "C",
+      right: {
+        val: "F"
+      }
+    }
+  };
+
+  function BFS(root) {
+    const queue = [];
+
+    queue.push(root);
+
+    while (queue.length) {
+      const top = queue.shift();
+
+      console.log(top.val);
+
+      if (top.left) {
+        queue.push(top.left);
       }
 
-      if(change.isIntersecting == false&&isShow==true){
-        console.log('消失');
-        isShow = false
+      if (top.right) {
+        queue.push(top.right);
       }
-    })
-  })
+      
+    }
+  }
 
-  observer.observe(img)
-
+  BFS(root)
 </script>
