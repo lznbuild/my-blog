@@ -7,26 +7,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
   <style>
-    #box {
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      display: inline-block;
-      margin-bottom: -20px;
-    }
+
 
     .wrap {
       width: 100px;
       height: 100px;
       background-color: black;
-      /* margin-top: -20px; */
     }
   </style>
 </head>
 
 <body>
-  <div id="box"></div>
-  <div class="wrap"></div>
+  <div id="dom">
+    <div class="wrap"></div>
+  </div>
 </body>
 
 </html>
@@ -105,45 +99,36 @@
 </script> 
 -->
 <script>
-  const root = {
-    val: "A",
-    left: {
-      val: "B",
-      left: {
-        val: "D"
-      },
-      right: {
-        val: "E"
+  // 选择需要观察变动的节点
+  const targetNode = document.getElementById('dom');
+
+  // 观察器的配置（需要观察什么变动）
+  const config = {attributes: true, childList: true, subtree: true};
+
+  // 当观察到变动时执行的回调函数
+  const callback = function (mutationsList, observer) {
+    // Use traditional 'for loops' for IE 11
+    console.log(mutationsList, 'mutationsList');
+    console.log(observer,'observer');
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        console.log('A child node has been added or removed.');
       }
-    },
-    right: {
-      val: "C",
-      right: {
-        val: "F"
+      else if (mutation.type === 'attributes') {
+        console.log('The ' + mutation.attributeName + ' attribute was modified.');
       }
     }
   };
 
-  function BFS(root) {
-    const queue = [];
+  // 创建一个观察器实例并传入回调函数
+  const observer = new MutationObserver(callback);
 
-    queue.push(root);
+  // 以上述配置开始观察目标节点
+  observer.observe(targetNode, config);
 
-    while (queue.length) {
-      const top = queue.shift();
+  // 之后，可停止观察
+  // observer.disconnect();
+</script> 
 
-      console.log(top.val);
 
-      if (top.left) {
-        queue.push(top.left);
-      }
 
-      if (top.right) {
-        queue.push(top.right);
-      }
-      
-    }
-  }
-
-  BFS(root)
-</script>

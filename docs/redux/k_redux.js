@@ -20,6 +20,8 @@ function fn3() {
 
 debugger;
 
-arr.reduce((left, right) => {
+let a = arr.reduce((left, right) => {
   return right(left())
 })
+
+console.log(a);
