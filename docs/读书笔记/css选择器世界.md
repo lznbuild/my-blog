@@ -64,4 +64,47 @@ class选择器  属性选择器   伪类选择器   10
 
  .lightblue p {color: lightblue;}
  .darkblue p {color: darkblue;}
+ ``` 
+
+ ## 后代选择符的错误认识  
+
+ ```html
+ <div id="myId">
+  <div class="lonely">123</div>
+  <div class="outer">
+    <div class="inner">456</div>
+  </div>
+ </div>
  ```
+
+```js
+document.querySelectorAll('#myId div div').length   // 1
+document.querySelector('#myId').querySelectorAll('div div').length  // 3  查询#myId元素的子元素，选择所有同事满足整个页面下div div选择器条件的DOM元素 
+document.querySelector('#myId').querySelectorAll(':scope div div').length 
+```
+
+querySelectorAll里面的选择器是全局属性。
+ 
+
+ 使用子选择符（>）的主要目的是为了避免冲突。滥用相当于固定了HTML的结构，不好维护。 
+
+相邻兄弟选择符（+） 只选中一个 ，忽略文本节点 
+
+### 为什么没有前面兄弟选择符 
+没有前面兄弟选择符和没有父元素选择符的原因是一样的，它们都受制于DOM渲染规则。浏览器解析HTML文档是从前往后，由外到里进行的，所以我们时常会看到页面先出现头部然后再出现主体内容的情况。但是，如果css支持了这种选择符，那就必须要等页面所有子元素加载完毕才能渲染css，因为这些选择符就是后面的DOM元素影响前面的DOM元素，如果后面的元素还没被加载，又怎么影响前面的元素样式呢，如果要支持这样的选择符，网页呈现速度必然会大大减慢，白屏时间加长，体验差。
+如果强制采取加载到哪里就渲染到哪里的策略呢？这样做会导致更大的问题，因为会出现加载到后面的元素的时候，前面的元素已经渲染好的样式会突然变成另一个样式，体验不好，多次的重排和重绘，性能很差。 
+
+
+
+:hover伪类选择器不是只能通过父子选择器控制的。 
+ a:hover + #content 
+
+
+ transition属性对display无过渡效果，对visibility有过渡效果 
+
+ :active伪类，普通元素也可以使用，点击触发。 
+
+
+普通元素可以获取焦点
+ <div contenteditable="true">123</div>
+ <div tabindex="1">123</div>

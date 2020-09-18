@@ -7,23 +7,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
   <style>
-    /* #dom p,
-    #dom2 p {
-      color: red;
-    } */
-    :is(#dom, #dom2) p {
-      color: aqua;
+
+    
+
+    #dom:active {
+      border: 1px solid red;
+    }
+
+    #btn {
+      /* box-shadow: inset 0 0 0 999px rgba(0, 0, 0, .05); */
+      opacity: 0;
     }
   </style>
 </head>
 
 <body>
-  <div id="dom">
-    <p>pppp</p>
-  </div>
-  <div id="dom2">
-    <p>p222222222</p>
-  </div>
+ <button id="btn">按钮</button>
+ <!-- <div id="dom" tabindex="1">123</div> -->
+  
 </body>
-
 </html>
+<script>
+  const btn = document.querySelector('#btn');
+
+  btn.onclick = function() {
+    console.log(11111);
+  }
+
+</script>
