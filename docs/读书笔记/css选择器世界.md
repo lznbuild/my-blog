@@ -13,7 +13,7 @@ class选择器  属性选择器   伪类选择器   10
 
 伪元素选择器 标签选择器 1 
 
-*
+*   0
 
 
 选择器 | 计算值 | 计算细则
@@ -63,7 +63,7 @@ class选择器  属性选择器   伪类选择器   10
 
 
  .lightblue p {color: lightblue;}
- .darkblue p {color: darkblue;}
+ .darkblue p {color: darkblue;} // 应用 
  ``` 
 
  ## 后代选择符的错误认识  
@@ -107,4 +107,65 @@ querySelectorAll里面的选择器是全局属性。
 
 普通元素可以获取焦点
  <div contenteditable="true">123</div>
- <div tabindex="1">123</div>
+ <div tabindex="1">123</div> 
+
+
+ :link伪类只选中有href属性的a标签 
+
+ :visited 选择器中的色值只能重置，不能凭空设置，可设置的css属性有限（background-color,outline-color,border-color）。无法使用getComputedStyle方法获取color 
+
+
+ :any-link 匹配所有设置了href属性的链接元素，包括a, link, area , 匹配所有:link 或:visited元素
+
+:target 匹配url hash对应的元素（id）
+
+
+### :target的使用
+
+ <div id="articleMore"></div>
+ <a href="#articleMore" class="cs-button" data-open="true">阅读更多</a>
+ <p class="cs-more-p">过呢更士大夫 士大夫士大夫</p>
+ <a href="##" class="cs-button" data-open="false">收起</a> 
+
+
+   .cs-more-p,
+  [data-open=false] {
+    display: none;
+  }
+
+
+  :target ~ [data-open=true]{
+    display: none;
+  }
+
+  :target ~ .cs-more-p,
+  :target ~ [data-open=false]{
+    display: block;
+  }
+
+
+## readonly 和disabled 的区别
+
+前者不能输入内容，可被表单提交 
+后者不能输入内容，不能提交 
+
+
+placeholder-shown 表示当输入框的placeholder内容显示的时候，匹配该输入框  
+
+
+// 可以做数据的默认展示 
+div:empty::before {
+  content:'暂无'
+} 
+
+
+:only-child 匹配没有任何兄弟元素的元素 
+
+### 逻辑组合伪类 
+
+:not()  
+:is()  
+:where()  
+:has()  
+
+优先级都是0 
