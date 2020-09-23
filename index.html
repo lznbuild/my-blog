@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      .box {
-        width: 100px;
-        float: right;
-        height: 2000px;
-        border: 1px solid red;
-      }
-      .parent {
-        width: 100px;
-        height: 200px;
-        border: 1px solid red;
-        overflow: auto;
-      }
-      .child {
-        width: 10px;
-        height: 2000px;
-        background: yellow;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box"></div>
-    <div class="parent">
-      <div class="child"></div>
-    </div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .wrap {
+      width: 300px;
+      background: #ccc;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .inner {
+      font-size: 30px;
+      width: 200px;
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+<div class="lightblue">
+  <div class="darkblue">
+    <p>1.颜色？</p>
+  </div>
+</div>
+<div class="darkblue">
+  <div class="lightblue">
+    <p>2.颜色？</p>
+  </div>
+</div>
+</body>
+
 </html>
-
 <script>
-  class Parent {}
 
-  class Child extends Parent {}
 
-  // console.log(Child.__proto__ == Parent); // true
-  // console.log(Child.prototype.__proto__ == Parent.prototype); // true
-  console.log(Parent.prototype.__proto__ == Object.prototype); // true
 </script>
+
+
+

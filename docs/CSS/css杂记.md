@@ -36,7 +36,7 @@ li{letter-spacing: normal}
 
 ### css层叠顺序  (层叠上下文)
 一个三维概念。
-background/border==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto==>z-index:0 ==> transform ==> z-index:1;==>filter==>opacity
+background/border==> z-index:-1 ==> block盒子 ==> float盒子==> inline/inline-block盒子==> z-index:auto==>z-index:0 ==> transform ==> z-index:1;==>filter==>opacity
 
 
 
@@ -111,7 +111,7 @@ dom.offsetParent 指向position非默认值的祖元素。本身或祖元素disp
 
 
 em更习惯用于字体大小，行高，text-indent首行缩进
-em作为行高单位时，相对于自身字体大小 
+em作为fontsize时，相对于父元素的fontsize计算，em作为其他样式（行高，首行缩进）时，相对于自身字体大小 
 
 
 Vertical-align只能应用于inline-block,inline元素 
