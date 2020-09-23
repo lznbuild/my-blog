@@ -245,3 +245,23 @@ IntersectionObserver
   }
 ``` 
 
+## css自定义变量 
+```css
+:root{
+  --testColor: red;
+}
+```
+
+```js
+  var rootStyles = document.styleSheets[0].cssRules[0].style;
+  rootStyles.setProperty('--testColor', 'green');
+``` 
+
+
+## <img src='xx' style='width:400px!important'/> 修改图片的width为300 
+
+max-width 
+
+transform:scale() 
+
+box-sizing: border-box; padding:xx; 

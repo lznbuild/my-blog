@@ -33,20 +33,16 @@
     <div class="box"></div>
     <div class="parent">
       <div class="child"></div>
-
     </div>
   </body>
 </html>
 
 <script>
-  let parent = document.getElementsByClassName('parent')[0];
-  
-  parent.addEventListener('scroll',(e)=> {
-    console.log('parent 滚动');
-    // e.stopPropagation()
-  })
+  class Parent {}
 
-  document.addEventListener('scroll',()=> {
-    console.log('document 滚动');
-  })
+  class Child extends Parent {}
+
+  // console.log(Child.__proto__ == Parent); // true
+  // console.log(Child.prototype.__proto__ == Parent.prototype); // true
+  console.log(Parent.prototype.__proto__ == Object.prototype); // true
 </script>

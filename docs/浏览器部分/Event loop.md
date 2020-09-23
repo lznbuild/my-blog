@@ -124,7 +124,7 @@ console.log('script end')
 
 Promise.resolve(返回值).then()，然后 await 后的代码全部被包裹进了 then 的回调中，所以 console.log('async1 end') 会优先执行于 console.log('promise1'),console.log('promise2')
 
-
+await 后跟promise和普通代码不一样,await 后的内容执行顺序不同.
 ```js
 // TODO: 不理解
 async function asyncFn() {
@@ -326,4 +326,48 @@ setImmediate(function (){
 // 1
 // TIMEOUT FIRED
 // 2
+``` 
+
+
+
+```js
+console.log('script start')
+
+async function async1() {
+    console.log('async1 start')
+    await async2()
+    console.log('async1 end')
+}
+async function async2() {
+    console.log('async2 start')
+    return Promise.resolve().then(()=>{
+      console.log('async2 end')
+    })
+}
+/* 这个函数没加 async 关键字，运行结果会不一致
+function async2() {
+    console.log('async2 start')
+    return Promise.resolve().then(()=>{
+      console.log('async2 end')
+    })
+}
+*/
+async1()
+
+setTimeout(function() {
+    console.log('setTimeout')
+}, 0)
+
+new Promise(resolve => {
+    console.log('new promise')
+    resolve()
+})
+.then(function() {
+    console.log('promise1')
+})
+.then(function() {
+    console.log('promise2')
+})
+
+console.log('script end')
 ```
