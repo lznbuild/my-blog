@@ -356,4 +356,60 @@ new Promise(resolve => {
 })
 
 console.log('script end')
+``` 
+
+
+```js
+  // => 代码一执行就开始执行了一个宏任务-宏0
+  console.log('script start');
+
+  setTimeout(() => { // 宏 1
+    console.log('北歌');
+  }, 1 * 2000);
+
+  Promise.resolve()
+    .then(function () { // 微1-1
+      console.log('promise1');
+    })
+    .then(function () { // 微1-4 => 这个then中的会等待上一个then执行完成之后得到其状态才会向Queue注册状态对应的回调，假设上一个then中主动抛错且没有捕获，那就注册的是这个then中的第二个回调了。
+      console.log('promise2');
+    });
+
+
+  async function foo() {
+    await bar() // => await(promise的语法糖)，会异步等待获取其返回值
+    // => 后面的代码可以理解为放到异步队列微任务中。 这里可以保留疑问后面会详细说
+    console.log('async1 end') // 微1-2
+  }
+  foo()
+
+  function bar() {
+    console.log('async2 end')
+  }
+
+  async function errorFunc() {
+    try {
+      await Promise.reject('error!!!')
+    } catch (e) {
+      // => 从这后面开始所有的代码可以理解为放到异步队列微任务中
+      console.log(e)  // 微1-3
+    }
+    console.log('async1');
+    return Promise.resolve('async1 success')
+  }
+  errorFunc().then(res => console.log(res)) // 微1-5
+
+  console.log('script end');
+
+// script start
+// async2 end
+// script end
+// promise1
+// async1 end
+// error!!!
+// async1
+// promise2
+// async1 success
+// 北歌
+//https://juejin.im/post/6868849475008331783#heading-13 (!!!)
 ```

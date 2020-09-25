@@ -1,1 +1,1 @@
-console.log('object');
+var a = new Boolean(false);

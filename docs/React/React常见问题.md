@@ -158,6 +158,13 @@ react 通过import导入的组件在render中可以直接使用，在vue中，�
 
 vue使用的是模板渲染，react是jsx，纯js。
 
+vue在编译时优化，react在运行时优化 
+
+vue在diff对比时，只对比动态内容部分，静态内容不再diff，需要在编译阶段做标记，vue ast中有一个static属性。
+vue1是每一个动态属性都建立watcher, 不需要diff.
+vue2在每一个组件上建立一个watcher, 拦截set后，不知道具体哪里需要修改，所以要diff当前组件，数据直接定向到组件。
+object.defineProperty可以监听数组 , 修改数组会造成多次的set拦截。 
+
 ## react context 的理解 
 
 context提供一种在组件之间共享state的方法，不必显式的通过组件树的逐层传递props。

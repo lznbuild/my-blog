@@ -1,1 +1,1 @@
-let a:Array<number> = [1,2,3]
+let a:boolean = new Boolean(false);
