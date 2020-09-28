@@ -18,6 +18,7 @@
       font-size: 16px;
       line-height: 1.5;
     }
+
     .inner {
       font-size: 30px;
       width: 200px;
@@ -27,25 +28,38 @@
 </head>
 
 <body>
-<div class="lightblue">
-  <div class="darkblue">
-    <p>1.颜色？</p>
-  </div>
-</div>
-<div class="darkblue">
   <div class="lightblue">
-    <p>2.颜色？</p>
+    <div class="darkblue">
+      <p>1.颜色？</p>
+    </div>
   </div>
-</div>
+  <div class="darkblue">
+    <div class="lightblue">
+      <p>2.颜色？</p>
+    </div>
+  </div>
 </body>
 
 </html>
 <script>
+  class A {
+    constructor(name) {
+      this.name = name
+    }
+  }
 
+  class B extends A {
+    constructor(name) {
+      super(name)
+      // console.log(super);
+    }
 
+    sayName() {
+      console.log(this.name);
+    }
+  }
 
- 
+  let b = new B('bbbb')
+  
+
 </script>
-
-
-
