@@ -283,6 +283,25 @@ console.log(fn); // function fn(){}
 
 function fn(){}
 ```
+
+```js
+  console.log(a) // undefined 
+  var a = 0;
+
+  if (true) {
+    console.log(a) // function a {}
+    a = 1;
+    console.log(a) // 1 
+    function a() { }
+    console.log(a) // 1
+    a = 21;
+    console.log('in =>', a) // 21 
+  }
+
+  console.log('out =>', a) // 1?????
+``` 
+
+
 ## Map 和 Object 
 
 |     | Map  |Object|

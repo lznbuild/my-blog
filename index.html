@@ -42,24 +42,20 @@
 
 </html>
 <script>
-  class A {
-    constructor(name) {
-      this.name = name
-    }
+  console.log(a) // undefined 
+  var a = 0;
+
+  if (true) {
+    console.log(a) // function a {}
+    a = 1;
+    console.log(a) // 1 
+    function a() { }
+    console.log(a) // 1
+    a = 21;
+    console.log('in =>', a) // 21 
   }
 
-  class B extends A {
-    constructor(name) {
-      super(name)
-      // console.log(super);
-    }
+  console.log('out =>', a) // 1?????
 
-    sayName() {
-      console.log(this.name);
-    }
-  }
-
-  let b = new B('bbbb')
-  
 
 </script>
