@@ -82,3 +82,12 @@ export default Counter;
 
 
 ## 自定义hooks使用第三方的组件,react-use或者umi
+
+
+
+
+### 理念，实现，源码
+函数式编程与React hook 的结合，就是把所有的副作用抽离。代数效应。
+suspense 组件可以单独使用？？？
+
+hooksDispatcherOnMount, hooksDispatcherOnUpdate mount和update阶段调用的不是同一个useState，对应练习中的isMount的作用

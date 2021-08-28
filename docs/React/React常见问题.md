@@ -179,9 +179,7 @@ vue3
 模板编译
 数据监听 
 
-<<<<<<< HEAD
 https://react.iamkasong.com/
-=======
 
 ## React 的生命周期怎么实现的 
 
@@ -237,4 +235,5 @@ replaceState 会先判断当前状态是否为 MOUNTING，如果不是即会调�
 
 
 https://zhuanlan.zhihu.com/p/20312691
->>>>>>> 954dc979f800e8e306b7fd1cf97e7f2b65f2f14a
+fakeTeamWork
+show solution

@@ -5,10 +5,20 @@ console.log(process); // 进程信息
 console.log(process.argv[process.argv.length - 1]); // 最后一项就是node执行命令的后缀参数
 
 // commonJs模块化规范输出的是引用
+exports.hello = 'hello'
 
+module.exports = ... 
+// 直接把exports重写掉
+
+// 进程一直存在，输入内容打Log
 process.stdin.on("data", e => {
   console.log(e.toString().trim());
 });
+
+process.exit()
+// 杀死进程
+
+
 
 // node.js         阻塞和非阻塞I/O的区别就在于系统接受输入再到输出期间，能不能接受其他输入
 
