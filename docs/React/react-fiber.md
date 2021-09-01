@@ -29,3 +29,5 @@ https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247484802&idx=1&sn=4b9f61
 
 
 fiber 协程，语言层面，控制程序的中断和执行
+
+之前的vdom是一个树形结构，diff过程无法中断，修改为双向链表，容易恢复遍历状态
