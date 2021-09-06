@@ -208,6 +208,12 @@ try{
 console.log( a ); // ReferenceError
 ```
 
+
+### try catch 
+
+- 无法捕获语法级别的错误
+- 异步错误，可以在异步代码里捕获同步错误
+
 ## 第二部分   关于this
 
 

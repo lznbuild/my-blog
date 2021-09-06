@@ -31,3 +31,19 @@ https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247484802&idx=1&sn=4b9f61
 fiber 协程，语言层面，控制程序的中断和执行
 
 之前的vdom是一个树形结构，diff过程无法中断，修改为双向链表，容易恢复遍历状态
+
+
+Fiber 可以理解为一个执行单元，每次执行完一个执行单元，react 就会检查现在还剩多少时间，如果没有时间则将控制权让出去
+
+React Fiber 是一种基于浏览器的单线程调度算法
+
+
+### $$typeof 
+
+目的是为了防止 XSS 攻击。因为 Synbol 无法被序列化，所以 React 可以通过有没有 $$typeof 属性来断出当前的 element 对象是从数据库来的还是自己生成的。
+
+如果没有 $$typeof 这个属性，react 会拒绝处理该元素。
+
+
+encodeURIComponent比encodeURI有什么区别
+区别就是encodeURIComponent编码范围更广，适合给参数编码，encodeURI适合给URL本身（locaion.origin）编码,当然项目里一般都是用qs库去处理

@@ -310,9 +310,9 @@ function fn(){}
 | 长度  | .size属性获取 |循环统计|
 | 性能  | 频繁增删键值对，性能友好 |无优化|
 
-Map key值可以是any 
+Map key值可以是any , Object 只能是string , symbol 
 
-Object没迭代器，不能用for of循环 
+Object没迭代器，不能用for of循环 , Map可以直接forEach ,for of 
 
 
 ## Set 和 WeakSet, Map 和 WeakMap 

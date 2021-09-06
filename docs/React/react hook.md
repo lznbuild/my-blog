@@ -91,3 +91,11 @@ export default Counter;
 suspense 组件可以单独使用？？？
 
 hooksDispatcherOnMount, hooksDispatcherOnUpdate mount和update阶段调用的不是同一个useState，对应练习中的isMount的作用
+
+react hooks 有哪些优缺点
+
+useLayoutEffect 和 useEffect 区别
+
+前端项目主要用的是ES版本是多少
+
+https一定是安全的吗？（考察https中间人劫持），有什么解决办法？
