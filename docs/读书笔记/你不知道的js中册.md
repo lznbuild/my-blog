@@ -71,6 +71,7 @@ var a = {
  return this.val.slice( 1 );
  }
 };
+
 var b = {
  val: [1,2,3],
  // 可能不是我们想要的结果！
@@ -174,7 +175,7 @@ b == 0; // false
 
 - 如果 x 为 null，y 为 undefined，则结果为 true。
 -  如果 x 为 undefined，y 为 null，则结果为 true。  
-- undefined和null不会涉及到任何类型转换
+- undefined和null不会涉及到任何类型转换, 对应 ！！！ 的部分。 
 
 
 - 如果 Type(x) 是字符串或数字，Type(y) 是对象，则返回 x == ToPrimitive(y) 的结果；

@@ -10,8 +10,6 @@ if(top.window.location.href!=window.location.href){
 // 判断当前路径和父级路径是否相同 ，不相同就是被插入了页面。
 ```
 
-
-
 ### meta标签有哪些作用？？？？
 ```js
   // 指定编码方式
@@ -23,7 +21,6 @@ if(top.window.location.href!=window.location.href){
   <meta name="keywords" content="" />
   <meta name="author" content="" />
 ```
-
 
 
 
@@ -127,7 +124,7 @@ Vertical-align只能应用于inline-block,inline元素
   flex-flow: flex-direction flex-wrap  
   justify-content  
   align-items  
-  align-content  多个轴线的侧轴对齐方式  
+  align-content  多个轴线的侧轴对齐方式  ()
 
 
   定义在子元素上的：  
@@ -194,12 +191,13 @@ IntersectionObserver
 
 ### a标签的定义顺序
   link→visited→hover→active    lv ha 
+  （未访问）
 
 
 ### bfc触发条件 
-- float 不为none
+- float 不为none 
 - position 为absolute 或fixed 
-- display 为inline-block, inline-flex, flex, table-cell
+- display 为inline-block, inline-flex, flex, table-cell 
 - overflow 不为visible  
 
 ##  bfc解决问题
