@@ -16,8 +16,6 @@ HTTP+加密+认证 == HTTPS
  
  - client发起HTTPS请求，连接443端口，提交支持的对称加密算法列表+client-random，server收到请求，和自己支持的加密算法进行比对，如果不符合，则断开连接。否则，server会把符合的算法+证书+service-random发给client，包括证书时间、证书日期、证书颁发的机构，公钥。
  
-
-
  - client验证证书，包括颁发证书的机构是否合法与是否过期，证书中包含的网站地址是否与正在访问的地址一致。保存公钥，client会生成一个随机字符串pre-master，然后用服务端的公钥进行加密，这里就保证了只有服务端才能看到这串随机字符串，并向server发送加密后的数据；最后server拿出自己的私钥，解密出数据，并返回确认消息，握手过程结束。  
 
 - 这样，client和server端，client-random+service-random+pre-master生成master secret，往后的数据交换通过master secret 加解密。  

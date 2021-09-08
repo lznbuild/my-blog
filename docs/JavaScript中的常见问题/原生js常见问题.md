@@ -176,7 +176,7 @@ getName() // Lydia
 
 
   ```js
-  // 查询url参数,包括对中文的解码  ?name=''&age=''
+  // 查询url参数,包括对中文的解码  ?name=''&age=''     URLSearchParams代替
   GetQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = location.search.slice(1).match(reg);
@@ -312,7 +312,7 @@ function fn(){}
 
 Map key值可以是any , Object 只能是string , symbol 
 
-Object没迭代器，不能用for of循环 , Map可以直接forEach ,for of 
+Object没迭代器，不能用for of循环 , Map可以直接forEach ,for of
 
 
 ## Set 和 WeakSet, Map 和 WeakMap 

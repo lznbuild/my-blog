@@ -433,12 +433,15 @@ function Person (name) {
   this.show1 = function () {
     console.log(this.name)
   }
+
   this.show2 = () => console.log(this.name)
+
   this.show3 = function () {
     return function () {
       console.log(this.name)
     }
   }
+  
   this.show4 = function () {
     return () => console.log(this.name)
   }
