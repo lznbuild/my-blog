@@ -52,82 +52,18 @@
   </body>
 </html>
 <script>
-  function getParseText2PhonicText(
-    text,
-    phonicIndices,
-    leftChar = "&lt;",
-    rightChar = "&gt;"
-  ) {
-    const phonicRanges = phonicIndices ? Object.values(phonicIndices) : [];
-    if (phonicRanges.length && text) {
-      const characters = text.split(" ");
-      const formatPhonicRanges = phonicRanges
-        .reverse()
-        .reduce((res, ranges) => {
-          res.unshift(ranges[0]);
-          return res.concat(ranges.slice(1));
-        }, []);
-        console.log(formatPhonicRanges, 'formatPhonicRanges');
-
-      const realWord = characters.pop();
-      const word = Array.from(realWord).reduce((res, character, index) => {
-        const range = formatPhonicRanges.find(
-          (item) => item.offset <= index && index < item.offset + item.length
-        );
-      debugger;
-
-        if (range) {
-          if (range.offset === index) {
-            res += leftChar;
-          }
-          res += character;
-          if (range.offset + range.length - 1 === index) {
-            res += rightChar;
-          }
-          return res;
-        } else {
-          return res + character;
-        }
-      }, "");
-
-      console.log(word, "word");
-      return [
-        ...characters.map(
-          (character) => `${leftChar}${character}${rightChar} `
-        ),
-        word,
-      ].join("");
+  /*
+    async function fn(){
+      await console.log(1)
+      console.log(2)
     }
-    return text;
-  }
 
-  // console.log(
-  //   getParseText2PhonicText("sk skip", {
-  //     0: [
-  //       {
-  //         wordIndex: 1,
-  //         offset: 0,
-  //         length: 2,
-  //       },
-  //     ],
-  //   })
-  // );
-  console.log(
-    getParseText2PhonicText("v v van", {
-      0: [
-        {
-          wordIndex: 2,
-          offset: 0,
-          length: 1,
-        },
-      ],
-      1: [
-        {
-          wordIndex: 2,
-          offset: 0,
-          length: 1,
-        },
-      ],
-    })
-  );
+    new Promise((resolve,reject)=>{
+      console.log(3)
+      resolve(4)
+    }).then(res=>console.log(res))
+
+    fn() // 3 1 4 2
+  */
+
 </script>
