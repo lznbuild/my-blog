@@ -66,4 +66,19 @@
     fn() // 3 1 4 2
   */
 
+  function highlight(text, list){
+    list.forEach(key=> {
+      var reg = new RegExp('('+key+')', 'g');
+      text = text.replace(reg, '<span>$1</span>')
+    })
+
+    return text;
+  }
+
+  var result = highlight(
+    '吃葡萄不吐葡萄皮, \n不吃葡萄倒吐葡萄皮',
+    ['葡萄', '吃']
+);
+
+console.log(result)
 </script>

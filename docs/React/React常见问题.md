@@ -242,13 +242,3 @@ replaceState 会先判断当前状态是否为 MOUNTING，如果不是即会调�
 https://zhuanlan.zhihu.com/p/20312691
 fakeTeamWork
 show solution
-
-
-
-1 react暴露的api有哪些，该如何使用？
-2 react提供了哪些自测性能的手段？
-3  ref既然不能用在函数组件中，那么父组件如何控制函数子组件内的state和方法？
-4 createElement和cloneElement有什么区别，应用场景是什么？
-5 react内置的children遍历方法，和数组方法,有什么区别？（children不一定为数组）
-6 react怎么将子元素渲染到父元素之外的指定容器中？
-7 useEffect componentDidMount 有什么差异
