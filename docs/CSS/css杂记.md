@@ -205,6 +205,33 @@ IntersectionObserver
 2. margin边距重叠 
 3. 防止浮动的字体环绕
 
+```js
+<style>
+      .container {
+        width: 200px;
+        border: 1px solid #ccc;
+      }
+      .dom {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        float: left;
+      }
+      p {
+        margin: 0;
+        overflow: hidden;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="dom" class="dom">123</div>
+      <p>离开福利款 独立风景；瘦了；等级分；啊是江东父老距离</p>
+    </div>
+  </body>
+```
 
 ### css垂直居中 
 1. 子元素行高等于父元素高度。 
@@ -263,3 +290,7 @@ max-width
 transform:scale() 
 
 box-sizing: border-box; padding:xx; 
+
+
+### 绝对定位 子元素是相对父元素的padding、border还是content进行定位? 
+padding 边框之内. 

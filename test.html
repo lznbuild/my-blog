@@ -52,33 +52,95 @@
   </body>
 </html>
 <script>
-  /*
-    async function fn(){
-      await console.log(1)
-      console.log(2)
+  // ['aaafsd', 'aawwewer', 'aaddfff'] => 'aa'
+  // console.log(fn(['aaafsd', 'aawwewer', 'aaddfff']))
+
+  function fn(arr) {
+    let res = "";
+
+    for (let i = 0; i < arr[0].length; i++) {
+      let reg = new RegExp(`^${arr[0].slice(0, i + 1)}`);
+      let flag = true;
+      arr.forEach((str) => {
+        if (!reg.test(str)) {
+          flag = false;
+        }
+      });
+
+      if (flag) {
+        res = arr[0].slice(0, i + 1);
+      }
     }
 
-    new Promise((resolve,reject)=>{
-      console.log(3)
-      resolve(4)
-    }).then(res=>console.log(res))
-
-    fn() // 3 1 4 2
-  */
-
-  function highlight(text, list){
-    list.forEach(key=> {
-      var reg = new RegExp('('+key+')', 'g');
-      text = text.replace(reg, '<span>$1</span>')
-    })
-
-    return text;
+    return res;
   }
 
-  var result = highlight(
-    '吃葡萄不吐葡萄皮, \n不吃葡萄倒吐葡萄皮',
-    ['葡萄', '吃']
-);
+  /*
+    {
+    "a": {
+      "b": {
+        "c": {
+          "d": 1
+        }
+      }
+    },
+    "aa": 2,
+    "c": [
+      1,
+      2
+    ]
+  } =>
+  { 'a.b.c.d': 1, aa: 2, 'c[0]': 1, 'c[1]': 2 }
 
-console.log(result)
+  */
+
+  function isArray(obj) {
+    return Array.isArray(obj);
+  }
+
+  function isObject(obj) {
+    return Object.prototype.toString.call(obj) === "[object Object]";
+  }
+
+  const obj = {
+    a: {
+      b: {
+        c: {
+          d: 1,
+        },
+      },
+    },
+    aa: 2,
+    c: [1, 2],
+  };
+
+  console.log(fn2(obj));
+
+  // function fn2(obj, currentKey = "", res = {}) {
+  //   const keys = Object.keys(obj);
+  //   for (let i = 0; i < keys.length; i++) {
+  //     let key = keys[i];
+  //     if (isObject(obj[key]) ) {
+  //       if (currentKey) {
+  //         fn2(obj[key], currentKey + "." + key, res);
+  //       } else {
+  //         fn2(obj[key], key, res);
+  //       }
+  //     } else if(isArray(obj[key])){
+  //       if (currentKey) {
+  //         fn2(obj[key], currentKey + "[" + key+']', res);
+  //       } else {
+  //         fn2(obj[key], "[" + key+']', res);
+  //       }
+  //     } else {
+  //       if (currentKey) {
+  //         res[currentKey + "." + key] = obj[key];
+  //       } else {
+  //         res[key] = obj[key];
+  //       }
+  //     }
+  //   }
+
+  //   return res;
+  // }
 </script>

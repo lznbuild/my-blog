@@ -6,33 +6,31 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/js-xlsx@0.8.22/dist/xlsx.core.min.js"></script>
     <style>
+      .container {
+        width: 200px;
+        height: 400px;
+        border: 10px solid #ccc;
+        position: relative;
+        margin: 50px;
+        padding: 30px;
+      }
       .dom {
-        display: inline-block;
         width: 100px;
         height: 100px;
         border: 1px solid red;
-        animation: mymove 3s;
-        animation-iteration-count:1;
-        animation-fill-mode: forwards;
         position: absolute;
+        top: 0;
+        left: 0;
       }
-      /* .active {
-        transform: translateX(100%);
-      } */
+     
 
-      @keyframes mymove {
-        from {
-          left: 0px;
-        }
-        to {
-          left:calc(100% - 100px);
-        }
-      }
     </style>
   </head>
 
   <body>
-    <div id="dom" class="dom">123</div>
+    <div class="container">
+      <div id="dom" class="dom">123</div>
+    </div>
   </body>
 </html>
 <script>
