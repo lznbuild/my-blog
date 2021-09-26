@@ -114,7 +114,7 @@
     c: [1, 2],
   };
 
-  console.log(fn2(obj));
+  // console.log(fn2(obj));
 
   // function fn2(obj, currentKey = "", res = {}) {
   //   const keys = Object.keys(obj);
@@ -143,4 +143,39 @@
 
   //   return res;
   // }
+
+/*
+给定一个升序整型数组[0,1,2,4,5,7,13,15,16],找出其中连续出现的数字区间，输出为["0->2","4->5","7","13","15->16"]
+*/ 
+
+function summaryRanges(arr){     
+  let res=[]
+
+  let start = 0;
+  let end = 0;
+  let isValid = false;
+
+  for(let i=0;i<arr.length;i++) {
+    if(arr[i]+1 === arr[i+1]) {
+      end = i+1;
+      isValid = true;
+    }else {
+      if(isValid) {
+        isValid = false;
+        res.push(`${arr[start]} -> ${arr[end]}`)
+      }else {
+        res.push(arr[i])
+      }
+      start = i+1;
+      end = i+1;
+    }
+  }
+
+  return res
+}
+
+// console.log(summaryRanges([0,1,2,4,5,7,13,15,16]));
+// console.log(summaryRanges([0,5,9,11]));
+
+
 </script>

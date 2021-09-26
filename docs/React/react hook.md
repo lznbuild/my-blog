@@ -69,7 +69,7 @@ export default Counter;
   useEffect(() => {
     document.querySelector('#dom').addEventListener('click', () => {
       setNum((prevState) => prevState + 1); // 没问题 
-      setNum(num+1) // 只会执行一次 
+      setNum(num+1) // num 只是初始值
     });
   }, []);
 ```
@@ -88,7 +88,7 @@ export default Counter;
 
 ### 理念，实现，源码
 函数式编程与React hook 的结合，就是把所有的副作用抽离。代数效应。
-suspense 组件可以单独使用？？？
+suspense 组件可以单独使用？不可以
 
 hooksDispatcherOnMount, hooksDispatcherOnUpdate mount和update阶段调用的不是同一个useState，对应练习中的isMount的作用
 
@@ -97,5 +97,3 @@ react hooks 有哪些优缺点
 useLayoutEffect 和 useEffect 区别
 
 前端项目主要用的是ES版本是多少
-
-https一定是安全的吗？（考察https中间人劫持），有什么解决办法？
