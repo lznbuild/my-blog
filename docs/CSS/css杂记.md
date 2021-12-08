@@ -96,7 +96,26 @@ z {    background-color:lightblue;}
 ::after
 
 
-## dom.getClientRects(),dom.getBoundingClientRect()  x,y,width,height获取位置和尺寸 
+### 伪类选择器
+:not
+:first-child
+:last-child
+:nth-child(n)
+:nth-last-child()
+
+:nth-of-type(n)
+:first-of-type()
+:last-of-type
+:empty
+:checked
+:enabled
+:disabled
+:readonly
+
+nth-of-type是取当前元素的兄弟元素的第n个，nth-child取的是当前元素的第n个节点的当前元素
+
+
+## dom.getClientRects(),dom.getBoundingClientRect()  x,y,width,height获取位置和尺寸 (用于获得页面中某个元素的左，上，右和下分别相对浏览器视窗的位置)
 他俩对块级元素的返回值一样，对行内元素不一样
 
 var offsetX = 

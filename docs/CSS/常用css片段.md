@@ -8,9 +8,10 @@ div {
   text-overflow: ellipsis;
 
   /* 多行 */
-  /* display : -webkit-box;
-  -webkit-line-clamp : 4;
-  -webkit-box-orient : vertical; */ 
+  /* display : -webkit-box;  跟flex 类似，是一种过时的写法
+  -webkit-line-clamp : 4; 限制在一个块元素显示的文本的行数
+  overflow: hidden;
+  -webkit-box-orient : vertical; */  设置flex的子元素的排列方式
 }
 
 

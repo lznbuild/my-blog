@@ -6,176 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      html,
-      body {
+      * {
         margin: 0;
+        padding: 0;
       }
-      section {
-        padding: 10px;
+      .container {
+        width: 600px;
+        display: flex;
       }
-      .dragbox {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
+      .div1 {
+        width: 500px;
+        background-color:red;
+        flex-shrink: 2;
+        height: 200px;
       }
-      .dragbox.move {
-        overflow: hidden;
-        pointer-events: none;
+      .div2 {
+        width: 400px;
+        background-color:green;
+        height: 200px;
+        flex-shrink: 1;
       }
-      .dragcon {
-        width: calc(200% - 50px);
-        height: calc(200% - 50px);
-      }
-      .ball {
-        position: relative;
-        width: 50px;
-        height: 50px;
-        background-color: cornflowerblue;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        pointer-events: all;
-      }
+      /*  333 266  600/900*500 600/900*400 */
+      /* 285 314 */
     </style>
   </head>
   <body>
-    <div class="dragbox" id="dragbox">
-      <div class="dragcon">
-        <div class="ball" id="ball"></div>
-      </div>
+    <div class="container">
+      <div class="div1"></div>
+      <div class="div2"></div>
     </div>
   </body>
 </html>
 <script>
-  // ['aaafsd', 'aawwewer', 'aaddfff'] => 'aa'
-  // console.log(fn(['aaafsd', 'aawwewer', 'aaddfff']))
-
-  function fn(arr) {
-    let res = "";
-
-    for (let i = 0; i < arr[0].length; i++) {
-      let reg = new RegExp(`^${arr[0].slice(0, i + 1)}`);
-      let flag = true;
-      arr.forEach((str) => {
-        if (!reg.test(str)) {
-          flag = false;
-        }
-      });
-
-      if (flag) {
-        res = arr[0].slice(0, i + 1);
-      }
-    }
-
-    return res;
-  }
-
-  /*
-    {
-    "a": {
-      "b": {
-        "c": {
-          "d": 1
-        }
-      }
-    },
-    "aa": 2,
-    "c": [
-      1,
-      2
-    ]
-  } =>
-  { 'a.b.c.d': 1, aa: 2, 'c[0]': 1, 'c[1]': 2 }
-
-  */
-
-  function isArray(obj) {
-    return Array.isArray(obj);
-  }
-
-  function isObject(obj) {
-    return Object.prototype.toString.call(obj) === "[object Object]";
-  }
-
-  const obj = {
-    a: {
-      b: {
-        c: {
-          d: 1,
-        },
+  const root = {
+    val: "A",
+    left: {
+      val: "B",
+      left: {
+        val: "D",
+      },
+      right: {
+        val: "E",
       },
     },
-    aa: 2,
-    c: [1, 2],
+    right: {
+      val: "C",
+      right: {
+        val: "F",
+      },
+    },
   };
 
-  // console.log(fn2(obj));
+  function BFS(root) {
+    const queue = [];
 
-  // function fn2(obj, currentKey = "", res = {}) {
-  //   const keys = Object.keys(obj);
-  //   for (let i = 0; i < keys.length; i++) {
-  //     let key = keys[i];
-  //     if (isObject(obj[key]) ) {
-  //       if (currentKey) {
-  //         fn2(obj[key], currentKey + "." + key, res);
-  //       } else {
-  //         fn2(obj[key], key, res);
-  //       }
-  //     } else if(isArray(obj[key])){
-  //       if (currentKey) {
-  //         fn2(obj[key], currentKey + "[" + key+']', res);
-  //       } else {
-  //         fn2(obj[key], "[" + key+']', res);
-  //       }
-  //     } else {
-  //       if (currentKey) {
-  //         res[currentKey + "." + key] = obj[key];
-  //       } else {
-  //         res[key] = obj[key];
-  //       }
-  //     }
-  //   }
+    queue.push(root);
 
-  //   return res;
-  // }
+    while (queue.length) {
+      const top = queue.shift();
 
-/*
-给定一个升序整型数组[0,1,2,4,5,7,13,15,16],找出其中连续出现的数字区间，输出为["0->2","4->5","7","13","15->16"]
-*/ 
+      console.log(top.val);
 
-function summaryRanges(arr){     
-  let res=[]
-
-  let start = 0;
-  let end = 0;
-  let isValid = false;
-
-  for(let i=0;i<arr.length;i++) {
-    if(arr[i]+1 === arr[i+1]) {
-      end = i+1;
-      isValid = true;
-    }else {
-      if(isValid) {
-        isValid = false;
-        res.push(`${arr[start]} -> ${arr[end]}`)
-      }else {
-        res.push(arr[i])
+      if (top.left) {
+        queue.push(top.left);
       }
-      start = i+1;
-      end = i+1;
+
+      if (top.right) {
+        queue.push(top.right);
+      }
     }
   }
 
-  return res
-}
-
-// console.log(summaryRanges([0,1,2,4,5,7,13,15,16]));
-// console.log(summaryRanges([0,5,9,11]));
-
-
+  // BFS(root)
 </script>

@@ -47,3 +47,5 @@ React Fiber 是一种基于浏览器的单线程调度算法
 
 encodeURIComponent比encodeURI有什么区别
 区别就是encodeURIComponent编码范围更广，适合给参数编码，encodeURI适合给URL本身（locaion.origin）编码,当然项目里一般都是用qs库去处理
+
+https://blog.csdn.net/halations/article/details/109284050

@@ -148,9 +148,10 @@ F.prototype instanceof React.Component // true为class组件
 ``` 
 
 ### React和Vue的区别 
-React没有slot支持，不灵活(可以自己实现)，没有keep-alive 
-api的设计风格上差异极大  
-React的render不如Vue的依赖追踪，不重新render子组件  
+- React没有slot支持，不灵活(可以自己实现)，没有keep-alive 
+
+- React的render不如Vue的依赖追踪，不重新render子组件  
+
 React setState 引起局部重新刷新。为了达到更好的性能，React 暴漏给开发者 shouldComponentUpdate 这个生命周期 ，来避免不需要的重新渲染（相比之下，Vue 由于采用依赖追踪，默认就是优化状态：你动了多少数据，就触发多少更新，不多也不少，而 React 对数据变化毫无感知，它就提供 React.createElement 调用已生成 virtual dom）。另外 React 为了弥补不必要的更新，会对 setState 的行为进行合并操作。
 
 React不对数据进行监听，不知道那个数据变了，只能通过diff，子组件也更新了。 react在往运行时优化（diff），filber 
@@ -161,14 +162,28 @@ vue有数据劫持，知道那个数据变了，只diff当前组件就好。
 
 react 通过import导入的组件在render中可以直接使用，在vue中，由于模板中使用的数据都必须挂在this上进行一次中转，所以需要在components中再次声明。
 
-vue使用的是模板渲染，react是jsx，纯js。
+- vue使用的是模板渲染，react是jsx，纯js。
 
 vue在编译时优化，react在运行时优化 
 
+vue3 做的静态编译，不需要全部的diff
 vue在diff对比时，只对比动态内容部分，静态内容不再diff，需要在编译阶段做标记，vue ast中有一个static属性。
 vue1是每一个动态属性都建立watcher, 不需要diff.
 vue2在每一个组件上建立一个watcher, 拦截set后，不知道具体哪里需要修改，所以要diff当前组件，数据直接定向到组件。
 object.defineProperty可以监听数组 , 修改数组会造成多次的set拦截。 
+
+- react抽象的东西比较少，api很少，vue抽象的概念相对多
+
+react运行时比较重，编译时很轻。
+
+- react推崇immutable， 原生 vdom ，jsx
+vue 推崇 mutable 抽象 rectivity+vdom  template + jsx 
+
+
+
+
+
+
 
 ## react context 的理解 
 
