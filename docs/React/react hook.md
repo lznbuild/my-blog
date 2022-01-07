@@ -80,10 +80,7 @@ export default Counter;
 
 ## 需要缓存值,用useRef  
 
-
 ## 自定义hooks使用第三方的组件,react-use或者umi
-
-
 
 
 ### 理念，实现，源码
@@ -94,6 +91,11 @@ hooksDispatcherOnMount, hooksDispatcherOnUpdate mount和update阶段调用的不
 
 react hooks 有哪些优缺点
 
-useLayoutEffect 和 useEffect 区别
+### useLayoutEffect 和 useEffect 区别 
+useLayoutEffect 先于useEffect执行, 会在绘制之前运行完成。useLayoutEffect 会阻塞渲染.
+默认情况下，effect 将在每轮渲染结束后执行。
+会在所有的 DOM 变更之后同步调用 effect。可以使用它来读取 DOM 布局并同步触发重渲染。在浏览器执行绘制之前，useLayoutEffect 内部的更新计划将被同步刷新.
 
-前端项目主要用的是ES版本是多少
+useEffect 在第二个参数有值的情况下，第一次不执行return ，后续先执行return 函数，再执行本身的函数.
+
+前端项目主要用的是ES版本是多少 

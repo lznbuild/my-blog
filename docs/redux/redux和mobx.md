@@ -35,8 +35,8 @@ redux是函数式编程的思路，可以添加中间件（redux-thunk），mobx
 
 
 ### 总结 
-- redux本身是纯函数思想，单向数据流，只能通过dispatch一个action去修改store，mobx 有一层监听数据的变化，响应式。
-- redux store不可修改，返回新的store， mobx直接修改 ，redux可以做时间旅行，调试方便。
+- redux本身是纯函数思想，单向数据流，只能通过dispatch一个action去修改store，mobx 有一层监听数据的变化，响应式。使用Mobx的组件可以做到精确更新，这一点得益于Mobx的observable
+- redux store不可修改，返回新的store， mobx直接修改 ，redux可以做时间旅行，调试方便。redux对state的概念进行强约束。然而对于一些项目来说，太过强，便失去了灵活性
 - redux将数据保存在单⼀的store中，mobx将数据保存在分散的多个store中，可以进行更细粒度更新，mobx可能会有更好的性能（监听也有性能损耗）。 
 - redux 有中间件
 

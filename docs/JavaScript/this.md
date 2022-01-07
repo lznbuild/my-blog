@@ -393,7 +393,7 @@ https://blog.crimx.com/2016/05/12/understanding-this/
 
 
 
-
+**setTimeout 中普通函数和箭头函数的this指向不一样**
 
 this 练习题  
 ```js
