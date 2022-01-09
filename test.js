@@ -1,12 +1,17 @@
-var Status;
-(function (Status) {
-    Status[Status["Success"] = 0] = "Success";
-    Status[Status["Error"] = 1] = "Error";
-})(Status || (Status = {}));
+const path = require('path');
+const fs = require('fs');
 
-var user = {
-    name: 'user1',
-    age: 18,
-    status: Status.Success
-};
-console.log(user, 'user');
+const currentPath = path.resolve(__dirname, '../suixintui/dist/js');
+
+
+fs.readdir(currentPath, function (err, files) {
+  const totalcount = files.reduce((total, val)=> {
+    if(/\.map$/.test(val)) {
+      const file = fs.statSync(`${currentPath}/${val}`); 
+      total += file.size/1000
+    }
+    return total;
+  }, 0)
+  console.log(totalcount+'kb', 'totalcount')
+})
+
