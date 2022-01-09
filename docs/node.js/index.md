@@ -36,17 +36,28 @@ process.exit()
 
 // Bugger 二进制编解码 
 // net模块 ，通信通道搭建
-//nodemon 热更新代码
+//nodemon 热更新代码工具 
+koa-mount 包很好用，路由相关
 
 // 性能调优
-// ab 性能压测  ab -c200  -n1600 -t10  [url] 
+// apche  
+ab -c200  -n1600 -t10  [url] 
 // 200并发量  1600次访问  10秒持续访问
-
-// node --prof  [url]   
-// chrome devTool     ==》      node --inspect-brk [url]  ==》chrome://inspect 
+根据httpcode 判断是否成功
 
 // node有个问题，错误一旦没有捕获，全局错误报错很严重，这也是为啥异步的回调函数参数是错误优先的原因
 
 // try catch 捕获不到异步错误，想想事件循环
 
 // buffer 缓冲区 描述二进制 
+
+### node性能调优
+- node自带profile
+  node --prof []
+- 
+
+进程守护
+process监听错误，uncaughtexception, 做错误上报
+子进程监听exit 时间，重新开启新的子进程
+可监控process硬件占用内存情况，超过多少上报
+心跳检测，
