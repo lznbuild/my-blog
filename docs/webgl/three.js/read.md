@@ -5,7 +5,8 @@
 ##### 2 相机
 相机决定了场景中那个角度的景色会显示出来。相机就像人的眼睛一样，人站在不同位置，抬头或者低头都能够看到不同的景色。
 Three有很多中相机 
- > 透视相机（THREE.PerspectiveCamera）
+ > 透视投影相机（THREE.PerspectiveCamera）：投影的结果除了与几何体的角度有关，还和距离相关。一般用于大型游戏场景
+ > 正投影相机（THREE.OrthographicCamera）：一条直线放置的角度不同，投影在投影面上面的长短不同。一般用于机械、工业设计领域等场景
 
 ##### 3 渲染器
 渲染器决定了渲染的结果应该画在页面的什么元素上面，并且以怎样的方式来绘制
@@ -316,6 +317,125 @@ console.log('本地坐标',mesh.position);
 #### 1.几何体-见几何模型图片
 
 #### 2.曲面:曲线和几何体同样本质上都是用来生成顶点的算法，曲线主要是按照一定的规则生成一系列沿着某条轨迹线分布的顶点
+##### 2.1 圆弧线ArcCurve
+ArcCurve( aX, aY, aRadius, aStartAngle, aEndAngle, aClockwise )
+参数	含义
+aX, aY	圆弧圆心坐标
+aRadius	圆弧半径
+aStartAngle, aEndAngle	起始角度
+aClockwise	是否顺时针绘制，默认值为false
+#####  曲线Curve方法.getPoints()：返回值是一个由二维向量Vector2或三维向量Vector3构成的数组，Vector2表示位于同一平面内的点，Vector3表示三维空间中一点。
+#####  几何体方法setFromPoints()：是几何体Geometry的方法，通过该方法可以把数组points中顶点数据提取出来赋值给几何体的顶点位置属性geometry.vertices，数组points的元素是二维向量Vector2或三维向量Vector3。
+##### 2.2 样条曲线
+```javascript
+var geometry = new THREE.Geometry(); //声明一个几何体对象Geometry
+// 三维样条曲线  Catmull-Rom算法
+var curve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(-50, 20, 90),
+  new THREE.Vector3(-10, 40, 40),
+  new THREE.Vector3(0, 0, 0),
+  new THREE.Vector3(60, -60, 0),
+  new THREE.Vector3(70, 0, 80)
+]);
+//getPoints是基类Curve的方法，返回一个vector3对象作为元素组成的数组
+var points = curve.getPoints(100); //分段数100，返回101个顶点
+// setFromPoints方法从points中提取数据改变几何体的顶点属性vertices
+geometry.setFromPoints(points);
+//材质对象
+var material = new THREE.LineBasicMaterial({
+  color: 0x000000
+});
+//线条模型对象
+var line = new THREE.Line(geometry, material);
+scene.add(line);
+```
+##### 2.3 贝塞尔曲线:贝塞尔曲线和样条曲线不同，多了一个控制点概念
+有一个控制点的3d曲线 :三维二次贝赛尔曲线
+```javascript
+var p1 = new THREE.Vector3(-80, 0, 0);
+var p2 = new THREE.Vector3(20, 100, 0);
+var p3 = new THREE.Vector3(80, 0, 0);
+// 三维二次贝赛尔曲线
+var curve = new THREE.QuadraticBezierCurve3(p1, p2, p3);
+```
+有两个控制点的3d曲线: 三维三次贝赛尔曲线
+```javascript
+var p1 = new THREE.Vector3(-80, 0, 0);
+var p2 = new THREE.Vector3(-40, 100, 0);
+var p3 = new THREE.Vector3(40, 100, 0);
+var p4 = new THREE.Vector3(80, 0, 0);
+// 三维三次贝赛尔曲线
+var curve = new THREE.CubicBezierCurve3(p1, p2, p3, p4);
+```
+##### 2.4 组合曲线
+```javascript
+var geometry = new THREE.Geometry(); //声明一个几何体对象Geometry
+// 绘制一个U型轮廓
+var R = 80;//圆弧半径
+var arc = new THREE.ArcCurve(0, 0, R, 0, Math.PI, true);
+// 半圆弧的一个端点作为直线的一个端点
+var line1 = new THREE.LineCurve(new THREE.Vector2(R, 200, 0), new THREE.Vector2(R, 0, 0));
+var line2 = new THREE.LineCurve(new THREE.Vector2(-R, 0, 0), new THREE.Vector2(-R, 200, 0));
+// 创建组合曲线对象CurvePath
+var CurvePath = new THREE.CurvePath();
+// 把多个线条插入到CurvePath中
+CurvePath.curves.push(line1, arc, line2);
+//分段数200
+var points = CurvePath.getPoints(200);
+// setFromPoints方法从points中提取数据改变几何体的顶点属性vertices
+geometry.setFromPoints(points);
+//材质对象
+var material = new THREE.LineBasicMaterial({
+  color: 0x000000
+});
+//线条模型对象
+var line = new THREE.Line(geometry, material);
+scene.add(line);
+
+
+```
+##### 2.5 旋转成型
+```javascript
+/**
+ * 创建旋转网格模型
+ */
+var points = [
+    new THREE.Vector2(50,60),
+    new THREE.Vector2(25,0),
+    new THREE.Vector2(50,-60)
+];
+var geometry = new THREE.LatheGeometry(points,30);
+var material=new THREE.MeshPhongMaterial({
+    color:0x0000ff,//三角面颜色
+    side:THREE.DoubleSide//两面可见
+});//材质对象
+material.wireframe = true;//线条模式渲染(查看细分数)
+var mesh=new THREE.Mesh(geometry,material);//旋转网格模型对象
+scene.add(mesh);//旋转网格模型添加到场景中
+```
+```javascript
+var shape = new THREE.Shape();//创建Shape对象
+var points = [//定位定点
+    new THREE.Vector2(50,60),
+    new THREE.Vector2(25,0),
+    new THREE.Vector2(50,-60)
+];
+shape.splineThru(points);//顶点带入样条插值计算函数
+var splinePoints = shape.getPoints(20);//插值计算细分数20
+var geometry = new THREE.LatheGeometry(splinePoints,30);//旋转造型
+```
+##### 2.6填充轮廓
+
+
+#### 帧动画
+
+##### 编辑帧动画 
+    
+
+
+
+
+
 
 
 
