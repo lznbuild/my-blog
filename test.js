@@ -1,17 +1,11 @@
-const path = require('path');
-const fs = require('fs');
-
-const currentPath = path.resolve(__dirname, '../suixintui/dist/js');
-
-
-fs.readdir(currentPath, function (err, files) {
-  const totalcount = files.reduce((total, val)=> {
-    if(/\.map$/.test(val)) {
-      const file = fs.statSync(`${currentPath}/${val}`); 
-      total += file.size/1000
-    }
-    return total;
-  }, 0)
-  console.log(totalcount+'kb', 'totalcount')
-})
-
+var net = require('net');
+var file = require('fs').createWriteStream('./test.txt');
+var server = net.createServer();
+server.on('connection', function(socket) {
+    socket.pipe(file,{end:false});
+    setTimeout(function() {
+        file.end('再见。');
+        socket.unpipe(file);
+    }, 5000);
+});
+server.listen(8431,'localhost');
