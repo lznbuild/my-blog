@@ -28,3 +28,6 @@ Native加载WebView之后，Web发送的所有请求都会经过WebView组件，
 - 向Webview中注入
 
 这个方法会通过webView提供的接口，App将Native的相关接口注入到JS的Context（window）的对象中，一般来说这个对象内的方法名与Native相关方法名是相同的，Web端就可以直接在全局window下使用这个暴露的全局JS对象，进而调用原生端的方法。
+
+
+## 离线包

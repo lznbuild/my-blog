@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="https://www.baidu.com" target="_block">百度 </a>
+  </body>
 </html>
 <script>
-  window.addEventListener('error',(e)=> {
-    const res = getLastEvent();
-    console.log(res, e.target.src , e.target.href)
-  })
-  console.log(a)
+  window.addEventListener("unload", function (event) {
+    console.log("I am the 3rd one.");
+  });
 </script>
