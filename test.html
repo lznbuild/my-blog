@@ -6,79 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      * {
-        margin: 0;
+      *{
         padding: 0;
+        margin: 0;
       }
-      .container {
-        width: 600px;
-        display: flex;
+
+      .content {
+        height: 40px;
+        border: 1px solid green;
+        margin: 100px;
+        display: none;
       }
-      .div1 {
-        width: 500px;
-        background-color:red;
-        flex-shrink: 2;
-        height: 200px;
-      }
-      .div2 {
-        width: 400px;
-        background-color:green;
-        height: 200px;
-        flex-shrink: 1;
-      }
-      /*  333 266  600/900*500 600/900*400 */
-      /* 285 314 */
+
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="div1"></div>
-      <div class="div2"></div>
-    </div>
+
+    <div class="content" id="content">sldkfjkl</div>
   </body>
 </html>
 <script>
-  const root = {
-    val: "A",
-    left: {
-      val: "B",
-      left: {
-        val: "D",
-      },
-      right: {
-        val: "E",
-      },
-    },
-    right: {
-      val: "C",
-      right: {
-        val: "F",
-      },
-    },
-  };
+function fn() {
+  console.log(aaa)
+}
 
-  function BFS(root) {
-    const queue = [];
+function render() {
+  try {
+    fn();
 
-    queue.push(root);
-
-    while (queue.length) {
-      const top = queue.shift();
-
-      console.log(top.val);
-
-      if (top.left) {
-        queue.push(top.left);
-      }
-
-      if (top.right) {
-        queue.push(top.right);
-      }
-    }
+  } catch (error) {
+    console.log(error, 'rrr')
   }
+}
 
-  // BFS(root)
-</script>
-<script>
+render();
+
 
 </script>

@@ -45,6 +45,22 @@ less-loader.options.modifyVars可以定义全局less变量
   color: #fff;
 }
 
-``` 
+```
 
-
+进度条
+      body {
+        background: linear-gradient(to right top, #0089f2 50%, #ddd 50%);
+        /* 通过 calc 函数配合 100vh 就可以从总长中删除一屏的高度 */
+        /* 100vh 浏览器视口的高度 */
+        background-size: 100% calc(100% - 100vh + 4px);
+        background-repeat: no-repeat;
+      }
+      body:before {
+        content: "";
+        position: fixed;
+        top: 3px;
+        bottom: 0;
+        width: 100%;
+        z-index: -1;
+        background: white;
+      }
