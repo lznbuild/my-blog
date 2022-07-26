@@ -4,7 +4,7 @@
 
 - 文本
 
-- 数字
+- 数字 
 
 - 日期
 
@@ -214,7 +214,7 @@ order by cust_name
 从customers表中查询客户列表，再对于列表中的每一个客户，统计其在orders表中的订单数量。
 
 
-### 联结
+### 联结（表连接）
 供应商和产品分别在两张表中，如何查询供应商对应的生产产品以及价格。
 
 eg:
@@ -262,3 +262,26 @@ update [table_name] set [col_name] = xxx,[col_name] = xxx [where]
 delete from [table_name];
 ## 删除指定行
 delete from [table_name] where username ='Tom';
+
+
+## 触发器
+show triggers
+
+create trigger [triggername] [triggertime(before, after)] [triggerevent(insert update delete)] on [databasename] for each row [sql语句]
+eg: create trigger tg_ponfo after insert 
+
+## 锁
+lock table [tablename] [type]
+
+eg: lock table table1 read;
+其他线程可查询，但无法更新数据
+
+解锁：
+unlock tables;
+在解锁完成前，进行更新的线程会一直等待，直到解锁完成后，才会进行更新。我们可以看一下更新线程的结果。
+
+
+https://mp.weixin.qq.com/s?__biz=MzkwMDE1MzkwNQ==&mid=2247495882&idx=1&sn=488a147b3bf3c710806ce7031e6186b5&chksm=c04ae794f73d6e829f59b76657db17c50daab3633cc488629efbf05b675209a23ff96bab9f90&token=268423844&lang=zh_CN#rd
+
+
+https://mp.weixin.qq.com/s?__biz=MzkwMDE1MzkwNQ==&mid=2247499423&idx=1&sn=0046d4facf4f10416388465c85d8f7b3&chksm=c04ae9c1f73d60d76064cf4ec339a31866671f5d35343852b4cd00405f289f2a664dc8b1e55f&token=268423844&lang=zh_CN#rd
