@@ -76,3 +76,36 @@ gitlab=>jenkins=>静态资源文件上传==>生成离线包上传>如果是不�
 - 客户端启动后，向离线系统查询最新的各个业务的离线包版本号，依次跟本地配置中的对应业务线比较。 如果需要更新，则再次向离线系统查询此业务线的离线包信息，离线系统会提供此业务线的离线包的信息（包括基础包，更新包的信息）。
 
 https://mp.weixin.qq.com/s/r5J5fgjeJkloSGv2BWNRow?
+
+
+### webView加载过程
+点击h5的入口==>判断要启动的url，基础参数检查，初始化webView(复用或者新建)==> 校验权限，注入cookie（依赖客户端注入cookie保证鉴权和跨端场景）==> 加载url ==》 页面资源加载==》api请求
+
+新建webview太耗时（提前创建），前端跨域时依赖的全量cookie注入, jsBridge等js注入耗时
+低端安卓机新建webview太耗时，甚至会因为卡顿被安卓系统强杀。
+
+cookie太多，种cookie整体时间几百毫秒，每个cookie注入调用耗时大于1ms
+当前打开的url不一定需要所有cookie，维护白名单注入。网络请求，页面跳转前拦截并往请求url命中的域名注入cookie 。
+
+jsBridge等js注入优化
+
+数据请求和webview初始化可以并行进行，总体加载时间就缩短了。
+
+cdn预热。将资源主动从源站推送到cdn节点，避免cdn回源，提升cdn真实命中率。
+
+nginx开启GZIP， 使网站的静态资源在传输过程时进行压缩，提高访问速度。
+
+动态import导入资源。
+
+长任务手动分割。
+
+移动端300ms延迟问题，在 WKwebview 中得到了完美适配。过渡方案fastclick, 有副作用，聚焦困难，偶现的响应失灵，input光标错位。
+
+
+当App首次打开时，默认是并不初始化浏览器内核的；只有当创建WebView实例的时候，才会创建WebView的基础框架。
+
+所以与浏览器不同，App中打开WebView的第一步并不是建立连接，而是启动浏览器内核。
+
+https://tech.meituan.com/2017/06/09/webviewperf.html
+
+全局webview容易内存泄漏

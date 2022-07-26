@@ -13,14 +13,24 @@
             border: 1px solid red;
             display: none;
         }
+        .color-blue {
+          color: blue;
+        }
+
+        .color-red {
+          color: red;
+        }
+
     </style>
 </head>
 
 <body>
-    <img src="" alt="">
+    <div class="color-red color-blue">文字</div>
+    <input type="text" id="input">
 </body>
 
 </html>
+
 <script>
   /*
     将文字版本的目录解析为树结构，尽量保证代码的可读性，处理边缘 Case，自己编写测试用例进行验证。
@@ -181,7 +191,7 @@
     for(let i=0;i<nums.length;i++) {
       let left = i+1;
       let right=nums.length-1;
-      
+
       while(left<right) {
         if(nums[i]+nums[left]+nums[right] === 0) {
           if(!map[[nums[i],nums[left],nums[right]].toString()]) {
@@ -190,11 +200,11 @@
           }
           left = left+1;
         }
-  
+
         if(nums[i]+nums[left]+nums[right] > 0) {
           right = right-1;
         }
-  
+
         if(nums[i]+nums[left]+nums[right] < 0) {
           left = left+1;
         }
@@ -290,16 +300,23 @@ console.log(threeSum([-1,0,1,2,-1,-4]));
 
 //   console.log(parseTree(text2));
 </script>
-li:nth-of-type(1) {
-color: red;
-}
-</style>
-</head>
 
-<body>
-    <div id="div"></div>
-</body>
-
-</html>
 <script>
+  // const input = document.querySelector('#input')
+
+  // let isInput = true;
+
+  // input.addEventListener('compositionstart', ()=> {
+  //   isInput = false;
+  //   console.log('start')
+  // })
+  // input.addEventListener('compositionend', ()=> {
+  //   isInput = true;
+  //   console.log('end')
+  // })
+  // input.addEventListener('input', ()=> {
+  //   if(isInput){
+  //     console.log('input')
+  //   }
+  // })
 </script>
