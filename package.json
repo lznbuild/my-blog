@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "inquirer": "^7.3.3",
-    "nodemon": "^2.0.4"
-  }
-}
