@@ -1,5 +1,10 @@
 主键：一列，其值能够唯一区分表中每个行
 
+mysql>show global variables like 'port'; 
+
+
+rz；上传文件
+
 ## 数据类型
 
 - 文本
@@ -8,8 +13,7 @@
 
 - 日期
 
-## 启动
-mysql -u root -p
+## 启动c dx 1b vv                            
 mysql.server start
 
 exit; 退出
