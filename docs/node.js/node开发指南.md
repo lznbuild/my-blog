@@ -77,3 +77,4 @@ util.inspect 和JSON.strinnify的区别
 核心模块，fs这种，有模块命名冲突，会加载核心模块.
 模块查找规则，先找核心模块，再找node_modules下，再找上级目录的node_modules，知道根目录.
 
+
