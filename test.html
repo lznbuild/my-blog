@@ -5,41 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      *{
-        padding: 0;
-        margin: 0;
-      }
-
-      .content {
-        height: 40px;
-        border: 1px solid green;
-        margin: 100px;
-        display: none;
-      }
-
-    </style>
   </head>
   <body>
-
-    <div class="content" id="content">sldkfjkl</div>
+    <a href="www.baidu.com">百度</a>
+    <!-- <input
+      name="s"
+      type="text"
+      x-webkit-speech
+      x-webkit-grammar="builtin:translate"
+    />
+    <input x-webkit-speech lang="zh-CN" />
+    <input x-webkit-speech x-webkit-grammar="bUIltin:search" />
+    <form action="http://www.google.com/search">
+      <input
+        type="search"
+        name="q"
+        lang="zh-CN"
+        x-webkit-speech
+        x-webkit
+        grammar="builtin:search"
+        onwebkitspeechchange="startSearch(event)"
+      />
+    </form> -->
   </body>
 </html>
+<script type="text/javascript"></script>
 <script>
-function fn() {
-  console.log(aaa)
-}
-
-function render() {
-  try {
-    fn();
-
-  } catch (error) {
-    console.log(error, 'rrr')
+  function getValueByKeyList(target, keys) {
+    const key = keys.shift();
+    if (Object.prototype.toString.call(target) === "[object Object]" && key) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      return getValueByKeyList(target[key], keys);
+    }
+    return target;
   }
-}
 
-render();
+  // const keys = [];
+  const target = {
+    a: {
+      b: 1,
+    },
+  };
 
+  var proxy = new Proxy(target, {
+    get: function (target, propKey, receiver) {
+      if (propKey.includes('/')) {
+  			const keys = propKey.split('/');
+  			const value = getValueByKeyList(target, keys);
+        return value
+  		}else {
+        return Reflect.get(target, propKey, receiver);
+      }
+    }
+  });
 
+  proxy.c = {d: 'd'}
+
+  // console.log(proxy['c/d'], 'value')
+
+  // Object.defineProperty(target, "a", {
+  //   get: function (attr1, attr2) {
+  //     // console.log(attr1, attr2);
+  //     return this.a;
+  //   },
+  // });
+
+  // console.log(target['a'])
+  // Object.defineProperties(target, )
 </script>

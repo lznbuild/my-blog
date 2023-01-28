@@ -1,7 +1,7 @@
 
 ## ES6的模块化
 
-export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下一节的import命令也是如此。  
+export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下一节的import命令也是如此。
 
 
 
@@ -52,8 +52,8 @@ console.log(obj.str3);
 ![](https://user-gold-cdn.xitu.io/2019/12/19/16f1c25051580d91?w=591&h=270&f=png&s=17691)
 
 
-可以看出,export 默认返回一个接口（对象），这个’接口‘，可以对应typeScript的interface去理解。  
-export的导出，必须与模块内部的变量建立一一对应关系  
+可以看出,export 默认返回一个接口（对象），这个’接口‘，可以对应typeScript的interface去理解。
+export的导出，必须与模块内部的变量建立一一对应关系
 ```js
 // 报错
 export 1;
@@ -62,7 +62,7 @@ export 1;
 var m = 1;
 export m
 ```
-因为没有提供对外的接口。第一种写法直接输出1，第二种写法通过变量m，还是直接输出1。1只是一个值，不是接口。  
+因为没有提供对外的接口。第一种写法直接输出1，第二种写法通过变量m，还是直接输出1。1只是一个值，不是接口。
 
 正确的写法是下面这样。
 ```js
@@ -127,12 +127,12 @@ setTimeout(()=>foo = 'baz',1000)
 // 导入
 import {foo} from '...'
 console.log(foo);
-setTimeout(()=>console.log(foo), 1000) 
+setTimeout(()=>console.log(foo), 1000)
 
 ```
 上面代码输出bar,1s后输出baz
 
-## export default 
+## export default
 
 
 从前面的例子可以看出，使用import命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。但是，用户肯定希望快速上手，未必愿意阅读文档，去了解模块有哪些属性和方法。
@@ -311,7 +311,7 @@ console.log(obj.counter);
 import {counter} from './test.js'
 ```
 
-## ES6模块加载的实质  
+## ES6模块加载的实质
 ES6模块加载的机制，与CommonJS模块完全不同。CommonJS模块输出的是一个值的拷贝，而ES6模块输出的是值的引用。
 
 CommonJS模块输出的是被输出值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值。请看下面这个模块文件lib.js的例子。
@@ -426,28 +426,31 @@ export const sum = (a, b) => a + b;
 
 ```js
 
-// module.js 
+// module.js
 export default () => "Hello world"
 export const name = "Lydia"
 
-// index.js 
+// index.js
 import * as data from "./module"
 
 console.log(data) // 导出的所有
 ```
 
-module.export[  ]的导出 
+module.export[  ]的导出
 
 
-ES6 的模块化 
-值的引用 
+ES6 的模块化
+值的引用
 静态分析：指不需要执行代码，只从字面量上对代码进行分析，方便优化代码体积，比如通过 Tree-shaking 操作消除模块中没有被引用或者执行结果不会被用到的无用代码
 
-commonJS 
-值的拷贝 
-动态声明 
+commonJS
+值的拷贝
+动态声明
 
+按照出现的时间前后有CommonJS、AMD、CMD、UMD。最后才是JavaScript官方在ES6提出的ES Module。
+import语句有提升的效果
 
+https://mp.weixin.qq.com/s/t-TUAzL0q0oK7HsDVQRNMw
 
 ```js
 // CommonJS模块
@@ -461,7 +464,7 @@ let readfile = _fs.readfile;
 ```
 即使语法结构，加载的仍然是整个fs模块。
 上面代码的实质是整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后再从这个对象上面读取 3 个方法。这种加载称为“运行时加载”，因为只有运行时才能得到这个对象，导致完全没办法在编译时做“静态优化”。
- 
+
 ```js
 // ES6模块
 import { stat, exists, readFile } from 'fs';
@@ -473,17 +476,17 @@ import不能在if else中引入，必须在文件首部引用，不能使用表�
 
 
 
-### 对比总结 
+### 对比总结
 - ES6模块在编译时，就能确定模块的依赖关系，以及输入和输出的变量。
 CommonJS 模块，运行时加载。
 
-- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。 
+- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
 
-- require 可以做动态加载，import 语句做不到，import 语句必须位于顶层作用域中。 
+- require 可以做动态加载，import 语句做不到，import 语句必须位于顶层作用域中。
 
-- ES6 模块中顶层的 this 指向 undefined，CommonJS 模块的顶层 this 指向当前模块。  
+- ES6 模块中顶层的 this 指向 undefined，CommonJS 模块的顶层 this 指向当前模块。
 
-- ES6 模块自动采用严格模式，无论模块头部是否写了 "use strict";  
+- ES6 模块自动采用严格模式，无论模块头部是否写了 "use strict";
 
 
 [参考内容](http://caibaojian.com/es6/module.html)

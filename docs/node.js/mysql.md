@@ -4,7 +4,7 @@
 
 - 文本
 
-- 数字 
+- 数字
 
 - 日期
 
@@ -18,7 +18,7 @@ exit; 退出
 show databases
 
 ## 添加db
-Create database [] 
+Create database []
 
 ## 删除
 Drop database []
@@ -29,9 +29,9 @@ use [];
 ## 查看所有表
 show tables;
 
-## 创建table 
+## 创建table
 CREATE TABLE [] (
-[key] [type] 
+[key] [type]
 );
 
 
@@ -59,7 +59,7 @@ select * from [table_name]
 select [col_name1],[col_name2] from [table_name]
 
 ### where语法
-select * form [table_name] where [binary] col_name 运算符 val  
+select * form [table_name] where [binary] col_name 运算符 val
 
 WHERE 子句的字符串比较是不区分大小写的。 你可以使用 BINARY 关键字来设定 WHERE 子句的字符串比较是区分大小写的
 
@@ -72,23 +72,23 @@ WHERE 子句的字符串比较是不区分大小写的。 你可以使用 BINARY
 <=
 
 #### where 组合
-where id = 1 and price < 10  
-where id = 1 or price < 10  
-and 优先级大于 or  
-where (id = 2 or id = 3) and price < 10  
+where id = 1 and price < 10
+where id = 1 or price < 10
+and 优先级大于 or
+where (id = 2 or id = 3) and price < 10
 
 #### null的判断
-select * from [table_name] where col_name is null   
-select * from [table_name] where col_name is not null 
+select * from [table_name] where col_name is null
+select * from [table_name] where col_name is not null
 
 #### 关键字
-between 两个值范围内查找  eg: where price between 5 and 10   
-like 按照某个模式查找  
-!= 等价于 <>   
+between 两个值范围内查找  eg: where price between 5 and 10
+like 按照某个模式查找
+!= 等价于 <>
 
 #### in语法
-select * from [table_name] where [col_name] in (val1,val2)  
-select * from [table_name] where [col_name] in (select [col_name] from [table_name])  
+select * from [table_name] where [col_name] in (val1,val2)
+select * from [table_name] where [col_name] in (select [col_name] from [table_name])
 
 eg: where id in (1, 2)  ==> where id = 1 or id = 2;
 
@@ -164,7 +164,7 @@ eg: select AVG(distinct price) as avg_price 只计算不同价格的平均值
 在select中使用，在group by中使用的名称一直
 select中的每个列都必须在group by中给出
 group by在where之后，在order by之前
-eg: 
+eg:
 select id, COUNT(*) as num_prods,
 from xxx
 group by id;
@@ -187,7 +187,7 @@ where
 group by
 having
 order by
-limit 
+limit
 
 ### 子查询（嵌套查询）
 eg:
@@ -244,8 +244,8 @@ xxx
 用union只能用一个order by， 在最后.
 
 ## 插入数据
-insert into [table_name] values(val1,val2)  
-insert into [table_name](col1,col2) values(val1,val2)  
+insert into [table_name] values(val1,val2)
+insert into [table_name](col1,col2) values(val1,val2)
 
 
 # insert 和 select组合
@@ -268,7 +268,7 @@ delete from [table_name] where username ='Tom';
 show triggers
 
 create trigger [triggername] [triggertime(before, after)] [triggerevent(insert update delete)] on [databasename] for each row [sql语句]
-eg: create trigger tg_ponfo after insert 
+eg: create trigger tg_ponfo after insert
 
 ## 锁
 lock table [tablename] [type]
@@ -285,3 +285,8 @@ https://mp.weixin.qq.com/s?__biz=MzkwMDE1MzkwNQ==&mid=2247495882&idx=1&sn=488a14
 
 
 https://mp.weixin.qq.com/s?__biz=MzkwMDE1MzkwNQ==&mid=2247499423&idx=1&sn=0046d4facf4f10416388465c85d8f7b3&chksm=c04ae9c1f73d60d76064cf4ec339a31866671f5d35343852b4cd00405f289f2a664dc8b1e55f&token=268423844&lang=zh_CN#rd
+
+
+## 分库分表
+
+数据量变大后会增加对数据进行分库分表的设计诉求，从而导致数据查询变得的复杂性
