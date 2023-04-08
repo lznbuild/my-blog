@@ -1,4 +1,6 @@
 
+按照出现的时间前后有CommonJS、AMD（require.js）、CMD（SeaJS）、UMD（AMD和Commonjs整合，javascript通用模块定义规范，让你的模块能在javascript所有运行环境中发挥作用），ES Module
+
 ## ES6的模块化
 
 export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下一节的import命令也是如此。  

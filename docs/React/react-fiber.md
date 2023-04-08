@@ -46,6 +46,21 @@ React Fiber 是一种基于浏览器的单线程调度算法
 
 
 encodeURIComponent比encodeURI有什么区别
+encodeURI用作对一个完整的 URI 进行编码，不会对网址中的 ASCII 字母和数字及标点符号进行编码。
+!#&dollar;&'()*+,/:;=?@-.\_~0-9a-zA-Z 不会被编码
+
 区别就是encodeURIComponent编码范围更广，适合给参数编码，encodeURI适合给URL本身（locaion.origin）编码,当然项目里一般都是用qs库去处理
 
+当需要获取一个可用的 URL 地址时，使用此方法进行编码。
+```js
+encodeURI('http://xuedingmiao.com/My first/');
+// http://xuedingmiao.com/My%20first/
+```
+
+当需要对 URL 的参数进行编码时，使用 encodeURIComponent。
+!'()*-.\_~0-9a-zA-Z 不会被编码
+```js
+encodeURIComponent('http://xuedingmiao.com/?a=1&b=2');
+// "http%3A%2F%2Fxuedingmiao.com%2F%3Fa%3D1%26b%3D2"
+```
 https://blog.csdn.net/halations/article/details/109284050

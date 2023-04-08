@@ -10,108 +10,43 @@
   </body>
 </html>
 <script>
-  /**
-   * 1.计算多个区间的交集
-   *   区间用长度为2的数字数组表示，如[2, 5]表示区间2到5（包括2和5）；
-   *   区间不限定方向，如[5, 2]等同于[2, 5]；
-   *   实现`getIntersection 函数`
-   *   可接收多个区间，并返回所有区间的交集（用区间表示），如空集用null表示
-   * 示例：
-   *   getIntersection([5, 2], [4, 9], [3, 6]); // [4, 5]
-   *   getIntersection([1, 7], [8, 9]); // null
-   */
-
-  function getIntersection(...arr) {
-    arr = arr
-      .map(([prev, next]) => {
-        if (prev > next) {
-          return [next, prev];
-        }
-        return [prev, next];
-      })
-      .sort((a, b) => {
-        return a[0] - b[0];
-      });
-
-    if (arr.length < 2) {
-      return null;
-    }
-
-    let res = arr[0];
-
-    for (let i = 1; i < arr.length; i++) {
-      let item = arr[i];
-      if (item[0] >= res[0] && item[0] <= res[1]) {
-        res = [item[0], Math.min(item[1], res[1])];
-      } else {
-        return null;
+const root = {
+  val: "A",
+  left: {
+    val: "B",
+    left: {
+      val: "D"
+    },
+    right: {
+      val: "E",
+      left: {
+        val: 'G'
       }
     }
-    return res;
-  }
-
-  /**
-   * 2.DOM 的体积过大会影响页面性能，假如你想在用户关闭页面时统计（计算并反馈给服务器）
-   当前页面中元素节点的数量总和、元素节点的最大嵌套深度以及最大子元素个数，请用 JS 配合
-   原生 DOM API 实现该需求（不用考虑陈旧浏览器以及在现代浏览器中的兼容性，可以使用任意
-   浏览器的最新特性；不用考虑 shadow DOM）。比如在如下页面中运行后：
-   <html>
-    <head></head>
-    <body>
-      <div>
-        <span>f</span>
-        <span>o</span>
-        <span>o</span>
-      </div>
-    </body>
-  </html>
-  // 会输出：
-
-  {
-    totalElementsCount: 7,当前页面中元素节点的数量总和
-    maxDOMTreeDepth: 4, 元素节点的最大嵌套深度
-    maxChildrenCount: 3 最大子元素个数
-  }
-   */
-
-  function fn() {
-    let dom = document.getElementsByTagName("html")[0];
-    let totalData = {
-      totalElementsCount: 0,
-      maxDOMTreeDepth: 0,
-      maxChildrenCount: 0,
-    };
-
-    let domNumMap={};
-
-    bps(dom, totalData, domNumMap);
-
-    totalData.maxChildrenCount = Math.max(...Object.values(domNumMap));
-    console.log(totalData);
-  }
-
-  function bps(dom, totalData, domNumMap) {
-    totalData.totalElementsCount ++;
-
-    if(domNumMap[dom.tagName]) {
-      domNumMap[dom.tagName]++;
-    }else {
-      domNumMap[dom.tagName] = 1;
+  },
+  right: {
+    val: "C",
+    right: {
+      val: "F"
     }
+  }
+};
 
-    let children = dom.children;
-
-    if(!children.length) {
-      return
-    }else {
-      totalData.maxDOMTreeDepth++
-    }
-
-    Array.from(children).forEach(child=> {
-      bps(child, totalData, domNumMap);
-    })
+var rob = (nums)=> {
+  const dp = [nums[0], Math.max(nums[0], nums[1])];
+  if(nums.length === 0) {
+    return 0
+  }
+  if(nums.length === 1) {
+    return nums[0]
+  }
+  for(let i=2;i<nums.length;i++) {
+    dp[i] = Math.max(dp[i-1], dp[i-2]+nums[i])
   }
 
+  return dp[nums.length-1]
+}
 
-  fn();
+console.log(rob([2,7,9,3,1]))
+// 2 7 11 11 12 
 </script>

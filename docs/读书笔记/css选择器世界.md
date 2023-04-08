@@ -88,7 +88,25 @@ querySelectorAll里面的选择器是全局属性。
 
  使用子选择符（>）的主要目的是为了避免冲突。滥用相当于固定了HTML的结构，不好维护。 
 
-相邻兄弟选择符（+） 只选中一个 ，忽略文本节点 
+
+.foo[class] {} 增加选择器优先级
+
+class选择器和id选择器不能以数字开头命名
+
+
+div > li 只选中直接后代，子子级不能选中。
++ 相邻兄弟选择符，只能选择后面一个   li+p  li相邻的第一个，且为p标签，非p不会下沿，忽略文本节点
+～ 随后兄弟选择符 选择后面全部 div ~ p
+
+属性选择器
+[attr='val'] 完全匹配, div[class='xx'] 匹配<div class='xx'>,不匹配<div class'xx xx2'>
+[attr~='val']属性值单匹配 div[class='xx'] 匹配<div class='xx xx2'>,不匹配<div class'xx2sdf'>
+
+纯字符匹配 
+[attr^='val']
+[attr$='val']
+[attr*='val']
+
 
 ### 为什么没有前面兄弟选择符 
 没有前面兄弟选择符和没有父元素选择符的原因是一样的，它们都受制于DOM渲染规则。浏览器解析HTML文档是从前往后，由外到里进行的，所以我们时常会看到页面先出现头部然后再出现主体内容的情况。但是，如果css支持了这种选择符，那就必须要等页面所有子元素加载完毕才能渲染css，因为这些选择符就是后面的DOM元素影响前面的DOM元素，如果后面的元素还没被加载，又怎么影响前面的元素样式呢，如果要支持这样的选择符，网页呈现速度必然会大大减慢，白屏时间加长，体验差。
@@ -105,9 +123,12 @@ querySelectorAll里面的选择器是全局属性。
  :active伪类，普通元素也可以使用，点击触发。 
 
 
-普通元素可以获取焦点
+普通元素可以获取焦点,可以使用:focus伪类
  <div contenteditable="true">123</div>
  <div tabindex="1">123</div> 
+
+ :focus 和:focus-within
+ 前者只应用于指定dom,后者应用于指定dom和子dom
 
 
  :link伪类只选中有href属性的a标签 
@@ -144,6 +165,12 @@ querySelectorAll里面的选择器是全局属性。
   }
 
 
+表单相关伪类
+:enabled
+:disabled
+
+
+
 ## readonly 和disabled 的区别
 
 前者不能输入内容，可被表单提交 
@@ -159,7 +186,11 @@ div:empty::before {
 } 
 
 
-:only-child 匹配没有任何兄弟元素的元素 
+:only-child 指定元素是其父节点的唯一节点（匹配没有任何兄弟元素的元素 ）
+:nth-child,
+:nth-last-child
+:first-child
+:last-child
 
 ### 逻辑组合伪类 
 
@@ -168,4 +199,4 @@ div:empty::before {
 :where()  
 :has()  
 
-优先级都是0 
+优先级都是0 ,优先级根据括号指定内容为准。

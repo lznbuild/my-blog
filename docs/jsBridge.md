@@ -49,6 +49,14 @@ web应用的性能和体验，是肯定不及客户端
 
 service worker等利用web api 来实现pwa的离线缓存方案，但目前xx的app使用的还是系统原生的webview。暂时不兼容pwa特性
 
+service worker是一段运行在浏览器后台的JavaScript脚本，在页面中注册并安装成功后，它可以拦截和处理网络请求，实现缓存资源并可在离线时响应用户的请求。针对弱网及无网络场景，可使用离线资源。基于web worker
+
+特点：
+网站必须使用 HTTPS。本地可使用 localhost
+单独的运行环境和执行线程：在一个新线程中，不会影响js主线程的运行，所以不会造成阻塞。
+不能访问dom：但service worker可以通过postMessage与页面之间通信
+
+
 ### 离线系统设计指南
 - 采用腾讯alloy团队出品的webpack离线包插件：ak-webpack-plugin，其可以根据配置，将webpack的构建出的静态资源，压缩成映射了静态资源在cdn路径url的zip压缩包
 - jenkins代替fe工程师构建与部署前端项目。使前端项目也像传统的app与后端项目一样做到了开发与构建部署分离，提高了团队的效率。 而我们生成和部署离线包的操作，也交由jenkins替我们完成。
