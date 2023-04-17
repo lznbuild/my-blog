@@ -5,38 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .content {
+        height: 40px;
+        border: 1px solid green;
+        margin: 100px;
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <a href="https://www.baidu.com" target="_blank">百度</a>
-    <!-- <input
-      name="s"
-      type="text"
-      x-webkit-speech
-      x-webkit-grammar="builtin:translate"
-    />
-    <input x-webkit-speech lang="zh-CN" />
-    <input x-webkit-speech x-webkit-grammar="bUIltin:search" />
-    <form action="http://www.google.com/search">
-      <input
-        type="search"
-        name="q"
-        lang="zh-CN"
-        x-webkit-speech
-        x-webkit
-        grammar="builtin:search"
-        onwebkitspeechchange="startSearch(event)"
-      />
-    </form> -->
-    <div id="result"></div>
+    <button id="btn">set log</button>
   </body>
 </html>
 <script type="text/javascript"></script>
 <script>
-window.onerror = function(e) {
-  console.log(e,'错误')
-}
-
-let target = [{max: 10, min: 4}, {max: 3, min: 2}, {max: 30, min: 8}];
-let p = new Proxy(target, {});
-console.log(p.sort((a, b) => Number(a.min) - Number(b.min)))
+  var body = document.body;
+  body.addEventListener("click", async function () {
+    var stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+    var mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
+      ? "video/webm; codecs=vp9"
+      : "video/webm";
+    var mediaRecorder = new MediaRecorder(stream, { mimeType: mime });
+    //录制
+    var chunks = [];
+    mediaRecorder.addEventListener("dataavailable", function (e) {
+      chunks.push(e.data);
+    });
+    //停止
+    mediaRecorder.addEventListener("stop", function () {
+      var blob = new Blob(chunks, { type: chunks[0].type });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "video.webm";
+      a.click();
+    });
+    //手动启动
+    mediaRecorder.start();
+  });
 </script>
