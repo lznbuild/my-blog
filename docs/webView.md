@@ -10,3 +10,16 @@ WebView初始化
 解决方案
 1. 在客户端刚启动时，就初始化一个全局的WebView待用，并隐藏；当用户访问了WebView时，直接使用这个WebView加载对应网页，并展示。（额外的内存消耗。）
 2. 在初始化的同时，通过Native来完成一些网络请求等过程，使得WebView初始化不是完全的阻塞后续过程
+
+
+## h5唤起app
+### url scheme
+window.location.href = 'zhihu://'
+
+是否成功唤起呢？
+
+我们可以监听当前页面的visibilitychange事件，如果页面隐藏，则表示唤端成功，否则唤端失败，跳转到应用商店。
+兼容性好，无论安卓或者 iOS 都能支持
+
+- 无法准确判断是否唤起成功
+- 有 URL Scheme 劫持风险

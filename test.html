@@ -7,7 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    <a href="www.baidu.com">百度</a>
+    <a href="https://www.baidu.com" target="_blank">百度</a>
     <!-- <input
       name="s"
       type="text"
@@ -27,49 +27,16 @@
         onwebkitspeechchange="startSearch(event)"
       />
     </form> -->
+    <div id="result"></div>
   </body>
 </html>
 <script type="text/javascript"></script>
 <script>
-  function getValueByKeyList(target, keys) {
-    const key = keys.shift();
-    if (Object.prototype.toString.call(target) === "[object Object]" && key) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getValueByKeyList(target[key], keys);
-    }
-    return target;
-  }
+window.onerror = function(e) {
+  console.log(e,'错误')
+}
 
-  // const keys = [];
-  const target = {
-    a: {
-      b: 1,
-    },
-  };
-
-  var proxy = new Proxy(target, {
-    get: function (target, propKey, receiver) {
-      if (propKey.includes('/')) {
-  			const keys = propKey.split('/');
-  			const value = getValueByKeyList(target, keys);
-        return value
-  		}else {
-        return Reflect.get(target, propKey, receiver);
-      }
-    }
-  });
-
-  proxy.c = {d: 'd'}
-
-  // console.log(proxy['c/d'], 'value')
-
-  // Object.defineProperty(target, "a", {
-  //   get: function (attr1, attr2) {
-  //     // console.log(attr1, attr2);
-  //     return this.a;
-  //   },
-  // });
-
-  // console.log(target['a'])
-  // Object.defineProperties(target, )
+let target = [{max: 10, min: 4}, {max: 3, min: 2}, {max: 30, min: 8}];
+let p = new Proxy(target, {});
+console.log(p.sort((a, b) => Number(a.min) - Number(b.min)))
 </script>
