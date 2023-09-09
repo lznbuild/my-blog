@@ -124,3 +124,18 @@ package.json文件中修改
 yargs 工具包，封装了process.argv 读取参数的方法，和缩写。--help的查看内容，也可以处理。
 
 inquirer.js ， node命令行界面
+
+
+
+## father 对比
+
+ts支持的好。bundle bundless两种构建模式
+bundless不对依赖做任何处理，源码平行变异输出。
+Bundle 即将源码打包的构建模式，它以入口文件作为起点、递归处理全部的依赖，然后将它们合并输出成构建产物
+https://github.com/umijs/father/blob/master/docs/guide/build-mode.md
+
+esm, cjs 一般用bundless
+
+umd一般用bundle
+可通过script直接引入cdn产物。项目样式表需要提供给用户使用。(antd)
+
