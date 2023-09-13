@@ -24,7 +24,7 @@ CREATE TABLE student_score (
 
 - 字符串
   类型	最大长度	存储空间要求	含义
-  CHAR(M)	M个字符	M×W个字节	固定长度的字符串，存储定长的字符串，比如「身份证号、手机号、邮箱等」；
+  CHAR(M)	M个字符	M×W个字节	固定长度的字符串，存储定长的字符串，不够的自动在末尾填充空格,比如「身份证号、手机号、邮箱等」；
   VARCHAR(M)	M个字符	L+1 或 L+2 个字节	可变长度的字符串
   TINYTEXT	2⁸-1 个字节	L+1个字节	非常小型的字符串
   TEXT	2¹⁶-1 个字节	L+2 个字节	小型的字符串
@@ -176,3 +176,31 @@ delete from [table_name];
 delete from [table_name] where username ='Tom';
 
 
+
+
+## 触发器
+show triggers
+
+create trigger [triggername] [triggertime(before, after)] [triggerevent(insert update delete)] on [databasename] for each row [sql语句]
+eg: create trigger tg_ponfo after insert
+
+## 锁
+lock table [tablename] [type]
+
+eg: lock table table1 read;
+其他线程可查询，但无法更新数据
+
+解锁：
+unlock tables;
+在解锁完成前，进行更新的线程会一直等待，直到解锁完成后，才会进行更新。我们可以看一下更新线程的结果。
+
+
+https://mp.weixin.qq.com/s?__biz=MzkwMDE1MzkwNQ==&mid=2247495882&idx=1&sn=488a147b3bf3c710806ce7031e6186b5&chksm=c04ae794f73d6e829f59b76657db17c50daab3633cc488629efbf05b675209a23ff96bab9f90&token=268423844&lang=zh_CN#rd
+
+
+https://mp.weixin.qq.com/s?__biz=MzkwMDE1MzkwNQ==&mid=2247499423&idx=1&sn=0046d4facf4f10416388465c85d8f7b3&chksm=c04ae9c1f73d60d76064cf4ec339a31866671f5d35343852b4cd00405f289f2a664dc8b1e55f&token=268423844&lang=zh_CN#rd
+
+
+## 分库分表
+
+数据量变大后会增加对数据进行分库分表的设计诉求，从而导致数据查询变得的复杂性

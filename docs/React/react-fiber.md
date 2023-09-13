@@ -1,4 +1,18 @@
+<!--
+ * @Author: Jeffrey
+ * @Date: 2021-08-30 23:08:59
+ * @LastEditors: Jeffrey
+ * @LastEditTime: 2023-09-03 10:49:48
+ * @Description: Do not edit
+-->
 本质是将渲染工作分成多个块，并将其分布到多个帧中。
+
+很多人还分不清React渲染和diff的界限。virtual dom是对象树，是用来表示组件树的内存对象；fiber是在virtual dom的前提下，为每一个节点附加的任务机制对象；diff是对新老两个virtual dom（内存对象）进行对比，对比过程中使用了fiber提供的任务机制，可以被中断，中断之后，要从头来过；diff得到的结果是patch，用来表示哪些virtual dom节点发生了何种变化；更新渲染是实施patch过程，fiber上记录了每一个virtual dom节点对应的真实DOM节点，每一个patch针对对应的DOM节点进行操作；diff过程可以中断重来，patch渲染过程不能被中断。
+
+React在第一次渲染到界面时跟virtual dom的更新机制没有半毛钱关系，根本没法享受它带来的性能优势。相反，由于第一次渲染需要创建原始的virtual dom以及fiber体系，反而会浪费一定的性能，当需要进行大列表数据渲染时，这种浪费体现的更加明显。
+
+virtual dom宣称的对立面是，对一整块DOM进行全部替换的更新方式，一次性更新整块DOM需要消耗大量资源删除原有DOM，创建新DOM，实施Reaint/Reflow过程，所以理论上virtual dom性能更好。但是，并不排除有的情况下，一次性替换整块DOM会比用virtual dom的形式更新性能更好。当patch数量超过一定数额时，除了需要进行遍历之外，每一次对小量的DOM进行操作，都可能带来重绘过程，数量一多，那么浏览器就需要完成n次重绘，造成卡顿，虽然一次性整块替换DOM也会存在同样问题。diff算法本身也存在性能损耗，fiber机制就是为了解决这个问题，但是实际上，fiber并没有强化virtual dom的优势，因为js是单线程的，即使异步操作，所以该做的计算一秒都少不了，在diff过程中，如果被中断，就要从来一次，反而增加了时间，不过好在fiber的调度机制，可以在空闲的时候把能干的先干，但是，该卡顿的还是会卡顿，这和fiber本身没有关系，是js单线程决定的。
+
 
 ### 讲讲react16中的fiber  
 
