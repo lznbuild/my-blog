@@ -34,7 +34,7 @@ redis-server --port xx
 /usr/local/etc/redis.conf
 
 redis-cli命令式交互模式
-redis-cli 
+redis-cli
 redis-cli --raw 避免中文乱码
 redis-cli -h host -p port -a password
 redis-cli -h 127.0.0.1 -p 6379
@@ -122,7 +122,7 @@ rpush key value
 
 lpop key
 
-rpop 
+rpop
 
 llen key
 
@@ -335,14 +335,14 @@ CONFIG SET maxmemory 4gb
 
 
 缓存淘汰策略
-不淘汰 
+不淘汰
 noeviction （默认的，一旦缓存被写满了，再有写请求来时，Redis 不再提供服务，而是直接返回错误）
-对设置了过期时间的数据中进行淘汰 
+对设置了过期时间的数据中进行淘汰
   随机：volatile-random
   ttl：volatile-ttl （越早过期的数据越优先被选择）
   lru：volatile-lru （最近最少使用的原则）
   lfu：volatile-lfu （首先会根据数据的访问次数进行筛选，把访问次数最低的数据淘汰出缓存。如果两个数据的访问次数相同，LFU 策略再比较这两个数据的访问时效性，把距离上一次访问时间更久的数据淘汰出缓存）
-全部数据进行淘汰 
+全部数据进行淘汰
   随机：allkeys-random （从所有键值对中随机选择并删除数据）
   lru：allkeys-lru
   lfu：allkeys-lfu
@@ -362,14 +362,14 @@ RDB  Redis DataBase 的缩写，中文名为快照/内存快照，RDB持久化�
 save命令：阻塞当前Redis服务器，直到RDB过程完成为止，对于内存 比较大的实例会造成长时间阻塞，线上环境不建议使用
 bgsave命令：Redis进程执行fork操作创建子进程，RDB持久化过程由子 进程负责，完成后自动结束。阻塞只发生在fork阶段，一般时间很短
 
-save 60 100 
+save 60 100
 从Redis最近一次创建快照之后开始算起，当“60秒之内有10 000次写入”这个条件被满足时，Redis就会自动触发BGSAVE命令。
 多个save配置，任意配置生效就会触发。
 
 自动生成rdb文件的时机
 - flushall 自动生成rdb文件
 - save 执行命令
-- 退出redis 
+- 退出redis
 
 怎么恢复rdb文件
 把这个文件放到redis启动目录就可以，redis启动时自己执行。
@@ -453,3 +453,7 @@ redis-sentinel [config]
 
 缺点
 - 很复杂
+
+https://mp.weixin.qq.com/s?__biz=MzkxNTE3ODU0NA==&mid=2247507228&idx=1&sn=a21ba8bf3cb47c319092847c3fd9f168&chksm=c1618843f616015569d373a0c986715c1fde7a94fcf6a4ad3b25b7b31eacfb9db71476cfede8&scene=126#rd
+
+https://zhuanlan.zhihu.com/p/586115488

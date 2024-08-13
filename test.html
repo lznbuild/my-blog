@@ -10,36 +10,32 @@
         padding: 0;
         margin: 0;
       }
+      .wrapper {
+        display: grid;
+        /* grid-template-columns: 200px 200px; */
+        /* grid-template-columns: repeat(auto-fill, 100px); */
+        /* grid-template-rows: repeat(auto-fill, 100px); */
+        grid-row-gap: 10px;
+        grid-column-gap: 20px;
+        grid-auto-flow: column;
 
-      .content {
-        border: 1px solid green;
-        height: 600px;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
       }
-      .box {
-        width: 100px;
-        height: 100px;
-        background-color: red;
+      .wrapper div {
+        border: 1px solid red;
       }
     </style>
   </head>
   <body>
-    <div class="content">
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
+    <div class="wrapper">
+      <div>一</div>
+      <div>二</div>
+      <div>三</div>
+      <div>四</div>
+      <div>五</div>
     </div>
   </body>
 </html>
 <script>
-
+  var obj1 = {a: 1}
+  console.log(Object.assign(obj1, {b: 2}));
 </script>

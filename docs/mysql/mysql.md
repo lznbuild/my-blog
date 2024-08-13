@@ -31,7 +31,7 @@ CREATE TABLE student_score (
   MEDIUMTEXT	2²⁴-1 个字节	L+3个字节	中等大小的字符串
   LONGTEXT	2³²-1 个字节	L+4个字节	大型的字符串
 
-- 数字 
+- 数字
   tinyint
   smallint
   mediumint
@@ -61,11 +61,11 @@ BLOB
 
 对于比较大的二进制数据，比方说图片、音频、压缩文件什么的，通常情况下都不直接存储到数据库管理系统中，而是将它们保存到文件系统中，然后在数据库中之存放一个文件路径即可
 
-## 启动c dx 1b vv                            
+## 启动c dx 1b vv       
 mysql.server start
 
 mysql -h主机名 -u用户名 -p密码
-mysql -u root -p 
+mysql -u root -p
 
 exit; 退出
 
@@ -73,7 +73,7 @@ exit; 退出
 show databases
 
 ## 添加db
-Create database [] 
+Create database []
 
 CREATE DATABASE IF NOT EXISTS 数据库名;
 如果已经存在，不会报错
@@ -89,9 +89,9 @@ use [];
 ## 查看所有表
 show tables;
 
-## 创建table 
+## 创建table
 CREATE TABLE [] (
-[key] [type] 
+[key] [type]
 );
 
 eq:
@@ -150,8 +150,8 @@ ALTER TABLE first_table1 RENAME TO dahaizi.first_table1;
 ALTER TABLE first_table MODIFY second_column1 VARCHAR(2) AFTER first_column;
 
 ## 插入数据
-insert into [table_name] values(val1,val2)  
-insert into [table_name](col1,col2) values(val1,val2)  
+insert into [table_name] values(val1,val2)
+insert into [table_name](col1,col2) values(val1,val2)
 
 批量插入
 INSERT INTO first_table(first_column, second_column) VALUES(4, 'ddd'), (5, 'eee'), (6, 'fff');
@@ -204,3 +204,7 @@ https://mp.weixin.qq.com/s?__biz=MzkwMDE1MzkwNQ==&mid=2247499423&idx=1&sn=0046d4
 ## 分库分表
 
 数据量变大后会增加对数据进行分库分表的设计诉求，从而导致数据查询变得的复杂性
+
+
+https://www.zhihu.com/question/485701420/answer/2882596938
+https://mp.weixin.qq.com/s/qHJiTjpvDikFcdl9SRL97Q

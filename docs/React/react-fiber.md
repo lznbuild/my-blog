@@ -1,8 +1,8 @@
 <!--
  * @Author: Jeffrey
  * @Date: 2021-08-30 23:08:59
- * @LastEditors: Jeffrey
- * @LastEditTime: 2023-09-03 10:49:48
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2024-03-19 14:14:16
  * @Description: Do not edit
 -->
 本质是将渲染工作分成多个块，并将其分布到多个帧中。
@@ -14,7 +14,7 @@ React在第一次渲染到界面时跟virtual dom的更新机制没有半毛钱�
 virtual dom宣称的对立面是，对一整块DOM进行全部替换的更新方式，一次性更新整块DOM需要消耗大量资源删除原有DOM，创建新DOM，实施Reaint/Reflow过程，所以理论上virtual dom性能更好。但是，并不排除有的情况下，一次性替换整块DOM会比用virtual dom的形式更新性能更好。当patch数量超过一定数额时，除了需要进行遍历之外，每一次对小量的DOM进行操作，都可能带来重绘过程，数量一多，那么浏览器就需要完成n次重绘，造成卡顿，虽然一次性整块替换DOM也会存在同样问题。diff算法本身也存在性能损耗，fiber机制就是为了解决这个问题，但是实际上，fiber并没有强化virtual dom的优势，因为js是单线程的，即使异步操作，所以该做的计算一秒都少不了，在diff过程中，如果被中断，就要从来一次，反而增加了时间，不过好在fiber的调度机制，可以在空闲的时候把能干的先干，但是，该卡顿的还是会卡顿，这和fiber本身没有关系，是js单线程决定的。
 
 
-### 讲讲react16中的fiber  
+### 讲讲react16中的fiber
 
 将任务细化为不同优先级，利用浏览器的空闲时间进行任务的执行以保证 UI 操作的流畅。浏览器的调度 API 主要分为两种，分别是高优先级的 requestAnimationFrame 与低优先级的 requestIdleCallback
 
@@ -31,15 +31,15 @@ react初次render或协调后所生成的一个对象，react16前是通过组�
 
 
 
-https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247484802&idx=1&sn=4b9f618ddbdf483101bbe942e23b08ca&chksm=fa2be56bcd5c6c7d4a9b384625ed88a917bfd841e41eccb7369301c037712c1993cb430efa1a&mpshare=1&&srcid=&sharer_sharetime=1572533493883&sharer_shareid=c2e4bd2a7749c57364e37417427f8b4f&from=timeline&scene=2&subscene=1&clicktime=1572591786&enterid=1572591786#rd 
+https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247484802&idx=1&sn=4b9f618ddbdf483101bbe942e23b08ca&chksm=fa2be56bcd5c6c7d4a9b384625ed88a917bfd841e41eccb7369301c037712c1993cb430efa1a&mpshare=1&&srcid=&sharer_sharetime=1572533493883&sharer_shareid=c2e4bd2a7749c57364e37417427f8b4f&from=timeline&scene=2&subscene=1&clicktime=1572591786&enterid=1572591786#rd
 
 
 
-### fiber的执行阶段 
+### fiber的执行阶段
 
 阶段一： 生成fiber树，得出需要更新的节点信息。这一步是一个渐进的过程，可以被打断。基于vdom树生成Fiber树，本质是链表。
 
-阶段二： 将需要更新的节点一次批量更新，这个过程不能被打断。 
+阶段二： 将需要更新的节点一次批量更新，这个过程不能被打断。
 
 
 fiber 协程，语言层面，控制程序的中断和执行
@@ -52,7 +52,7 @@ Fiber 可以理解为一个执行单元，每次执行完一个执行单元，re
 React Fiber 是一种基于浏览器的单线程调度算法
 
 
-### $$typeof 
+### $$typeof
 
 目的是为了防止 XSS 攻击。因为 Symbol 无法被序列化，所以 React 可以通过有没有 $$typeof 属性来断出当前的 element 对象是从数据库来的还是自己生成的。
 
@@ -78,3 +78,5 @@ encodeURIComponent('http://xuedingmiao.com/?a=1&b=2');
 // "http%3A%2F%2Fxuedingmiao.com%2F%3Fa%3D1%26b%3D2"
 ```
 https://blog.csdn.net/halations/article/details/109284050
+
+https://juejin.cn/post/6844904131795091464
