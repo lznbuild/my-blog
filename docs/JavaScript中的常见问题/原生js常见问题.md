@@ -40,9 +40,9 @@ promise有三个状态：pending,fulfilled,rejected
   }).then(()=>{
     console.log('promise4');
   })
-  
 
-  // 1  2 4 3 
+
+  // 1  2 4 3
 ```
 
 
@@ -74,19 +74,19 @@ promise有三个状态：pending,fulfilled,rejected
 
   // 然后，我们打印 a[b]，也就是 a["[object Object]"]。之前刚设置为 456，因此返回的是 456。
   ```
-  
+
 ## 浏览器部分
 
 在浏览器中，我们不仅有运行时引擎，还有一个叫做 WebAPI 的东西。WebAPI 提供了 setTimeout 函数，也包含其他的，例如 DOM。
 
 ## 6 种 falsy 值
 
-undefined  
-null  
-NaN  
-0  
-'' (empty string)  
-false  
+undefined
+null
+NaN
+0
+'' (empty string)
+false
 
 ## 问题
 ```js
@@ -139,8 +139,8 @@ multiply(value);
 ## 问题
 ```js
 [1, 2, 3, 4].reduce((x, y) => console.log(x, y));
-// 1 2  
-// undefined 3  
+// 1 2
+// undefined 3
 // undefined 4
 ```
 
@@ -192,18 +192,18 @@ getName() // Lydia
 
 因为计算机中都是由0和1整的二进制数字表示的，所以十进制的小数转换成二进制是采用对阶运算求和，例如8是2的3次方，0.5(1/2)就是2的-1次方，0.75(3/4)是2的-1加2的-2，可是0.2呢？就是1/5，通过对阶运算求和只能无限接近，不能相等
 
-console.log( Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON); 
+console.log( Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON);
 
 
 
-## 占内存和堆内存的比较  
+## 占内存和堆内存的比较
 
 栈内存：存储基本数据类型  按值访问  存储的值大小固定   空间小，运行效率高
 
-堆内存：存储引用数据类型  按引用访问  值的大小不固定   空间大，运行效率低 
+堆内存：存储引用数据类型  按引用访问  值的大小不固定   空间大，运行效率低
 
 
-## 连等问题 
+## 连等问题
 ```js
 var A = B = C;
 ```
@@ -213,33 +213,33 @@ var A = B = C;
 var a = {n: 1};
 var b = a;
 a.x = a = {n: 2};
-console.log(a.x)    
+console.log(a.x)
 console.log(b.x)
 // 关键在于第三行，.的优先级高于=，所以a.x后，a和b同时指向{n:1,x:undefined},接着第3行从右向左执行，a.x(原对象)={n:2},也就是a和b指向{n:1,x:{n:2}}，a的引用指向新对象{n:2},
 // a.x // undefined
 // b.x  // {n:2}
-``` 
+```
 
 
 ## var,let,const 的区别
 var 声明的变量在变量环境 ， let ,const 声明的变量在词法环境，对应执行上下文。
 
-变量提升 
+变量提升
 
-let const 和var三者其实会存在变量提升。  
-let只是创建过程提升，初始化过程并没有提升，所以会产生暂时性死区。 
+let const 和var三者其实会存在变量提升。
+let只是创建过程提升，初始化过程并没有提升，所以会产生暂时性死区。
 var的创建和初始化过程都提升了，所以在赋值前访问会得到undefined function 的创建、初始化、赋值都被提升了。
 
 JavaScript 是允许访问还没有绑定值的var所声明的标识符的。这种标识符后来统一约定称为“变量声明（varDelcs）”，而“let/const”则称为“词法声明（lexicalDecls）”。JavaScript 环境在创建一个“变量名（varName in varDecls）”后，会为它初始化绑定一个 undefined 值，而”词法名字（lexicalNames）”在创建之后就没有这项待遇
 
 
-## DOM操作影响性能 
+## DOM操作影响性能
 浏览器的js引擎和DOM引擎共享一个主线程，多次DOM操作导致DOM引擎占
 用主线程过久，造成卡顿的感觉。任何 DOM API 调用都要先将 JS 数据结构转为 DOM 数据结构，再挂起 JS 引擎并启动 DOM 引擎，执行过后再把可能的返回值反转数据结构，重启 JS 引擎继续执行。这种上下文切换很耗性能。性能消耗在JS对象和DOM对象的转换和同步
 很多DOM操作都会触发回流，消耗性能。
 
 
-for in 可以用于对象，for of不能，因为普通对象没有遍历器iterable,用于数组，前者遍历下表，后者遍历值  
+for in 可以用于对象，for of不能，因为普通对象没有遍历器iterable,用于数组，前者遍历下表，后者遍历值
 
 
 
@@ -250,29 +250,29 @@ for in 可以用于对象，for of不能，因为普通对象没有遍历器iter
 
 
 ## 箭头函数和普通函数的区别
-- 箭头函数没有 this，它会从自己的作用域链的上一层继承 this（因此无法使用 apply / call / bind 进行绑定 this 值）； 
+- 箭头函数没有 this，它会从自己的作用域链的上一层继承 this（因此无法使用 apply / call / bind 进行绑定 this 值）；
 
-- 不绑定 arguments，当在箭头函数中调用 aruguments 时同样会向作用域链中查询结果； 
+- 不绑定 arguments，当在箭头函数中调用 aruguments 时同样会向作用域链中查询结果；
 
-- 不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数 
+- 不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数
 
-- 没有 prototype 属性，即指向 undefined； 
+- 没有 prototype 属性，即指向 undefined；
 
-- 无法使用 new 实例化对象，因为普通构造函数通过 new 实例化对象时 this 指向实例对象，而箭头函数没有 this 值，同时 箭头函数也没有 prototype。使用new需要把函数的prototype赋值给新对象的__proto__ 
+- 无法使用 new 实例化对象，因为普通构造函数通过 new 实例化对象时 this 指向实例对象，而箭头函数没有 this 值，同时 箭头函数也没有 prototype。使用new需要把函数的prototype赋值给新对象的__proto__
 
 
-## 函数的变量提升 
+## 函数的变量提升
 - 允许在块级作用域内声明函数
 - 函数声明(函数名称) 类似于 var，即会提升到全局作用域或函数作用域的头部
-- 同时，函数声明(函数整体) 还会提升到所在的块级作用域的头部 
- 
+- 同时，函数声明(函数整体) 还会提升到所在的块级作用域的头部
+
 也就是说函数声明的初始化赋值在定义的块级作用域顶部，变量提升到最顶部的环境。
 
 ```js
 console.log(fn); // undefined
 {
   function fn(){}
-} 
+}
 ```
 
 ```js
@@ -282,24 +282,24 @@ function fn(){}
 ```
 
 ```js
-  console.log(a) // undefined 
+  console.log(a) // undefined
   var a = 0;
 
   if (true) {
     console.log(a) // function a {}
     a = 1;
-    console.log(a) // 1 
+    console.log(a) // 1
     function a() { }
     console.log(a) // 1
     a = 21;
-    console.log('in =>', a) // 21 
+    console.log('in =>', a) // 21
   }
 
   console.log('out =>', a) // 1?????
-``` 
+```
 
 
-## Map 和 Object 
+## Map 和 Object
 
 |     | Map  |Object|
 |  ----  | ----  | ---- |
@@ -307,27 +307,27 @@ function fn(){}
 | 长度  | .size属性获取 |循环统计|
 | 性能  | 频繁增删键值对，性能友好 |无优化|
 
-Map key值可以是any , Object 只能是string , symbol 
+Map key值可以是any , Object 只能是string , symbol
 
 Object没迭代器，不能用for of循环 , Map可以直接forEach ,for of
 
 存储值的读取顺序问题
 
-## Set 和 WeakSet, Map 和 WeakMap 
+## Set 和 WeakSet, Map 和 WeakMap
 
 WeakSet 成员只能是对象（或数组），不能是其他类型的值。对象都是弱引用，即GC不考虑WeakSet对该对象的引用 ，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中
 WeakSet 适合临时存放一组对象，以及存放跟对象绑定的信息。只要这些对象在外部消失，它在 WeakSet 里面的引用就会自动消失。
 
-由于上面这个特点，WeakSet 的成员是不适合引用的，因为它会随时消失。另外，由于 WeakSet 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的，因此 ES6 规定 WeakSet 不可遍历。 
+由于上面这个特点，WeakSet 的成员是不适合引用的，因为它会随时消失。另外，由于 WeakSet 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的，因此 ES6 规定 WeakSet 不可遍历。
 
 
-WeakMap只接受对象作为键名，不接受其他类型的值作为键名。 弱引用 
+WeakMap只接受对象作为键名，不接受其他类型的值作为键名。 弱引用
 
 
-## Reflect存在意义 
-- 将object对象一些内部的方法，放到Reflect对象上，现阶段这些方法存在于object和Reflect对象上，未来只存在于Reflect对象上。也就是说，从Reflect对象上可以拿到语言内部的方法。  
+## Reflect存在意义
+- 将object对象一些内部的方法，放到Reflect对象上，现阶段这些方法存在于object和Reflect对象上，未来只存在于Reflect对象上。也就是说，从Reflect对象上可以拿到语言内部的方法。
 
-- 操作对象时出现报错返回false  
+- 操作对象时出现报错返回false
 ```js
  try {
   Object.defineProperty(target, property, attributes);
@@ -335,18 +335,18 @@ WeakMap只接受对象作为键名，不接受其他类型的值作为键名。 
 } catch (e) {
   // failure
 }
- 
+
 // 新写法
 if (Reflect.defineProperty(target, property, attributes)) {
   // success
 } else {
   // failure
 }
-``` 
+```
 
-- 让操作对象的编程变为函数式编程  
+- 让操作对象的编程变为函数式编程
 
-- 保持和proxy对象的方法一一对应, Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。
+- 保持和proxy对象的方法一一对应, Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。设计目标之一是与 Proxy handlers 的方法保持一致性。例如，Reflect.get(target, property, receiver) 与 get 方法具有相同的参数。这使得我们在编写 Proxy 时，可以很方便地调用对应的 Reflect 方法来保留默认行为。
 
 
 ### async await

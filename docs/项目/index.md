@@ -30,7 +30,7 @@ window.addEventListener('error', (event) => {
 
 
 
-@ks/weblogger
+
 
 FPSMonitor 每隔一段时间，会上报当前页面帧率计算，用于辅助业务判断页面是否有卡顿发生
 
@@ -52,7 +52,7 @@ AutoShow 元素可见
 IntersectionObserver
 
 接入需要做什么？ 对比两端
-New WebLogger实例，给配置
+New 实例，给配置
 封装上报信息的函数
 <div data-track={params} > vue指令
 接口拦截上报
@@ -71,7 +71,7 @@ logger.sendImmediately(type, options) 立即上报
 Logger.collect() 收集上报，根据配置wait时间间隔，延时批量上报(维护异步队列)
 flush() 立即批量上报
 updateOptions 更新配置
-上报url https://log-sdk.ksapisrv.com
+
 关闭页面发送数据， 可延时跳转
 监听了浏览器的 beforeunload 事件，会在页面跳转或关闭时将未发送的埋点信息上报上去
 
@@ -83,9 +83,6 @@ invoke
 invoke("pay.startKspayOrderPrepay”)
 
 
-@ks/zt-pay-sdk
-orderPayWechatOfficialAccount,
-invokeWeixinJSBridgeOfPay,
 
 
 github内容整理
@@ -109,24 +106,8 @@ static 文件下内容上传can， axis.min.js vue-router.min.js, vue.min.js
 创编的难度在那里，只是一个联动表单？ 逻辑分支太多，一改影响面很大，白名单控制各种功能的放量，稳定性怎么保证，日志洞察和分析能力（排障归因，产品下一步的决策等），如何复盘操作链路，跨端的复用？
 
 App store跳转(微信)
-window.open('itms-apps://apps.apple.com/cn/app/414478124')
 
 
-看看充值的逻辑
-接口拿参数payCode
-@ks/zt-pay-sdk
-orderPayWechatOfficialAccount,
-invokeWeixinJSBridgeOfPay,
-
-invoke("pay.startKspayOrderPrepay”)
-
-
-kwai://post/live? (Web=> App Store)
-baseSchema: "kwai://live/play/“,协议跳转
-
-金牛拍档
-项目介绍
-partner.e.kuaishou.com/home
 
 内容结构配置化，降低开发的迭代成本,
 后续新加板块，直接在对应categaryId下新建板块，创建内容到相应板块。
@@ -143,7 +124,7 @@ dompurify实现原理 防止xss攻击
 图文编辑器 https://rain120.github.io/athena/zh/slate/SlateStart.html
 
 
-随心推 加速包引入，加量包，优惠券，新人活动，埋点上报，报表，
+
 Esp 图表，多指标数值差距过大，归一化处理, 任务中心的动画，结合贝塞尔曲线，代码分层，考虑复用性和可维护性的冲突，消息通知，避免网络问题造成的失误提示或者不提示。
 websockt 使用，
 
@@ -151,15 +132,6 @@ websockt 使用，
 面包屑封装，路由管理(已经抽离)
 mock数据方案（已完成）
 监控，case 群 oncall
-
-
-
-https://school.corp.kuaishou.com/school/web/play/KC2019127#section=2647
-transitionend函数
-*zoom: 1; 作用
-
-组件库的开发 https://git.corp.kuaishou.com/ks-ad/ad-fe/magnet-design/m-ui/-/blob/master/package.json
-
 
 
 动态js引入
@@ -252,34 +224,6 @@ overscroll-behavior: contain; 兼容性，没发解决所有场景
 
 
 
-esp
-
-
-功能梳理
-
-首页： 顶部消息提示
-账户总览 总花费， GMV ROI 等数据，支持时间筛选
-账户信息，虚拟金
-广告状态，审核中有多少，审核通过多少，未通过多少
-
-直播 & 短视频
-直播观看数，平均观看时长，下单率， 商品数，粉丝增长率，销售额
-花费，曝光数，直播观看数， GMV, ROI
-学习链接，到磁力学
-
-推广列表
-
-报表
-
-创编
-专业版（计划，组，创意）
-搜索广告
-经营版
-极简版
-
-短视频带货，选 商品点击率 订单成交量 卖货ROI
-直播卖货， 直播前预热：播放量，点赞评论量，涨粉数，直播预约点击。直播中提人气，极速进人，直播中提高销量，商品点击率，商品点击率 订单成交量 卖货ROI。
-
 
 充血和贫血？
 贫血 （事物脚本）watch各自触发修改state。 领域对象没有业务逻辑，只有对state的 get set.面向过程
@@ -325,10 +269,10 @@ https://mp.weixin.qq.com/s/rf-onLvIVIFP6XGGuIVG9Q
 
 ￼
 层次分明， 洋葱式插件保留了洋葱架构的内部核心和外部依赖的层次结构。插件通常被视为外部依赖，而宿主应用程序的核心逻辑位于内部。可复用，洋葱式插件允许插件在请求处理过程中先后执行，可以按需添加或删除插件，并且每个插件可以根据需要决定是否继续执行或终止执行，这使得洋葱式插件非常适合承当服务拦截器的角色。
- 
+
 与管道式插件相比，洋葱式插件对数据干涉的时机更加完备，不仅仅可以对自身的数据输入环节进行干涉和处理，在数据输出环节还能对其他插件的输出进行干涉和处理。
 相比管道式插件复杂性更高，洋葱式插件模式需要插件之间的协作和数据传递，即处理输入流和处理输出流，在处理复杂逻辑时可能导致代码变得复杂难以理解。
- 
+
 洋葱架构中的层次嵌套可能会增加函数调用的次数和层次，进而导致一定的性能损耗。 （中间件，koa, express）
 ￼
 灵活度最高
@@ -342,13 +286,7 @@ Webpack 当中，其通过 Tapable 实现了一种发布订阅者模式的插�
 
 
 
-材料准备
 
-晋升准备
-- 项目维度，做了什么，沉淀了什么，哪些数据指标提现
-- 工作成果，方案对比，解决了什么问题，思路，成果，后续规划(后续思考，对未来)，要突出重点
-- 影响力&贡献 业务贡献，团队建设，技术影响，分享沉淀 荣誉认可。
-- 有战功，有能力，具备下个职级的能力
 
 竞品对比，分析，技术选型 项目拆解、进度管控、风险应对 立项书？
 业务收益
@@ -361,10 +299,6 @@ Webpack 当中，其通过 Tapable 实现了一种发布订阅者模式的插�
 目标，短期，长期
 方案，解决了哪些问题，如何解决，有没有引入新的问题，如何衡量收益，风险？如何规避？渐进式？
 切入点？架构，技术痛点，梳理现有逻辑。
-
-
-
-随心推汇总
 
 
 复杂度来自不被约束的业务逻辑。其实不光是技术问题，不要觉得代码的复杂度或者裂化，只能通过技术方式去解决，改一下交互就能简单很多，协作方之间不合理的划分，产品，后端，前端之间的博弈，让每一方都干该干的事，最终目的是实现需求，服务客户，且稳定持久的运行。大大降低复杂度。业务发展的好，一定是用户体验好，用户觉得好，业务方平时工作流畅，稳定发展。而不是推一个事强势推，不给缓冲时间，开发没有方案设计，导致代码裂化，人员变动频繁，形成屎山。
@@ -504,11 +438,7 @@ document.addEventListener(‘visibilitychange’,function(){})是可以做到监
 微信，支付宝 支付在ios的审核。
 
 
-useEffect多次调用问题
-1. 中间态，引入一个新的state，监听。
-2. 合并状态，{x, x2} 监听合并后的状态
-3. 防抖处理
-4.
+
 
 
 我可以在线上监控，问题追踪方面多花点时间。
@@ -538,12 +468,9 @@ swr缓存策略
 service work 缓存
 
 
-磁力金牛移动端性能优化拆解
-金牛电商-C端落地页性能优化
+移动端性能优化拆解
+C端落地页性能优化
 https://github.com/FuncJin/React-IM
-
-磁力学的价值点更偏向于「培训学习」的基建平台，无法构建一个内容、社区、营销为主的客户营销生态，而金牛拍档的定位侧重于业务营销，以内容触达的同时通过营销活动拉动客户的增长；
-所以希望通过单独的「金牛拍档」这样一个整合的统一平台来完成这个能力。
 
 
 https://mp.weixin.qq.com/s/S0U4l1-L8_Qhj4EI1wu4kQ
@@ -553,11 +480,8 @@ https://mp.weixin.qq.com/s/s2tgfZ3PJ-2HTciTmWg8pA
 
 「微前端」与「Web Components」的爱恨情仇
 
-做短视频达人变现的经验复盘(求个赞)
 
-【报告】小红书用户调研
 
-同比跟去年比，环比跟临近时间比。
 
 
 MPA 的项目应该如何管理代码和工程。
@@ -565,7 +489,6 @@ MPA 的项目应该如何管理代码和工程。
 react-query & useEffect
 swr
 
-https://kdev.corp.kuaishou.com/web/workbench/mergeRequest/detail?mrId=81&repoId=36491&tabKey=changedFiles&position=&from=
 
 监控mysql 下面各种情况的sql语句补充。
 我要接手线上的问题处理+群oncall !
@@ -590,12 +513,6 @@ https://gitee.com/CrimsonHu/rxjs-cross-component-communication
 https://gitee.com/ecitlm/splider
 https://github.com/wangweianger/zanePerfor
 https://github.com/ecomfe/react-hooks/tree/master
-
-=================================================
-https://school.corp.kuaishou.com/school/web/play/KC2019127
-
-Kim Meeting_20230216_矫志宇的会议.mp4
-视频
 
 
 umijs modernjs这些工具的设计思路
@@ -638,21 +555,8 @@ use-credentials跨域也会带上cookie，相当于fetch请求的 credentials: '
 带报警组的sql查询需要带project_id
 
 
-“电商平台商业化，强调的是‘内循环’，即为主经营阵地在该平台的商家提供电商营销服务，实现高效的交易闭环；社交平台、搜索平台的商业化，强调的是‘外循环’，通过卖流量、导流量实现创收。”曹世博说，“快手商业化的推动力，正是在于‘内循环+外循环’的双向增长，这是国内乃至全球互联网广告平台都少有的一种模式。”
 
 
-内循环行业更多是指快手小店的服务（直接在快手开店做生意）
-
-自助户说明：一个快手小店，只能开一个自助户
-渠道户说明：一个快手小店可以找多家代理合作
-
-
-账户定位：
-自助户：
-客户自己进行移动订单的创编、充值
-渠道户：
-代理商进行移动订单的创编、充值
-代理商只充值，客户自己创编
 
 cdn逃生
 不能写死域名。 动态域名，使用占位符var—xx—ali.com
@@ -670,10 +574,6 @@ dom实现
 方案算法安全，性能可以，潜入提取方便，对内容质量内容无影响，防止压缩，旋转，裁剪磨坏。
 将图片信息 绘制到canvas ， getImageData 获取像素数据，数据导入绘制，然后渲染图片
 
-
-
-gitlab公司项目学习
-docs 里 很多内容可以学习
 
 
 应该有一个 form + table + 分页的逻辑汇总，组件or 自定义hooks
