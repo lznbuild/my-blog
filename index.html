@@ -1,138 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://unpkg.com/konva@9.3.18/konva.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        #container {
+            background-color: red;
+            width: 1440px;
+            background-image: url('https://www.w3schools.com/css/img_bg_transparent.gif');
+            background-repeat: repeat;
+        }
+
+        #grey {
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: grayscale(1);
+            visibility: hidden;
+            opacity: 0.5;
+        }
+
+        .main {
+            display: flex;
+            position: relative;
         }
     </style>
 </head>
+
 <body>
-    <canvas></canvas>
-    <div>
-        <button onclick="cancel()">取消</button>
-        <button onclick="save()">保存</button>
+    <div class="main">
+        <img id="grey" />
+        <div id="container"></div>
+        <div>
+            <button id="eraser">擦除</button>
+            <button id="restore">恢复</button>
+        </div>
     </div>
-</body>
-<script>
-    // 配置内容
-    const config = {
-        width: 400, // 宽度
-        height: 200, // 高度
-        lineWidth: 5, // 线宽
-        strokeStyle: 'red', // 线条颜色
-        lineCap: 'round', // 设置线条两端圆角
-        lineJoin: 'round', // 线条交汇处圆角
-    }
 
-    // 获取canvas 实例
-    const canvas = document.querySelector('canvas')
-    // 设置宽高
-    canvas.width = config.width
-    canvas.height = config.height
-    // 设置一个边框
-    canvas.style.border = '1px solid #000'
-    // 创建上下文
-    const ctx = canvas.getContext('2d')
+    <script>
+        let mode = 'eraser';
 
-    // 设置填充背景色
-    ctx.fillStyle = 'transparent'
-    // 绘制填充矩形
-    ctx.fillRect(
-        0, // x 轴起始绘制位置
-        0, // y 轴起始绘制位置
-        config.width, // 宽度
-        config.height // 高度
-    );
+        const stage = new Konva.Stage({
+            container: 'container',
+            width: 1440,
+            height: window.innerHeight,
+        });
 
-    // 保存上次绘制的 坐标及偏移量
-    const client = {
-        offsetX: 0, // 偏移量
-        offsetY: 0,
-        endX: 0, // 坐标
-        endY: 0
-    }
 
-    // 判断是否为移动端
-    const mobileStatus = (/Mobile|Android|iPhone/i.test(navigator.userAgent))
 
-    // 初始化
-    const init = event => {
-      console.log('init')
-        // 获取偏移量及坐标
-        const { offsetX, offsetY, pageX, pageY } = mobileStatus ? event.changedTouches[0] : event
-
-        // 修改上次的偏移量及坐标
-        client.offsetX = offsetX
-        client.offsetY = offsetY
-        client.endX = pageX
-        client.endY = pageY
-
-        // 清除以上一次 beginPath 之后的所有路径，进行绘制
-        ctx.beginPath()
-        // 根据配置文件设置相应配置
-        ctx.lineWidth = config.lineWidth
-        ctx.strokeStyle = config.strokeStyle
-        ctx.lineCap = config.lineCap
-        ctx.lineJoin = config.lineJoin
-        // 设置画线起始点位
-        ctx.moveTo(client.endX, client.endY)
-        // 监听 鼠标移动或手势移动
-        window.addEventListener(mobileStatus ? "touchmove" : "mousemove", draw)
-    }
-    // 绘制
-    const draw = event => {
-        // 获取当前坐标点位
-        const { pageX, pageY } = mobileStatus ? event.changedTouches[0] : event
-        // 修改最后一次绘制的坐标点
-        client.endX = pageX
-        client.endY = pageY
-
-        // 根据坐标点位移动添加线条
-        ctx.lineTo(pageX , pageY )
-
-        // 绘制
-        ctx.stroke()
-    }
-    // 结束绘制
-    const cloaseDraw = () => {
-        // 结束绘制
-        ctx.closePath()
-        // 移除鼠标移动或手势移动监听器
-        window.removeEventListener("mousemove", draw)
-    }
-    // 创建鼠标/手势按下监听器
-    window.addEventListener(mobileStatus ? "touchstart" : "mousedown", init)
-    // 创建鼠标/手势 弹起/离开 监听器
-    window.addEventListener(mobileStatus ? "touchend" :"mouseup", cloaseDraw)
-
-    // 取消-清空画布
-    const cancel = () => {
-        // 清空当前画布上的所有绘制内容
-        ctx.clearRect(0, 0, config.width, config.height)
-    }
-    // 保存-将画布内容保存为图片
-    const save = () => {
-        // 将canvas上的内容转成blob流
-        canvas.toBlob(blob => {
-            // 获取当前时间并转成字符串，用来当做文件名
-            const date = Date.now().toString()
-            // 创建一个 a 标签
-            const a = document.createElement('a')
-            // 设置 a 标签的下载文件名
-            a.download = `${date}.png`
-            // 设置 a 标签的跳转路径为 文件流地址
-            a.href = URL.createObjectURL(blob)
-            // 手动触发 a 标签的点击事件
-            a.click()
-            // 移除 a 标签
-            a.remove()
+        document.body.querySelector('#eraser').addEventListener('click', () => {
+            mode = 'eraser';
+            const grey = document.getElementById('grey');
+            grey.style.visibility = 'hidden';
+            stage.container().style.cursor = 'default';
         })
-    }
-</script>
+
+        document.body.querySelector('#restore').addEventListener('click', () => {
+            mode = 'restore';
+            const grey = document.getElementById('grey');
+            grey.style.visibility = 'visible';
+            stage.container().style.cursor = 'crosshair';
+        })
+
+
+        const layer = new Konva.Layer();
+        stage.add(layer);
+
+        let points = [];
+        const maskLine = new Konva.Line({
+            stroke: 'purple',
+            strokeWidth: 100,
+            lineCap: 'round',
+            lineJoin: 'round',
+            points,
+            name: 'maskLine',
+            opacity: 1,
+            globalCompositeOperation: 'destination-out'
+        });
+
+        const pointer = new Konva.Circle({
+            x: 800,
+            y: 100,
+            radius: 50,
+            fill: 'purple',
+            opacity: 0.5,
+        });
+
+
+
+        const konvaImage = new Konva.Image({
+            x: 0,
+            y: 0,
+            width: 0,
+            height: 0,
+            name: 'originImage'
+        });
+
+
+        const maskImage = new Konva.Image({
+            x: 0,
+            y: 0,
+            width: 0,
+            height: 0,
+            name: 'maskImage',
+            globalCompositeOperation: 'destination-out'
+        })
+
+
+
+        const imageObj = new Image();
+        imageObj.onload = function () {
+            const grey = document.getElementById('grey');
+            grey.src = 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/mj-download/image_medium_file_name1735638562283.jpg';
+            grey.width = imageObj.width;
+            grey.height = imageObj.height;
+
+            stage.width(imageObj.width);
+            stage.height(imageObj.height);
+
+            konvaImage.image(imageObj);
+            konvaImage.width(imageObj.width);
+            konvaImage.height(imageObj.height);
+            maskImage.width(imageObj.width);
+            maskImage.height(imageObj.height);
+
+            layer.add(konvaImage);
+            layer.add(maskImage);
+            layer.add(maskLine);
+            layer.add(pointer);
+            layer.draw();
+
+
+            let isDrawing = false;
+
+            // 处理鼠标移动事件
+            stage.on('mousemove', function (e) {
+                const { x, y } = stage.getPointerPosition();
+                pointer.x(x);
+                pointer.y(y);
+                if (isDrawing) {
+                    points.push(x, y);
+                    maskLine.points(points);
+                }
+                layer.draw();
+            });
+
+            // 鼠标按下事件
+            stage.on('mousedown', function (e) {
+                isDrawing = true;
+                const { x, y } = stage.getPointerPosition();
+                points.push(x, y, x, y);
+                maskLine.points(points);
+                pointer.x(x);
+                pointer.y(y);
+                if (mode === 'restore') {
+                    maskLine.opacity(0.5);
+                    maskLine.globalCompositeOperation('source-over');
+                } else {
+                    maskLine.opacity(1);
+                    maskLine.globalCompositeOperation('destination-out');
+                }
+                layer.draw();
+            });
+
+
+            stage.on('mouseup', function (e) {
+                isDrawing = false;
+                const cloneStage = stage.clone();
+                cloneStage.find(it => {
+                    const name = it.name();
+                    const type = it.getType();
+                    const show = ['maskLine', 'maskImage'].includes(name);
+                    if (!show) {
+                        if (type !== 'Layer') {
+                            it.hide();
+                        }
+                    } else {
+                        it.opacity(1);
+                        if (mode === 'eraser') {
+                            it.globalCompositeOperation('source-over');
+                        } else if (mode === 'restore') {
+                            if (name === 'maskLine') {
+                                it.globalCompositeOperation('destination-out');
+                            } else if (name === 'maskImage') {
+                                it.globalCompositeOperation('source-over');
+                            }
+                        }
+                    }
+                })
+
+                const maskCanvas = cloneStage.toCanvas();
+                maskImage.image(maskCanvas);
+                maskLine.points([]);
+                points = [];
+                layer.draw();
+            });
+        };
+        imageObj.src = 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/mj-download/image_medium_file_name1735638562283.jpg';
+
+    </script>
+</body>
+
 </html>

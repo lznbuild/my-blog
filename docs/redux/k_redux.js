@@ -18,8 +18,6 @@ function fn3() {
   );
 }
 
-debugger;
-
 let a = arr.reduce((left, right) => {
   return right(left())
 })

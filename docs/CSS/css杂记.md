@@ -1,7 +1,7 @@
 
 ### 怎么禁止iframe插入自己的页面？？
 ```js
-<script type="text/javascript">  
+<script type="text/javascript">
 if(top.window.location.href!=window.location.href){
     top.window.location.href=window.location.href;
 }
@@ -13,11 +13,11 @@ if(top.window.location.href!=window.location.href){
 ### meta标签有哪些作用？？？？
 ```js
   // 指定编码方式
-  <meta charset="UTF-8" /> 
-  // 指定缩放比例 
+  <meta charset="UTF-8" />
+  // 指定缩放比例
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description" content="" /> 
+  <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="author" content="" />
 ```
@@ -61,9 +61,9 @@ relative定位，top，z-index等值都有效.
 
 ID  100
 
-class，属性选择器，伪类选择器（:hover）  10 
+class，属性选择器，伪类选择器（:hover）  10
 
-标签选择器，伪元素选择器 1 
+标签选择器，伪元素选择器 1
 
 *  通配符选择器、选择符（> + ~） 逻辑组合伪类（:not :is  :where 优先级都是0 ,优先级根据括号指定内容为准。） 0
 
@@ -87,13 +87,13 @@ z {    background-color:lightblue;}
 
 
 ## 伪元素
-::first-line  
+::first-line
 
-::first-letter  
+::first-letter
 
 排版后的第一行和第一个字符，跟HTML中的位置无关
 
-::before  
+::before
 
 ::after
 
@@ -120,61 +120,59 @@ nth-of-type是取当前元素的兄弟元素的第n个，nth-child取的是当�
 ## dom.getClientRects(),dom.getBoundingClientRect()  x,y,width,height获取位置和尺寸 (用于获得页面中某个元素的左，上，右和下分别相对浏览器视窗的位置)
 他俩对块级元素的返回值一样，对行内元素不一样
 
-var offsetX = 
-document.documentElement.getBoundingClientRect().x - 
+var offsetX =
+document.documentElement.getBoundingClientRect().x -
 element.getBoundingClientRect().x;
 
 
-dom.offsetParent 指向position非默认值的祖元素。本身或祖元素display:none 指向null 
+dom.offsetParent 指向position非默认值的祖元素。本身或祖元素display:none 指向null
 
 
 em更习惯用于字体大小，行高，text-indent首行缩进
-em作为fontsize时，相对于父元素的fontsize计算，em作为其他样式（行高，首行缩进）时，相对于自身字体大小 
+em作为fontsize时，相对于父元素的fontsize计算，em作为其他样式（行高，首行缩进）时，相对于自身字体大小
 
 
-Vertical-align只能应用于inline-block,inline元素 
+Vertical-align只能应用于inline-block,inline元素
 
 
 在css里面，padding-top,padding-bottom,margin-top,margin-bottom取值为百分比的时候，参照的是父元素的宽度
 
 ## 弹性布局的属性总结
-  容器设置为flex布局，子元素的float,clear,vertical-align失效  
-  定义在容器元素上的：  
-  flex-direction  
-  flex-wrap  
-  flex-flow: flex-direction flex-wrap  
-  justify-content  
-  align-items  
+  容器设置为flex布局，子元素的float,clear,vertical-align失效
+  定义在容器元素上的：
+  flex-direction
+  flex-wrap
+  flex-flow: flex-direction flex-wrap
+  justify-content
+  align-items
   align-content  多个轴线的侧轴对齐方式  ()
 
-
-  定义在子元素上的：  
-    order: 根据数值展示主轴上的排列顺序,数值越大越往后  
-    flex-grow: 当主轴方向子元素没有撑满父元素，按照这个比例分配剩余空间  
+  定义在子元素上的：
+    order: 根据数值展示主轴上的排列顺序,数值越大越往后
+    flex-grow: 当主轴方向子元素没有撑满父元素，按照这个比例分配剩余空间
     flex-shrink: 当空间不足时，都将等比例缩小,为0就是不缩小，默认为1
-    flex-basis: 在分配多余空间之前，占据的主轴空间 写法：400px  
-    flex: flex-grow flex-shrink flex-basis     
+    flex-basis: 在分配多余空间之前，占据的主轴空间 写法：400px
+    flex: flex-grow flex-shrink flex-basis
     flex:1 其实就是flex-grow: 1  默认 0 1 auto
-    align-self: 侧轴对齐方式，覆盖父元素的align-items  
+    align-self: 侧轴对齐方式，覆盖父元素的align-items
 
 
 
-## @import 引入css和link有什么区别 
+## @import 引入css和link有什么区别
 
-- 本质的区别，link属于HTML标签，而@import是CSS提供的  
+- 本质的区别，link属于HTML标签，而@import是CSS提供的
 
-- 加载顺序，页面被加载时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载  
+- 加载顺序，页面被加载时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载
 
+- 兼容性问题，import只在IE 5以上才能识别，而link是HTML标签，无兼容问题。
 
-- 兼容性问题，import只在IE 5以上才能识别，而link是HTML标签，无兼容问题。 
-
-- 权重， link方式的样式权重高于@import的权重。 
+- 权重， link方式的样式权重高于@import的权重。
 
 - 使用dom控制样式时的差别。当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的。
 
 
 
-IntersectionObserver  
+IntersectionObserver
 
 ```js
   const img = document.querySelector('#box')
@@ -191,14 +189,14 @@ IntersectionObserver
     })
   })
 
-  observer.observe(img) 
+  observer.observe(img)
   // observer.observe(img1)  // 观察多个元素
 
-  ``` 
+  ```
 
 
-  ## 获取浏览器的唯一标识 
-  由于不同的系统显卡绘制 canvas 时渲染参数、抗锯齿等算法不同，因此绘制成图片数据的 CRC 校验也不一样。 
+  ## 获取浏览器的唯一标识
+  由于不同的系统显卡绘制 canvas 时渲染参数、抗锯齿等算法不同，因此绘制成图片数据的 CRC 校验也不一样。
   ```js
   function getCanvasFp () {
     const canvas = document.getElementById('canvas')
@@ -208,22 +206,22 @@ IntersectionObserver
     ctx.fillText('hello, shanyue', 2, 2)
     return canvas.toDataURL('image/jpeg')
   }
-  ``` 
+  ```
 
 ### a标签的定义顺序
-  link→visited→hover→active    lv ha 
+  link→visited→hover→active    lv ha
   （未访问）
 
 
-### bfc触发条件 
-- float 不为none 
-- position 为absolute 或fixed 
-- display 为inline-block, inline-flex, flex, table-cell 
-- overflow 不为visible  
+### bfc触发条件
+- float 不为none
+- position 为absolute 或fixed
+- display 为inline-block, inline-flex, flex, table-cell
+- overflow 不为visible
 
 ##  bfc解决问题
 1. 容器高度塌陷，清除浮动
-2. margin边距重叠 
+2. margin边距重叠
 3. 防止浮动的字体环绕
 
 ```js
@@ -254,12 +252,12 @@ IntersectionObserver
   </body>
 ```
 
-### css垂直居中 
-1. 子元素行高等于父元素高度。 
+### css垂直居中
+1. 子元素行高等于父元素高度。
 
 2. position:absolute; top: 50%; left: 50%; margin-left: -width*50%;margin-top:-height*50%;
 
-3. ... translate(-50%,-50%) 
+3. ... translate(-50%,-50%)
 
 4. ... top:0;left:0;right:0;bottom:0;margin:auto;
 
@@ -285,13 +283,13 @@ IntersectionObserver
   }
 
   span {
- 
+
     display: inline-block;
     vertical-align: middle;
   }
-``` 
+```
 
-## css自定义变量 
+## css自定义变量
 ```css
 :root{
   --testColor: red;
@@ -301,17 +299,17 @@ IntersectionObserver
 ```js
   var rootStyles = document.styleSheets[0].cssRules[0].style;
   rootStyles.setProperty('--testColor', 'green');
-``` 
+```
 
 
-## <img src='xx' style='width:400px!important'/> 修改图片的width为300 
+## <img src='xx' style='width:400px!important'/> 修改图片的width为300
 
-max-width 
+max-width
 
-transform:scale() 
+transform:scale()
 
-box-sizing: border-box; padding:xx; 
+box-sizing: border-box; padding:xx;
 
 
-### 绝对定位 子元素是相对父元素的padding、border还是content进行定位? 
-padding 边框之内. 
+### 绝对定位 子元素是相对父元素的padding、border还是content进行定位?
+padding 边框之内.

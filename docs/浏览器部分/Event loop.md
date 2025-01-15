@@ -5,7 +5,7 @@
 
 主线程之外，事件触发线程管理着一个任务队列，只要异步任务有了运行结果，就在任务队列之中放一个事件回调.一旦执行栈中的所有同步任务执行完毕，系统就会读取任务队列，将可运行的异步任务(任务队列中的事件回调，只要任务队列中有事件回调，就说明可以执行)添加到执行栈中，开始执行。
 
-要比较同步和异步，可以将调用函数的过程分成两部分：执行操作和返回结果 
+要比较同步和异步，可以将调用函数的过程分成两部分：执行操作和返回结果
 
 程序在同步调用函数的时候，会立即执行操作并等待得到返回结果后再继续运行，也就是说同步执行是阻塞的。
 
@@ -36,16 +36,16 @@ fn()
 
 ### 常见的宏任务
 
-- 主代码块  
-- setTimeout  
-- setInterval  
-- setImmediate   (Node环境）  
+- 主代码块
+- setTimeout
+- setInterval
+- setImmediate   (Node环境）
 
 
 ### 常见微任务
 
-process.nextTick (Node)  
-Promise.then()  
+process.nextTick (Node)
+Promise.then()
 
 
 在宏观任务中，JavaScript 的 Promise 还会产生异步代码，**JavaScript 必须保证这些异步代码在一个宏观任务中完成，因此，每个宏观任务中又包含了一个微观任务队列。**
@@ -68,7 +68,7 @@ new Promise((resolve,reject)=> {
     // 2 55  3 44 1
 ```
 
-我们现在要实现一个红绿灯，把一个圆形 div 按照绿色 3 秒，黄色 1 秒，红色 2 秒循环改变背景色，你会怎样编写这个代码呢  
+我们现在要实现一个红绿灯，把一个圆形 div 按照绿色 3 秒，黄色 1 秒，红色 2 秒循环改变背景色，你会怎样编写这个代码呢
 ```js
 function sleep(duration){
   return new Promise(function(resolve){
@@ -162,7 +162,7 @@ let promise = new Promise(resolve => {
 
 console.log('script end');
   /*
-  script start 
+  script start
  asyncFn
  asyncFn2
  fn3
@@ -218,10 +218,10 @@ console.log('script end');
     fn2();
     fn3();
     // fn1  fn2  fn3  10  fn end  set  20   fn3 end
-``` 
+```
 
 
-浏览器为了能够使宏任务和DOM任务有序的进行，会在一个宏任务执行结果后，在下一个宏任务执行前，GUI渲染线程开始工作，对页面进行渲染。 
+浏览器为了能够使宏任务和DOM任务有序的进行，会在一个宏任务执行结果后，在下一个宏任务执行前，GUI渲染线程开始工作，对页面进行渲染。
 
 ```js
 document.body.style = "background:red"
@@ -229,7 +229,7 @@ document.body.style = "background:green"
 document.body.style = "background:blue"
 document.body.style = "background:gray"
 ```
-以上代码属于同一个宏任务，所以只会看到gray颜色  
+以上代码属于同一个宏任务，所以只会看到gray颜色
 
 ```js
 document.body.style = 'background:blue';
@@ -238,17 +238,32 @@ setTimeout(function(){
 },0)
 ```
 
-颜色一闪而过  
+颜色一闪而过
 
 ### 每一帧要做的事
-宏任务===> 微任务==> requestanimationframe ==> 渲染(html解析，样式计算，布局，更新图层树，paint绘制，Composite合成，栅格化) ==> （还有空闲时间）requestIdleVallback  
-
+微任务 ===> 宏任务  ==> requestAnimationFrame ==> 渲染(html解析，样式计算，布局，更新图层树，paint绘制，Composite合成，栅格化) ==> （还有空闲时间）requestIdleCallback
 
 
 浏览器需要时间将每一帧绘制到屏幕上，大约10ms用来执行js代码。
 
 
+事件循环的工作流程
+执行栈清空：
 
+当当前执行栈中的所有同步代码执行完毕后，执行栈变为空。
+执行微任务队列中的任务：
+
+执行栈为空后，事件循环会先检查微任务队列。
+如果微任务队列中有任务，事件循环会依次执行这些任务，直到微任务队列为空。
+微任务队列中的任务会在当前执行栈清空后立即执行，不会等待下一个事件循环周期。
+执行宏任务队列中的任务：
+
+在微任务队列中的任务执行完毕后，事件循环会从宏任务队列中取出一个任务执行。
+宏任务队列中的任务每次事件循环只执行一个。
+执行完一个宏任务后，事件循环会再次检查微任务队列，执行其中的任务，然后继续从宏任务队列中取出下一个任务。
+重复循环：
+
+事件循环会不断重复上述过程，直到所有任务队列中的任务都被执行完毕。
 
 ```js
 let a = 0;
@@ -263,32 +278,17 @@ b();
 a++;
 
 console.log("1", a); // -> '1' 1
-```  
+```
 
 冻结函数作用域，往协程上想
 
 ## setTimeout 是准时的吗
 
-
-
-
 异步任务指的是，不进入主线程、而进入"任务队列"（task queue）的任务，只有"任务队列"通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。
 ## 参考
 
 
-https://juejin.im/post/5a6547d0f265da3e283a1df7#heading-11
-
-
-https://juejin.im/post/5e0adffbe51d4541013f0bf4?utm_source=gold_browser_extension
-
-
-https://juejin.im/post/5e58c618e51d4526ed66b5cf?utm_source=gold_browser_extension
-
-https://juejin.im/post/5ec73026f265da76da29cb25?utm_source=gold_browser_extension 
-
-
-
-## node 运行机制 
+## node 运行机制
 
 （1）V8引擎解析JavaScript脚本。
 
@@ -309,7 +309,7 @@ setImmediate指定的回调函数，总是排在setTimeout前面
 
 
 
-由于process.nextTick指定的回调函数是在本次"事件循环"触发，而setImmediate指定的是在下次"事件循环"触发，所以很显然，前者总是比后者发生得早，而且执行效率也高 
+由于process.nextTick指定的回调函数是在本次"事件循环"触发，而setImmediate指定的是在下次"事件循环"触发，所以很显然，前者总是比后者发生得早，而且执行效率也高
 
 
 ```js
@@ -326,7 +326,7 @@ setImmediate(function (){
 // 1
 // TIMEOUT FIRED
 // 2
-``` 
+```
 
 
 
@@ -370,7 +370,7 @@ new Promise(resolve => {
 })
 
 console.log('script end')
-``` 
+```
 
 
 ```js
@@ -427,6 +427,3 @@ console.log('script end')
 // 北歌
 //https://juejin.im/post/6868849475008331783#heading-13 (!!!)
 ```
-
-
-https://zhuanlan.zhihu.com/p/142742003

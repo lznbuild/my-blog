@@ -148,8 +148,6 @@ F.prototype instanceof React.Component // true为class组件
 ```
 
 ### React和Vue的区别
-- React没有slot支持，不灵活(可以自己实现)，没有keep-alive
-
 - React的render不如Vue的依赖追踪，不重新render子组件
 
 React setState 引起局部重新刷新。为了达到更好的性能，React 暴漏给开发者 shouldComponentUpdate 这个生命周期 ，来避免不需要的重新渲染（相比之下，Vue 由于采用依赖追踪，默认就是优化状态：你动了多少数据，就触发多少更新，不多也不少，而 React 对数据变化毫无感知，它就提供 React.createElement 调用已生成 virtual dom）。另外 React 为了弥补不必要的更新，会对 setState 的行为进行合并操作。
