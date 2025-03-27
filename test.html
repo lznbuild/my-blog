@@ -1,41 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      .wrapper {
-        display: grid;
-        /* grid-template-columns: 200px 200px; */
-        /* grid-template-columns: repeat(auto-fill, 100px); */
-        /* grid-template-rows: repeat(auto-fill, 100px); */
-        grid-row-gap: 10px;
-        grid-column-gap: 20px;
-        grid-auto-flow: column;
 
-      }
-      .wrapper div {
-        border: 1px solid red;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div>一</div>
-      <div>二</div>
-      <div>三</div>
-      <div>四</div>
-      <div>五</div>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .wrap {
+      width: 100px;
+    }
+
+    .square {
+      width: 100%;
+      padding-top: 100%;
+      /* 高度等于宽度 */
+      background-color: lightblue;
+      position: relative;
+      /* 用于内部布局 */
+    }
+  </style>
+  <!-- //  300 300 -->
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="square"></div>
+  </div>
   </body>
+
 </html>
 <script>
-  var obj1 = {a: 1}
-  console.log(Object.assign(obj1, {b: 2}));
+
+  // 用js写出一个函数trans，将数字转换成汉语的输出，输入为不超过10000亿的数字。
+
+  // trans(123456) —— 十二万三千四百五十六
+  // trans(14423456) —— 一千四百四十二万三千四百五十六
+  // trans（100010001）—— 一亿零一万零一
+
+
+  function trans(num) {
+    const unitList = ['亿', '万', '千', '百', '十', '']
+    const numMap = {
+      1: '一',
+      2: '二',
+      3: '三',
+      4: '四',
+      5: '五',
+      6: '六',
+      7: '七',
+      8: '八',
+      9: '九',
+      0: '零'
+    }
+    const nums = num.toString().split('').map(item => Number(item));
+    const numList = [];
+    let str = '';
+    let yi = nums[nums.length - 9]
+    let wan = nums[nums.length - 5]
+    let qian = nums[nums.length - 4]
+    let bai = nums[nums.length - 3]
+    let shi = nums[nums.length - 2]
+    let ge = nums[nums.length - 1]
+
+    numList.push(yi, wan, qian, bai, shi, ge)
+
+    console.log(numList, 'numList')
+
+    numList.forEach((item, index) => {
+      if (item) {
+        str += `${numMap[item]}${unitList[index]}`
+      } else {
+        if (!str.endsWith('零')) {
+          str += '零'
+        }
+      }
+
+    })
+
+    return str
+  }
+  console.log(trans(100010001));
 </script>

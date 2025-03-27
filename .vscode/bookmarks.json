@@ -1,0 +1,44 @@
+{
+	"files": [
+		{
+			"path": "docs/算法/基础算法.md",
+			"bookmarks": [
+				{
+					"line": 73,
+					"column": 19,
+					"label": ""
+				},
+				{
+					"line": 121,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 278,
+					"column": 20,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "docs/面试总结.md",
+			"bookmarks": [
+				{
+					"line": 506,
+					"column": 5,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "docs/2025.md",
+			"bookmarks": [
+				{
+					"line": 563,
+					"column": 9,
+					"label": ""
+				}
+			]
+		}
+	]
+}

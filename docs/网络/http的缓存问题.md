@@ -17,10 +17,10 @@
 在浏览器中，浏览器会在js和图片等文件解析执行后直接存入内存缓存中，那么当刷新页面时只需直接从内存缓存中读取(from memory cache)；而css文件则会存入硬盘文件中，所以每次渲染页面都需要从硬盘读取缓存(from disk cache)。
 
 
-## 强缓存，协商缓存 
+## 强缓存，协商缓存
 
-### 强缓存  
-强制缓存不需要再和服务器发生交互。由 pragma, cache-control ,expires属性控制。  
+### 强缓存
+强制缓存不需要再和服务器发生交互。由 pragma, cache-control ,expires属性控制。
 
 Expires 的值是一个 HTTP 日期，在浏览器发起请求时，会根据系统时间和 Expires 的值进行比较，如果系统时间超过了 Expires 的值，缓存失效。由于和系统时间进行比较，所以当系统时间和服务器时间不一致的时候，会有缓存有效期不准的问题。Expires 的优先级是最低的。
 
@@ -29,31 +29,31 @@ Expires 的值是一个 HTTP 日期，在浏览器发起请求时，会根据系
 当服务器返回 HTTP 响应头给浏览器时，浏览器是通过响应头中的 Cache-Control 字段（http1.1标准中的，http1.0标准中用pragma）来设置是否缓存该资源。通常，我们还需要为这个资源设置一个缓存过期时长，而这个时长是通过 Cache-Control 中的 Max-age 参数来设置的。
 
 ### cache-control
-在请求头和响应头中都可以使用  
+在请求头和响应头中都可以使用
 | 值 | 描述 |
 | ------ | ------ |
-| private | 客户端可以缓存 | 
+| private | 客户端可以缓存 |
 | public | 客户端和代理服务器都可缓存（前端的同学，可以认为public和private是一样的） |
-| max-age=xxx |  缓存的内容将在 xxx 秒后失效 | 
-| no-cache | 需要使用协商缓存来验证缓存数据 | 
-| no-store | 所有内容都不会缓存，强制缓存，协商缓存都不会触发 | 
+| max-age=xxx |  缓存的内容将在 xxx 秒后失效 |
+| no-cache | 需要使用协商缓存来验证缓存数据 |
+| no-store | 所有内容都不会缓存，强制缓存，协商缓存都不会触发 |
 
 Pragma 只有一个属性值，就是 no-cache ，效果和 Cache-Control 中的 no-cache 一致，不使用强缓存，需要与服务器验证缓存是否新鲜，在 3 个头部属性中的优先级最高。
 
-### 协商缓存  
+### 协商缓存
 当浏览器的强缓存失效的时候或者请求头中设置了不走强缓存，并且在请求头中设置了If-Modified-Since(最后修改时间) 或者 If-None-Match 的时候，会将这两个属性值到服务端去跟资源最后修改时间做对比，如果命中了协商缓存，会返回 304 状态，加载浏览器缓存，并且响应头会设置 Last-Modified(最后修改时间) 或者 ETag 属性。
 
 
- Last-Modified （服务器给前端的资源最后修改时间）  
- If-Modified-Since  （前端给后端的，就是前面的那个最后修改时间）  
+ Last-Modified （服务器给前端的资源最后修改时间）
+ If-Modified-Since  （前端给后端的，就是前面的那个最后修改时间）
 
-有个问题，如果一个资源在缓存时间已过了，但是资源没有被修改过，这样的资源走协商缓存的话，会再一次从后端发送到前端，这也是一种浪费。  
+有个问题，如果一个资源在缓存时间已过了，但是资源没有被修改过，这样的资源走协商缓存的话，会再一次从后端发送到前端，这也是一种浪费。
 
 
 ```js
 const express = require('express');
 const app = express();
-var options = { 
+var options = {
   etag: true, // 开启协商缓存
   lastModified: true, // 开启协商缓存
   setHeaders: (res, path, stat) => {
@@ -113,11 +113,11 @@ http.createServer(function(req, res) {
 
 ```
 
-浏览器地址栏中写入URL，回车，浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿（最快）  
+浏览器地址栏中写入URL，回车，浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿（最快）
 
-F5就是告诉浏览器，别偷懒，好歹去服务器看看这个文件是否有过期了。于是浏览器就发送一个请求带上If-Modified-Since  
+F5就是告诉浏览器，别偷懒，好歹去服务器看看这个文件是否有过期了。于是浏览器就发送一个请求带上If-Modified-Since
 
-Ctrl+F5告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端就完成了强行更新的操作  
+Ctrl+F5告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端就完成了强行更新的操作
 
 
 
@@ -137,19 +137,14 @@ Last-Modified 能够感知的单位时间是秒，如果文件在 1 秒内改变
 
 
 ## 总结
-缓存分为强缓存和协商缓存 
+缓存分为强缓存和协商缓存
 
-强缓存：不会向服务器发送请求，直接从缓存中读取资源，每次访问本地缓存直接验证看是否过期，通过expires过期时间，cache-control缓存控制  
+强缓存：不会向服务器发送请求，直接从缓存中读取资源，每次访问本地缓存直接验证看是否过期，通过expires过期时间，cache-control缓存控制
 
 协商缓存：协商缓存命中，服务器会将这个请求返回304，通过Last-Modified（后端给前端）/If-Mondified-since（前端给后端）或者 ETag（后端给前端）， If-None-Match（前端给后端） 控制
 
-强缓存优于协商缓存进行，expires和cache-contrl生效则直接使用缓存。 
+强缓存优于协商缓存进行，expires和cache-contrl生效则直接使用缓存。
 
 etag适合重要量小的资源，last modify适合不重要的量大的资源。注意last modify需要保证服务器时间准确
 
-https://juejin.im/post/5eb7f811f265da7bbc7cc5bd
 
-https://juejin.im/post/5df5bcea6fb9a016091def69
-
-
-https://mp.weixin.qq.com/s/6Cmwf9pd6zEccc7iVF55rA

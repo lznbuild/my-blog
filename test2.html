@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">1111</div>
+</body>
+
+</html>
+<script>
+    function fn(arr) {
+        let left = 0;
+        let right = 1;
+
+        const res = [];
+
+        while (right <= arr.length) {
+            if (arr[left] + (right - left) === arr[right]) {
+                right += 1;
+            } else {
+                if (arr[left] === arr[right - 1]) {
+                    res.push(arr[right - 1]);
+                } else {
+                    res.push(`${arr[left]}->${arr[right - 1]}`);
+                }
+                left = right;
+                right += 1;
+            }
+        }
+
+        return res;
+    }
+
+    console.log(fn([0, 1, 2, 4, 5, 7, 13, 15, 16]));
+</script>
